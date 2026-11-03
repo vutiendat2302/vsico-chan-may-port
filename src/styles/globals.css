@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #3e116c;
+  --color-primary-dark: #2c0a4e;
+  --color-primary-light: #541991;
+  --color-ink: #0f172a;
+  --color-ink-soft: #1e293b;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f8f7fc;
+  --color-muted: #475569;
+  --color-muted-light: #94a3b8;
+  --color-highlight: #d97706;
+  --color-highlight-light: #f59e0b;
+  --color-border: #e2e8f0;
+
+  --font-heading: var(--font-playfair), Georgia, serif;
+  --font-body: var(--font-be-vietnam), system-ui, sans-serif;
+  --font-label: var(--font-montserrat), system-ui, sans-serif;
+
+  --leading-heading: 1.25;
+}
+
+@utility container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1400px;
+  padding-inline: 1.25rem;
+
+  @media (width >= 640px) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 1024px) {
+    padding-inline: 4rem;
+  }
+
+  @media (width >= 1280px) {
+    padding-inline: 5rem;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background-color: var(--color-surface);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Chiều cao dòng >= 1.25 để tránh dấu thanh tiếng Việt xếp chồng bị cắt/đè */
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-heading {
+    font-family: var(--font-heading);
+    line-height: 1.25;
+  }
+
+  /* Trạng thái focus rõ ràng cho điều hướng bàn phím (WCAG AA) */
+  :focus-visible {
+    outline: 2px solid var(--color-primary-light);
+    outline-offset: 2px;
+  }
+}
+
+/* Keyframes cho Preloader */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes progressBar {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* Tôn trọng thiết lập giảm chuyển động của hệ điều hành / trình duyệt */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

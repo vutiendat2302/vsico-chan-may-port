@@ -1,0 +1,511 @@
+{
+  "metadata": {
+    "title": "VSICO Hue Port | Sea Gateway of the East–West Economic Corridor (EWEC)",
+    "description": "VSICO Chan May Hue deep-water seaport and integrated cross-border logistics hub connected to ICD Lao Bao in Central Vietnam."
+  },
+  "nav": {
+    "brandSubtitle": "CHAN MAY · HUE",
+    "berthSpecs": "Berth Capacity",
+    "location": "II. Location",
+    "portIcd": "III. Port & ICD",
+    "solutions": "IV. Solutions",
+    "infrastructure": "V. Infrastructure",
+    "services": "VI. Services",
+    "policies": "VII. Policies",
+    "about": "VIII. About VSICO",
+    "certifications": "IX. Certifications",
+    "contact": "X. Priority Inquiry",
+    "switchLocale": "VI",
+    "switchLocaleAria": "Switch to Vietnamese",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close menu",
+    "menuTitle": "NAVIGATION DIRECTORY",
+    "menuContactSubtitle": "Chan May – Lang Co Economic Zone, Hue City",
+    "menuDirectInquiry": "Inquire & Get Incentives",
+    "groupChanMayPort": "CHAN MAY PORT",
+    "groupIncentives": "INCENTIVES",
+    "groupAboutVsico": "ABOUT VSICO",
+    "groupContact": "CONTACT",
+    "vsicoSystemTitle": "VSICO SYSTEM",
+    "systemWebsite": "VSICO Website",
+    "systemPort": "VSICO Hue Port (Chan May)",
+    "systemPortSub": "Deep-water seaport -14m",
+    "systemIcd": "ICD Lao Bao & ICD Network",
+    "systemIcdSub": "Quang Tri (86,000 m²) & Hung Yen"
+  },
+  "berthSpecs": {
+    "roman": "I",
+    "eyebrow": "BERTH CAPACITY & VESSEL SPECIFICATIONS",
+    "title": "International deep-water standard welcoming large-tonnage vessels",
+    "summary": "540 m of continuous quay length with a -14 m draft, engineered to simultaneously accommodate 4,000 TEU container ships and 70,000 DWT general cargo vessels.",
+    "berths": "Berths",
+    "berthsDesc": "Berth No. 4 & Berth No. 5",
+    "berthsSub": "Phase 1 Berth 4 (08/2026), completing Berth 5 (09/2027)",
+    "quayLength": "Quay Length",
+    "quayLengthDesc": "540 m continuous quay",
+    "quayLengthSub": "Length guarantees simultaneous docking of 2 large vessels",
+    "depth": "Water Depth",
+    "depthDesc": "-14 m natural draft",
+    "depthSub": "Deep, stable draft independent of tidal cycles",
+    "area": "Port Area",
+    "areaDesc": "20.4 ha integrated area",
+    "areaSub": "Container yards, CFS warehouses, closed conveyor & logistics",
+    "vesselCapacity": "Vessel Capacity",
+    "vesselBadge": "NEXT-GENERATION VESSEL RECEPTION",
+    "vesselSummary": "Berth No. 4 & No. 5 technical infrastructure is engineered for large-scale vessel classes:",
+    "containerVesselTitle": "Domestic & Intra-Asia Container Vessels",
+    "containerVesselTeu": "4,000 TEU",
+    "containerVesselDesc": "Accommodates container vessels up to 4,000 TEU, speeding up turnaround with Weihua 45t-45m quay cranes.",
+    "bulkVesselTitle": "Bulk & General Cargo Vessels",
+    "bulkVesselDwt": "70,000 DWT",
+    "bulkVesselDesc": "Accommodates bulk carriers up to 70,000 DWT, featuring an enclosed conveyor system for environmental protection.",
+    "officialPlanningNote": "Port infrastructure approved under official Chan May – Lang Co Economic Zone planning."
+  },
+  "hero": {
+    "brandTitle": "VSICO HUE PORT",
+    "locationSub": "CHAN MAY – LANG CO, HUE CITY",
+    "title": "Sea Gateway of the East–West Economic Corridor",
+    "tagline": "Deep-Water Seaport & Integrated Logistics Hub",
+    "primaryCta": "Explore the Port",
+    "secondaryCta": "Incentive Policies",
+    "scrollHint": "Scroll to explore the corridor",
+    "videoAlt": "Aerial view of the deep-water berths and container vessels at VSICO Chan May Hue Port"
+  },
+  "location": {
+    "roman": "II",
+    "eyebrow": "GEOGRAPHIC LOCATION & CONNECTIVITY",
+    "title": "Where the Sea Meets the Economic Corridor",
+    "summary": "Located about {distanceKm} km from the Lao Bao International Border Gate, VSICO Hue Port connects directly to the East–West Economic Corridor (EWEC), serving as a maritime gateway for Southern Laos, Northeast Thailand, and Northern Cambodia.",
+    "ewecBadge": "Direct EWEC Corridor Connection",
+    "laoBaoDistanceLabel": "Distance to Lao Bao International Border Gate",
+    "laoBaoDistanceValue": "about {distanceKm} km",
+    "mapTabEwec": "East–West Economic Corridor (EWEC) Map",
+    "mapTabZones": "Distances to 6 Central Industrial Zones",
+    "ewecCorridorTitle": "EWEC Cross-Border Corridor Route",
+    "ewecCorridorDesc": "Cargo flows from Southern Laos, Northeast Thailand, and Northern Cambodia converge through the Lao Bao Border Gate directly to the Chan May deep-water port.",
+    "industrialZonesTitle": "Distances to 6 Key Industrial Zones",
+    "selectZoneHint": "Select an Industrial Zone to highlight its connection on the map",
+    "advantageNote": "Optimizes domestic transport with stable infrastructure and reduced transshipment risk.",
+    "nodes": {
+      "chanMayPort": "VSICO Hue Port (Chan May)",
+      "icdLaoBao": "ICD Lao Bao (Quang Tri)",
+      "southernLaos": "Southern Laos (Savannakhet)",
+      "northeastThailand": "Northeast Thailand (Mukdahan)",
+      "northernCambodia": "Northern Cambodia (Stung Treng)"
+    },
+    "countries": {
+      "vietnam": "Vietnam",
+      "laos": "Laos",
+      "thailand": "Thailand",
+      "cambodia": "Cambodia"
+    },
+    "zones": {
+      "hoaKhanh": "Hoa Khanh IZ",
+      "daNang": "Da Nang IZ",
+      "phuBai": "Phu Bai IZ",
+      "quangTri": "Quang Tri IZ",
+      "bacChuLai": "Bac Chu Lai IZ",
+      "vsipQuangNgai": "VSIP Quang Ngai IZ"
+    },
+    "provinces": {
+      "daNang": "Da Nang City",
+      "hue": "Hue City",
+      "quangTri": "Quang Tri Province",
+      "quangNam": "Quang Nam Province",
+      "quangNgai": "Quang Ngai Province"
+    }
+  },
+  "portIcd": {
+    "roman": "III",
+    "eyebrow": "INTEGRATED PORT – ICD MODEL",
+    "title": "One Unbroken Chain",
+    "summary": "VSICO Hue Port is seamlessly connected with ICD Lao Bao (VSICO Quang Tri) spanning {icdArea} m² right next to the Vietnam–Laos border gate, forming a closed-loop operational chain from border to berth.",
+    "icdCardBadge": "LAO BAO INTERNATIONAL BORDER GATE · QUANG TRI",
+    "icdCardTitle": "ICD VSICO Quang Tri (ICD Lao Bao)",
+    "icdAreaLabel": "Total planned area",
+    "portCardBadge": "CHAN MAY – LANG CO ECONOMIC ZONE · HUE CITY",
+    "portCardTitle": "VSICO Hue Deep-Water Seaport",
+    "portAreaLabel": "Total port area",
+    "chainLabel": "Closed-loop transit of about {distanceKm} km along National Highway 9 – Highway 1A",
+    "imageAlt": "Aerial view of ICD VSICO Quang Tri at the Lao Bao international border gate area",
+    "functionsTitle": "Core Functions at ICD Lao Bao",
+    "functions": {
+      "consolidation": "Cross-border transit cargo staging, consolidation, and distribution",
+      "customs": "On-site customs clearance and border inspection procedures",
+      "valueAdded": "Bonded warehousing and value-added logistics services"
+    },
+    "benefitsTitle": "Operational Value for Cargo Owners & Shipping Lines",
+    "benefits": {
+      "speed": "Accelerates cargo transit from Laos and Thailand to seaport berths",
+      "risk": "Reduces transshipment risk through single-point operational coordination",
+      "synergy": "Optimizes berth utilization and vessel stevedoring schedules at Chan May"
+    }
+  },
+  "solutions": {
+    "roman": "IV",
+    "eyebrow": "COMPLETE SOLUTIONS",
+    "title": "Ship – Port – Warehouse – ICD: A Synchronized Ecosystem",
+    "summary": "Single-point coordination across the entire supply chain: fewer transshipment handoffs, shorter waiting times, combined with financial support policies at Chan May.",
+    "modes": {
+      "portToPort": {
+        "title": "Port to Port",
+        "description": "Operates domestic container shipping routes (Hai Phong – Chan May Hue – Ho Chi Minh City) and Intra-Asia services.",
+        "highlights": "Frequency: {trips} trips/week · {fleetTeu} TEU fleet ({minTeu} – {maxTeu} TEU vessels)"
+      },
+      "icdToPort": {
+        "title": "ICD – Port",
+        "description": "Cargo is consolidated and cleared at ICD Lao Bao, then transported directly to VSICO Hue Port for vessel loading.",
+        "highlights": "{warehouseArea} m² warehouse & ICD network across Hung Yen, Hai Phong, Quang Binh, Quang Tri, Hue, Dong Nai, Long An"
+      },
+      "doorToDoor": {
+        "title": "Door to Door",
+        "description": "Combines 20'/40' container tractors and {minTons} – {maxTons} ton trucks with warehouses, ICD, seaport, and container vessels from shipper to consignee.",
+        "highlights": "Official route coverage is pending confirmation"
+      }
+    },
+    "flowTitle": "Closed-Loop Logistics Flow Diagram",
+    "flowSubtitle": "Scroll to trace the seamless 7-stage cargo journey across the VSICO ecosystem",
+    "costNoteTitle": "Qualitative Import–Export Cost Optimization",
+    "costNoteBody": "Combining single-provider operations (Ship – Port – Warehouse – ICD), fewer intermediate handoffs, and Hue City financial incentives helps shippers optimize end-to-end operational expenditure.",
+    "flow": {
+      "originWarehouse": {
+        "label": "Factory / Warehouse",
+        "sub": "Cargo stuffing origin"
+      },
+      "trucking": {
+        "label": "VSICO Fleet",
+        "sub": "20'/40' tractors & trucks"
+      },
+      "icdLaoBao": {
+        "label": "ICD Lao Bao",
+        "sub": "Consolidation & customs"
+      },
+      "chanMayPort": {
+        "label": "VSICO Hue Port",
+        "sub": "-14m berth stevedoring"
+      },
+      "containerShip": {
+        "label": "VSICO Container Ship",
+        "sub": "Domestic & Intra-Asia"
+      },
+      "destinationPort": {
+        "label": "Destination Port",
+        "sub": "Hai Phong / HCMC / Intra-Asia"
+      },
+      "destinationWarehouse": {
+        "label": "Consignee Warehouse",
+        "sub": "Final delivery completed"
+      }
+    }
+  },
+  "infrastructure": {
+    "roman": "V",
+    "eyebrow": "INFRASTRUCTURE, CAPACITY & PEOPLE",
+    "title": "Deep-Water Port Specifications & Operational Roadmap",
+    "summary": "Master-planned across 20.4 hectares with container and bulk berths, enclosed bulk conveyor systems, CFS and bulk warehouses, and a dedicated 250-person team.",
+    "specsTitle": "Berth Specifications & Functional Zones",
+    "equipmentTitle": "Cargo Handling Equipment",
+    "peopleTitle": "On-Port Organization ({staffCount} Personnel)",
+    "layoutImageAlt": "20.4-hectare master plan layout of VSICO Hue Port",
+    "craneImageAlt": "Weihua 45t-45m quay cranes at VSICO Hue Port",
+    "staffImageAlt": "250-person operational team at VSICO Hue Port",
+    "specs": {
+      "containerBerth": "Container Berth accommodating vessels up to {teu} TEU",
+      "bulkBerth": "Bulk Cargo Berth accommodating vessels up to {dwt} DWT",
+      "conveyor": "Dedicated enclosed bulk cargo conveyor system",
+      "warehouses": "Bulk warehouse, CFS warehouse & port service complex",
+      "quayCranes": "Quayside: {count} shore cranes ({model})",
+      "backyardEquipment": "Yardside: {forklifts} reach stackers/forklifts, {backupCranes} backup cranes, {tractors} tractor units"
+    },
+    "departments": {
+      "management": "01. Management Division",
+      "dispatch": "02. Dispatch Division",
+      "technical": "03. Technical Division",
+      "operations": "04. Operations Division"
+    },
+    "timelineLayer1Title": "Layer 1 · Strategic Infrastructure Milestones",
+    "timelineLayer2Title": "Layer 2 · Operational Capacity & Productivity Phases",
+    "phase1Title": "Phase 1 (Aug 2026 – May 2027)",
+    "phase1Volume": "Target throughput: {volume} TEU",
+    "phase1Moves": "Handling productivity: {min} – {max} moves/hour",
+    "phase2Title": "Phase 2 (From Jun 2027)",
+    "phase2Volume": "Expanded full-berth handling capacity",
+    "phase2Moves": "Handling productivity: {min} – {max} moves/hour",
+    "phaseAdvantage": "Optimizes vessel turnaround time and ensures reliable, consistent berth operations.",
+    "countdownBadge": "SEPTEMBER 2027 MILESTONE",
+    "countdownTitle": "Countdown to Berth 5 & ICD Lao Bao Commissioning",
+    "countdownUnits": {
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    }
+  },
+  "timeline": {
+    "berth4": "VSICO Hue – Berth 4 enters operation",
+    "berth4Desc": "Receives Phase 1 container and bulk vessels at the Chan May – Lang Co Economic Zone.",
+    "berth5": "VSICO Hue – Berth 5 enters operation",
+    "berth5Desc": "Expands total quay length to 540 m, raising handling productivity to 80 – 85 moves/hour.",
+    "icdLaoBao": "ICD Lao Bao enters operation",
+    "icdLaoBaoDesc": "Completes the 86,000 m² border logistics hub connecting Lao Bao Border Gate directly to the seaport.",
+    "statusOperating": "Operating",
+    "statusUpcoming": "Upcoming",
+    "monthOnlyNote": "Milestone dates are displayed by scheduled month and year."
+  },
+  "services": {
+    "roman": "VI",
+    "eyebrow": "ON-PORT SERVICES",
+    "title": "Three Core Cargo & Maritime Service Pillars",
+    "summary": "Comprehensive cargo stevedoring, vessel technical support, and international-standard marine supply services right at Chan May berths.",
+    "groups": {
+      "cargoAndYard": {
+        "title": "Cargo Handling & Yard Operations",
+        "subtitle": "Container and bulk stevedoring, yard storage, and standard container maintenance.",
+        "items": {
+          "stevedoring": "Container and dry bulk cargo stevedoring services",
+          "yardStorage": "Container yard storage, CFS, and bulk warehouse management",
+          "containerRepair": "Container inspection, cleaning, and repair services"
+        }
+      },
+      "vesselSupport": {
+        "title": "Vessel Husbandry & Support",
+        "subtitle": "Dedicated support for shipowners and masters throughout every port call.",
+        "items": {
+          "agencyFree": "Shipping agency services (Complimentary)",
+          "tugboat": "Harbor tugboat assistance for safe berthing and unberthing",
+          "shipRepair": "Alongside vessel maintenance and repair services"
+        }
+      },
+      "maritimeSupply": {
+        "title": "Marine Supply & Environmental Services",
+        "subtitle": "Full chandling, bunkering, and vessel sanitation at berth.",
+        "items": {
+          "bunkeringAndWater": "Marine fuel bunkering, fresh water, and lubricants supply",
+          "chandling": "Ship chandling (stores, spare parts, nautical charts, provisions)",
+          "holdCleaning": "Cargo hold cleaning and shipboard waste collection"
+        }
+      }
+    }
+  },
+  "policies": {
+    "roman": "VII",
+    "eyebrow": "SUPPORT POLICIES",
+    "title": "What Support Do You Receive at Chan May?",
+    "summary": "Combines direct financial support from the Hue City People's Committee with tailored commercial incentives from VSICO for shipping lines, cargo owners, and forwarders.",
+    "tabShippingLine": "For Shipping Lines",
+    "tabCargoOwner": "For Cargo Owners & Forwarders",
+    "hueGovBadge": "HUE CITY GOVERNMENT SUPPORT POLICY",
+    "vsicoCommercialBadge": "VSICO COMMERCIAL POLICY",
+    "shippingAmountSuffix": "/ port call",
+    "shippingCondition": "Eligibility condition: Minimum {minTrips} calls/month",
+    "cargo20Label": "20' Container",
+    "cargo40Label": "40' Container",
+    "perContainerSuffix": "/ container",
+    "commercial": {
+      "shipping": {
+        "liftOnOff": "Preferential lift-on / lift-off (LO/LO) tariff policies at port",
+        "demDet": "Volume-based flexible Demurrage / Detention (Dem/Det) terms",
+        "berthPriority": "Priority berthing window allocation for vessels calling at VSICO Hue Port",
+        "agencyFeeSupport": "Complimentary shipping agency service and agency cost support",
+        "otherOwnerPolicies": "Tailored commercial partnership programs for regular liner services"
+      },
+      "cargo": {
+        "icdLiftOnOff": "Preferential lift-on / lift-off policies at ICD Lao Bao",
+        "demDet": "Extended Dem/Det free time for import and export shipments",
+        "icdCustomsSupport": "Dedicated customs clearance facilitation and time support at ICD Lao Bao",
+        "portCustomsSupport": "On-site customs clearance assistance at VSICO Hue Port"
+      }
+    },
+    "calculator": {
+      "title": "Hue City Support Estimator",
+      "subtitle": "Select your category and enter projected monthly volume to estimate direct VND support.",
+      "modeShipping": "Shipping Line (By calls/month)",
+      "modeCargo": "Cargo Owner (By container count)",
+      "tripsInputLabel": "Number of vessel calls per month",
+      "minTripsWarning": "A minimum of {minTrips} calls/month is required to qualify for Hue City support.",
+      "cont20InputLabel": "Number of 20' Containers",
+      "cont40InputLabel": "Number of 40' Containers",
+      "estimatedTotalLabel": "Estimated Total Hue City Support",
+      "validityPendingNote": "Note: The official validity period of these support policies is subject to confirmation."
+    }
+  },
+  "about": {
+    "roman": "VIII",
+    "eyebrow": "ABOUT VSICO",
+    "title": "End-to-End Logistics Ecosystem",
+    "summary": "Group-wide maritime and logistics capabilities featuring a container vessel fleet, tractor fleet, nationwide warehouse and ICD network, and international representative offices.",
+    "metrics": {
+      "fleetDwt": "Total Fleet Deadweight",
+      "fleetTeu": "Container Fleet Capacity",
+      "warehouseArea": "Group-Wide Warehouse & ICD Area",
+      "auditor": "Independent Auditor (Every {months} months)"
+    },
+    "outputChartTitle": "VSICO Group Total Throughput 2023 – 2025 (Unit: TEU)",
+    "revenueChartTitle": "VSICO Group Total Revenue 2023 – 2025 (Unit: VND Billion)",
+    "chartWholeGroupBadge": "Consolidated VSICO Group Figures",
+    "auditNote": "Audited semi-annually (every {months} months) for VSICO and member companies by {auditor}.",
+    "warehousesTitle": "Group-Wide Warehouse & ICD Network ({totalArea} m²)",
+    "officesTitle": "International Representative Offices",
+    "offices": {
+      "singapore": "Singapore",
+      "china": "China",
+      "hongKong": "Hong Kong",
+      "cambodia": "Cambodia",
+      "laos": "Laos"
+    },
+    "warehouses": {
+      "hue": {
+        "name": "VSICO Hue Warehouse",
+        "location": "Chan May Port, Hue City"
+      },
+      "vanLam": {
+        "name": "Van Lam ICD",
+        "location": "Dai Dong, Hung Yen"
+      },
+      "laoBao": {
+        "name": "Lao Bao ICD",
+        "location": "Lao Bao Border Gate, Quang Tri"
+      },
+      "quangBinh": {
+        "name": "Quang Binh Warehouse",
+        "location": "Hon La IZ, Quang Binh"
+      },
+      "thienSon": {
+        "name": "Thien Son Warehouse",
+        "location": "My Hao, Hung Yen"
+      },
+      "vanGiang": {
+        "name": "Van Giang Warehouse",
+        "location": "Van Giang, Hung Yen"
+      },
+      "longAn": {
+        "name": "Long An Warehouse",
+        "location": "Phu An Thanh IZ"
+      },
+      "dongNai": {
+        "name": "Dong Nai Warehouse",
+        "location": "An Phuoc IZ, Dong Nai"
+      }
+    }
+  },
+  "certifications": {
+    "roman": "IX",
+    "eyebrow": "CERTIFICATIONS & CUSTOMERS",
+    "title": "Trusted by Leading Industrial Names",
+    "summary": "Certified to international ISO management standards and EcoVadis sustainability ratings. Click any certificate to inspect in full resolution.",
+    "tabs": {
+      "iso": "ISO & Sustainability",
+      "transportAndPostal": "Transport & Postal Licenses",
+      "agencyAndContainer": "Ship Agency & Container Repair",
+      "partnerAwards": "Warehouse & Operation Recognition"
+    },
+    "zoomHint": "Click to zoom certificate",
+    "closeDialog": "Close certificate viewer",
+    "items": {
+      "iso9001": {
+        "title": "ISO 9001 Certificate",
+        "subtitle": "Quality Management System"
+      },
+      "iso14001": {
+        "title": "ISO 14001 Certificate",
+        "subtitle": "Environmental Management System"
+      },
+      "iso45001": {
+        "title": "ISO 45001 Certificate",
+        "subtitle": "Occupational Health & Safety Management System"
+      },
+      "iso28000": {
+        "title": "ISO 28000 Certificate",
+        "subtitle": "Supply Chain Security Management System"
+      },
+      "iso31000": {
+        "title": "ISO 31000 Certificate",
+        "subtitle": "Enterprise Risk Management Guidelines"
+      },
+      "ecovadis": {
+        "title": "EcoVadis Certification",
+        "subtitle": "Corporate Social Responsibility & Sustainability Assessment"
+      },
+      "transportLicense": {
+        "title": "International Transport License",
+        "subtitle": "Vietnam – Laos & Vietnam – Cambodia Cross-Border Road Transport Permit"
+      },
+      "postalLicense": {
+        "title": "Postal License & Professional Certificates",
+        "subtitle": "Postal operations permit and professional logistics training certificates"
+      },
+      "agencyContainer": {
+        "title": "Ship Agency & Container Repair Certificates",
+        "subtitle": "Certified shipping agency and container technical repair qualification"
+      },
+      "hondaAward": {
+        "title": "Honda 101KI Supplier Award (May 2025)",
+        "subtitle": "Category: Excellent Warehouse & Operation Management"
+      }
+    },
+    "customersHeading": "Selected Customers Across the VSICO Network",
+    "chanMayCustomersHeading": "Container Customers in the Chan May Area",
+    "logoPermissionPendingNote": "Customer logo display permissions are being finalized prior to public production release.",
+    "sectors": {
+      "automotive": "Automotive & Motorcycles",
+      "electronics": "Electronics & Appliances",
+      "fmcg": "Food & Consumer Goods",
+      "chanMayRegional": "Chan May – Hue Region"
+    }
+  },
+  "contact": {
+    "roman": "X",
+    "eyebrow": "PRIORITY INFORMATION REGISTRATION",
+    "title": "Open Your New Route via Chan May",
+    "summary": "Select your organization type and register your details to receive port tariffs, vessel schedules, and tailored support policy consultation.",
+    "portAddressTitle": "VSICO Hue Port",
+    "portAddressValue": "Chan May – Lang Co Economic Zone, Chan May – Lang Co Commune, Hue City",
+    "hqAddressTitle": "VSICO Group Headquarters",
+    "hqAddressValue": "3rd Floor, Tower 1, Times Tower, 35 Le Van Luong, Thanh Xuan, Hanoi",
+    "hotlineLabel": "Support Hotline",
+    "websiteLabel": "Corporate Website",
+    "form": {
+      "name": "Contact Full Name",
+      "namePlaceholder": "John Doe",
+      "company": "Company / Shipping Line Name",
+      "companyPlaceholder": "Company Ltd.",
+      "role": "Organization Role",
+      "roleShippingLine": "Shipping Line",
+      "roleCargoOwner": "Cargo Owner",
+      "roleForwarder": "Freight Forwarder",
+      "email": "Work Email",
+      "emailPlaceholder": "contact@company.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "(+84) 9xx xxx xxx",
+      "message": "Expected Route / Monthly Volume Inquiry",
+      "messagePlaceholder": "E.g., Intra-Asia route / 50 x 40' containers per month via ICD Lao Bao...",
+      "submit": "Get Tariff & Policy Consultation",
+      "submitting": "Submitting...",
+      "successTitle": "Priority Consultation Request Recorded",
+      "successMessage": "Your registration has been recorded in the browser (client-side preview). VSICO Hue Port's commercial team will contact you shortly.",
+      "resetButton": "Submit another inquiry",
+      "errors": {
+        "nameMin": "Please enter your full name (at least 2 characters).",
+        "companyMin": "Please enter your company name.",
+        "emailInvalid": "Please enter a valid work email address.",
+        "phoneMin": "Please enter a valid contact phone number."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Sea gateway connecting the East–West Economic Corridor (EWEC) · Integrated seaport and cross-border logistics hub in Central Vietnam.",
+    "quickLinks": "Quick Navigation",
+    "socialLinks": "Official Channels",
+    "copyright": "© {year} VSICO Hue Port. All company content, logos, and certificates remain the property of VSICO and their respective owners."
+  },
+  "common": {
+    "pendingBadge": "PENDING CONFIRMATION",
+    "approxPrefix": "about",
+    "unitKm": "km",
+    "unitTeu": "TEU",
+    "unitDwt": "DWT",
+    "unitHa": "ha",
+    "unitMeter": "m",
+    "unitSqm": "m²"
+  }
+}

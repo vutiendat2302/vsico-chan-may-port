@@ -1,0 +1,511 @@
+{
+  "metadata": {
+    "title": "Cảng VSICO Huế | Cửa Ngõ Ra Biển Của Hành Lang Đông – Tây (EWEC)",
+    "description": "Cảng nước sâu VSICO Chân Mây Huế và trung tâm logistics xuyên biên giới tích hợp ICD Lao Bảo tại miền Trung Việt Nam."
+  },
+  "nav": {
+    "brandSubtitle": "CHÂN MÂY · HUẾ",
+    "berthSpecs": "Năng lực cầu bến",
+    "location": "II. Vị trí",
+    "portIcd": "III. Cảng & ICD",
+    "solutions": "IV. Giải pháp",
+    "infrastructure": "V. Hạ tầng",
+    "services": "VI. Dịch vụ",
+    "policies": "VII. Chính sách",
+    "about": "VIII. Về VSICO",
+    "certifications": "IX. Chứng nhận",
+    "contact": "X. Nhận thông tin ưu tiên",
+    "switchLocale": "EN",
+    "switchLocaleAria": "Chuyển sang tiếng Anh",
+    "openMenu": "Mở danh mục điều hướng",
+    "closeMenu": "Đóng danh mục",
+    "menuTitle": "MỤC LỤC ĐIỀU HƯỚNG",
+    "menuContactSubtitle": "Khu kinh tế Chân Mây – Lăng Cô, TP. Huế",
+    "menuDirectInquiry": "Tư vấn & Nhận ưu đãi",
+    "groupChanMayPort": "CẢNG CHÂN MÂY",
+    "groupIncentives": "ƯU ĐÃI",
+    "groupAboutVsico": "VỀ VSICO",
+    "groupContact": "LIÊN HỆ",
+    "vsicoSystemTitle": "HỆ THỐNG VSICO",
+    "systemWebsite": "Website VSICO",
+    "systemPort": "Cảng VSICO Huế (Chân Mây)",
+    "systemPortSub": "Cảng biển nước sâu -14m",
+    "systemIcd": "ICD Lao Bảo & Hệ thống ICD",
+    "systemIcdSub": "Quảng Trị (86.000 m²) & Hưng Yên"
+  },
+  "berthSpecs": {
+    "roman": "I",
+    "eyebrow": "NĂNG LỰC CẦU BẾN & THÔNG SỐ TIẾP NHẬN",
+    "title": "Chuẩn mực cảng nước sâu quốc tế đón tàu trọng tải lớn",
+    "summary": "Quy hoạch chiều dài 540 m cầu bến với mớn nước -14 m, sẵn sàng tiếp nhận đồng thời tàu container sức chở 4.000 TEU và tàu hàng tổng hợp 70.000 DWT.",
+    "berths": "Bến cảng",
+    "berthsDesc": "Bến số 4 & Bến số 5",
+    "berthsSub": "Vận hành Bến 4 (08/2026), hoàn thiện Bến 5 (09/2027)",
+    "quayLength": "Cầu bến",
+    "quayLengthDesc": "540 m liên tục",
+    "quayLengthSub": "Chiều dài đảm bảo tiếp nhận đồng thời 2 tàu lớn",
+    "depth": "Độ sâu trước bến",
+    "depthDesc": "-14 m mớn nước tự nhiên",
+    "depthSub": "Mớn nước sâu ổn định, không phụ thuộc thủy triều",
+    "area": "Diện tích cảng",
+    "areaDesc": "20,4 ha đồng bộ",
+    "areaSub": "Bãi container, kho CFS, băng tải kín và hậu cần",
+    "vesselCapacity": "Cỡ tàu tiếp nhận",
+    "vesselBadge": "NĂNG LỰC ĐÓN TÀU THẾ HỆ MỚI",
+    "vesselSummary": "Hạ tầng kỹ thuật bến số 4 và bến số 5 được thiết kế chuyên biệt để đón các thế hệ tàu tải trọng lớn:",
+    "containerVesselTitle": "Tàu Container Nội địa & Nội Á",
+    "containerVesselTeu": "4.000 TEU",
+    "containerVesselDesc": "Tiếp nhận tàu container sức chở tới 4.000 TEU, giải phóng tàu với hệ thống cẩu bờ Weihua 45t-45m.",
+    "bulkVesselTitle": "Tàu Hàng Rời & Hàng Tổng Hợp",
+    "bulkVesselDwt": "70.000 DWT",
+    "bulkVesselDesc": "Tiếp nhận tàu hàng rời trọng tải tới 70.000 DWT, tích hợp băng tải kín bảo vệ môi trường.",
+    "officialPlanningNote": "Hạ tầng tiếp nhận đã được phê duyệt quy hoạch tại Khu kinh tế Chân Mây – Lăng Cô."
+  },
+  "hero": {
+    "brandTitle": "CẢNG VSICO HUẾ",
+    "locationSub": "CHÂN MÂY – LĂNG CÔ, TP. HUẾ",
+    "title": "Cửa ngõ ra biển của Hành lang Đông – Tây",
+    "tagline": "Cảng biển nước sâu & Trung tâm logistics tích hợp",
+    "primaryCta": "Khám phá cảng",
+    "secondaryCta": "Nhận chính sách ưu đãi",
+    "scrollHint": "Cuộn để khám phá hành trình",
+    "videoAlt": "Toàn cảnh cầu cảng nước sâu và tàu container tại Cảng VSICO Chân Mây Huế"
+  },
+  "location": {
+    "roman": "II",
+    "eyebrow": "VỊ TRÍ ĐỊA LÝ & NĂNG LỰC KẾT NỐI",
+    "title": "Nơi biển gặp hành lang kinh tế",
+    "summary": "Cách Cửa khẩu Quốc tế Lao Bảo khoảng {distanceKm} km, Cảng VSICO Huế kết nối trực tiếp Hành lang Kinh tế Đông – Tây (EWEC), mở ra cửa ngõ giao thương đường biển thuận lợi cho Nam Lào, Đông Bắc Thái Lan và Bắc Campuchia.",
+    "ewecBadge": "Kết nối trực tiếp tuyến EWEC",
+    "laoBaoDistanceLabel": "Khoảng cách tới Cửa khẩu Quốc tế Lao Bảo",
+    "laoBaoDistanceValue": "khoảng {distanceKm} km",
+    "mapTabEwec": "Bản đồ Hành lang Đông – Tây (EWEC)",
+    "mapTabZones": "Cự ly kết nối 6 KCN miền Trung",
+    "ewecCorridorTitle": "Tuyến hành lang xuyên biên giới EWEC",
+    "ewecCorridorDesc": "Luồng hàng từ Nam Lào, Đông Bắc Thái Lan và Bắc Campuchia hội tụ qua Cửa khẩu Lao Bảo thẳng về Cảng nước sâu Chân Mây.",
+    "industrialZonesTitle": "Khoảng cách kết nối tới 6 Khu công nghiệp trọng điểm",
+    "selectZoneHint": "Chọn một Khu công nghiệp để xem tuyến kết nối trên bản đồ",
+    "advantageNote": "Tối ưu vận tải nội địa với hạ tầng ổn định và giảm thiểu rủi ro trung chuyển.",
+    "nodes": {
+      "chanMayPort": "Cảng VSICO Huế (Chân Mây)",
+      "icdLaoBao": "ICD Lao Bảo (Quảng Trị)",
+      "southernLaos": "Nam Lào (Savannakhet)",
+      "northeastThailand": "Đông Bắc Thái Lan (Mukdahan)",
+      "northernCambodia": "Bắc Campuchia (Stung Treng)"
+    },
+    "countries": {
+      "vietnam": "Việt Nam",
+      "laos": "Lào",
+      "thailand": "Thái Lan",
+      "cambodia": "Campuchia"
+    },
+    "zones": {
+      "hoaKhanh": "KCN Hòa Khánh",
+      "daNang": "KCN Đà Nẵng",
+      "phuBai": "KCN Phú Bài",
+      "quangTri": "KCN Quảng Trị",
+      "bacChuLai": "KCN Bắc Chu Lai",
+      "vsipQuangNgai": "KCN VSIP Quảng Ngãi"
+    },
+    "provinces": {
+      "daNang": "TP. Đà Nẵng",
+      "hue": "TP. Huế",
+      "quangTri": "Tỉnh Quảng Trị",
+      "quangNam": "Tỉnh Quảng Nam",
+      "quangNgai": "Tỉnh Quảng Ngãi"
+    }
+  },
+  "portIcd": {
+    "roman": "III",
+    "eyebrow": "MÔ HÌNH TÍCH HỢP CẢNG – ICD",
+    "title": "Một chuỗi, không đứt đoạn",
+    "summary": "Cảng VSICO Huế được kết nối đồng bộ với ICD Lao Bảo (VSICO Quảng Trị) rộng {icdArea} m² sát khu vực cửa khẩu Việt – Lào, hình thành chuỗi vận hành khép kín từ biên giới ra tới cầu bến.",
+    "icdCardBadge": "CỬA KHẨU QUỐC TẾ LAO BẢO · QUẢNG TRỊ",
+    "icdCardTitle": "ICD VSICO Quảng Trị (ICD Lao Bảo)",
+    "icdAreaLabel": "Tổng diện tích quy hoạch",
+    "portCardBadge": "KHU KINH TẾ CHÂN MÂY – LĂNG CÔ · TP. HUẾ",
+    "portCardTitle": "Cảng Nước Sâu VSICO Huế",
+    "portAreaLabel": "Quy mô diện tích cảng",
+    "chainLabel": "Hành trình khép kín khoảng {distanceKm} km dọc trục Quốc lộ 9 – Quốc lộ 1A",
+    "imageAlt": "Toàn cảnh ICD VSICO Quảng Trị tại khu vực cửa khẩu quốc tế Lao Bảo",
+    "functionsTitle": "Chức năng cốt lõi tại ICD Lao Bảo",
+    "functions": {
+      "consolidation": "Tập kết, gom hàng và phân phối hàng quá cảnh xuyên biên giới",
+      "customs": "Thực hiện thủ tục hải quan và thông quan trực tiếp tại khu vực cửa khẩu",
+      "valueAdded": "Cung cấp các dịch vụ kho ngoại quan và logistics giá trị gia tăng"
+    },
+    "benefitsTitle": "Hiệu quả mang lại cho Chủ hàng & Hãng tàu",
+    "benefits": {
+      "speed": "Tăng tốc độ lưu chuyển hàng hóa từ Lào và Thái Lan ra cảng biển",
+      "risk": "Giảm thiểu rủi ro trung chuyển nhờ quy trình điều phối đồng bộ một đầu mối",
+      "synergy": "Tối ưu hiệu quả khai thác cầu bến và kế hoạch xếp dỡ tàu tại Chân Mây"
+    }
+  },
+  "solutions": {
+    "roman": "IV",
+    "eyebrow": "GIẢI PHÁP TRỌN GÓI",
+    "title": "Tàu – Cảng – Kho – ICD: một hệ sinh thái đồng bộ",
+    "summary": "Một đầu mối điều phối xuyên suốt cho cả chuỗi cung ứng: giảm khâu trung chuyển, rút ngắn thời gian chờ đợi và kết hợp chính sách hỗ trợ tài chính tại Chân Mây.",
+    "modes": {
+      "portToPort": {
+        "title": "Port to Port",
+        "description": "Khai thác các tuyến vận tải biển container nội địa (Hải Phòng – Chân Mây Huế – TP.HCM) và tuyến nội Á.",
+        "highlights": "Tần suất {trips} chuyến/tuần · Đội tàu {fleetTeu} TEU (cỡ tàu {minTeu} – {maxTeu} TEU)"
+      },
+      "icdToPort": {
+        "title": "ICD – Cảng",
+        "description": "Hàng hóa được gom và thông quan tại ICD Lao Bảo rồi vận chuyển thẳng về Cảng VSICO Huế để xếp lên tàu.",
+        "highlights": "Hệ thống kho & ICD rộng {warehouseArea} m² tại Hưng Yên, Hải Phòng, Quảng Bình, Quảng Trị, Huế, Đồng Nai, Long An"
+      },
+      "doorToDoor": {
+        "title": "Door to Door",
+        "description": "Kết hợp đội xe container 20’/40’ và xe tải {minTons} – {maxTons} tấn cùng kho bãi, ICD, cảng và tàu biển thành chuỗi từ kho người gửi tới kho người nhận.",
+        "highlights": "Đang chờ xác nhận phạm vi tuyến áp dụng chính thức"
+      }
+    },
+    "flowTitle": "Sơ đồ luồng vận hành Logistics khép kín",
+    "flowSubtitle": "Cuộn để theo dõi hành trình hàng hóa liền mạch qua 7 điểm chạm trong hệ sinh thái VSICO",
+    "costNoteTitle": "Tối ưu hóa chi phí xuất nhập khẩu",
+    "costNoteBody": "Sự kết hợp giữa một đầu mối vận hành (Tàu – Cảng – Kho – ICD), giảm thiểu điểm trung chuyển và gói hỗ trợ từ TP. Huế giúp doanh nghiệp tối ưu hóa chi phí vận hành toàn trình.",
+    "flow": {
+      "originWarehouse": {
+        "label": "Kho / Nhà máy",
+        "sub": "Điểm đóng hàng xuất phát"
+      },
+      "trucking": {
+        "label": "Đội xe VSICO",
+        "sub": "Cont 20'/40' & xe tải"
+      },
+      "icdLaoBao": {
+        "label": "ICD Lao Bảo",
+        "sub": "Gom hàng & thông quan"
+      },
+      "chanMayPort": {
+        "label": "Cảng VSICO Huế",
+        "sub": "Xếp dỡ cầu bến -14m"
+      },
+      "containerShip": {
+        "label": "Đội tàu VSICO",
+        "sub": "Nội địa & Nội Á"
+      },
+      "destinationPort": {
+        "label": "Cảng đích",
+        "sub": "Hải Phòng / TP.HCM / Nội Á"
+      },
+      "destinationWarehouse": {
+        "label": "Kho nhận hàng",
+        "sub": "Giao hàng hoàn tất"
+      }
+    }
+  },
+  "infrastructure": {
+    "roman": "V",
+    "eyebrow": "QUY MÔ HẠ TẦNG, NĂNG LỰC & NHÂN SỰ",
+    "title": "Hạ tầng cảng nước sâu và lộ trình vận hành",
+    "summary": "Quy hoạch 20,4 ha đồng bộ gồm bến container, bến hàng rời kèm hệ thống băng tải, kho CFS, kho hàng rời và đội ngũ 250 nhân sự chuyên trách.",
+    "specsTitle": "Thông số cầu bến & Khu chức năng",
+    "equipmentTitle": "Hệ thống thiết bị xếp dỡ",
+    "peopleTitle": "Hệ thống nhân sự tại cảng ({staffCount} người)",
+    "layoutImageAlt": "Sơ đồ quy hoạch tổng thể 20,4 ha của Cảng VSICO Huế",
+    "craneImageAlt": "Hệ thống cẩu bờ Weihua 45t-45m tại tiền phương Cảng VSICO Huế",
+    "staffImageAlt": "Đội ngũ 250 nhân sự vận hành Cảng VSICO Huế",
+    "specs": {
+      "containerBerth": "Bến Container tiếp nhận tàu tới {teu} TEU",
+      "bulkBerth": "Bến Hàng rời tiếp nhận tàu tới {dwt} DWT",
+      "conveyor": "Hệ thống băng tải hàng rời khép kín",
+      "warehouses": "Kho hàng rời, Kho CFS & Khu dịch vụ hậu cần",
+      "quayCranes": "Tiền phương: {count} cẩu bờ ({model})",
+      "backyardEquipment": "Hậu phương: {forklifts} xe nâng, {backupCranes} cẩu dự phòng, {tractors} xe đầu kéo"
+    },
+    "departments": {
+      "management": "01. Nhân sự Quản lý",
+      "dispatch": "02. Nhân sự Điều độ",
+      "technical": "03. Nhân sự Kỹ thuật",
+      "operations": "04. Nhân sự Khai thác"
+    },
+    "timelineLayer1Title": "Lớp 1 · Cột mốc hạ tầng chiến lược",
+    "timelineLayer2Title": "Lớp 2 · Lộ trình năng lực & hiệu suất khai thác",
+    "phase1Title": "Giai đoạn 1 (08/2026 – 05/2027)",
+    "phase1Volume": "Sản lượng mục tiêu: {volume} TEU",
+    "phase1Moves": "Năng suất khai thác: {min} – {max} moves/giờ",
+    "phase2Title": "Giai đoạn 2 (Từ 06/2027)",
+    "phase2Volume": "Nâng cao công suất khai thác toàn diện",
+    "phase2Moves": "Năng suất khai thác: {min} – {max} moves/giờ",
+    "phaseAdvantage": "Tối ưu thời gian giải phóng tàu và đảm bảo vận hành ổn định, hiệu quả.",
+    "countdownBadge": "CỘT MỐC THÁNG 09/2027",
+    "countdownTitle": "Đếm ngược tới thời điểm vận hành Bến số 5 & ICD Lao Bảo",
+    "countdownUnits": {
+      "days": "Ngày",
+      "hours": "Giờ",
+      "minutes": "Phút",
+      "seconds": "Giây"
+    }
+  },
+  "timeline": {
+    "berth4": "VSICO Huế – Bến số 4 đi vào hoạt động",
+    "berth4Desc": "Tiếp nhận tàu container và tàu hàng rời giai đoạn 1 tại Khu kinh tế Chân Mây – Lăng Cô.",
+    "berth5": "VSICO Huế – Bến số 5 đi vào hoạt động",
+    "berth5Desc": "Mở rộng chiều dài cầu bến lên 540 m, nâng năng suất giải phóng tàu lên 80 – 85 moves/giờ.",
+    "icdLaoBao": "ICD Lao Bảo đi vào hoạt động",
+    "icdLaoBaoDesc": "Khép kín chuỗi logistics vùng biên 86.000 m² kết nối trực tiếp cửa khẩu Lao Bảo với cảng biển.",
+    "statusOperating": "Đã vận hành",
+    "statusUpcoming": "Sắp tới",
+    "monthOnlyNote": "Thời điểm các cột mốc hiển thị theo tháng và năm dự kiến."
+  },
+  "services": {
+    "roman": "VI",
+    "eyebrow": "DỊCH VỤ TẠI CẢNG",
+    "title": "Ba nhóm dịch vụ khai thác & hậu cần hàng hải",
+    "summary": "Đáp ứng trọn vẹn nhu cầu xếp dỡ hàng hóa, hỗ trợ kỹ thuật tàu biển và cung ứng hàng hải ngay tại cầu bến Chân Mây.",
+    "groups": {
+      "cargoAndYard": {
+        "title": "Khai thác hàng & Bến bãi",
+        "subtitle": "Vận hành xếp dỡ container, hàng rời và bảo dưỡng vỏ cont tiêu chuẩn.",
+        "items": {
+          "stevedoring": "Dịch vụ xếp dỡ hàng hóa container và hàng rời",
+          "yardStorage": "Dịch vụ lưu bãi và quản lý kho CFS / kho hàng rời",
+          "containerRepair": "Dịch vụ kiểm tra, vệ sinh và sửa chữa container"
+        }
+      },
+      "vesselSupport": {
+        "title": "Hỗ trợ tàu biển",
+        "subtitle": "Đồng hành cùng chủ tàu và thuyền trưởng trong suốt thời gian tàu làm hàng.",
+        "items": {
+          "agencyFree": "Dịch vụ đại lý tàu biển (Miễn phí)",
+          "tugboat": "Dịch vụ tàu lai dắt hỗ trợ cập và rời cầu an toàn",
+          "shipRepair": "Dịch vụ bảo trì và sửa chữa tàu biển tại bến"
+        }
+      },
+      "maritimeSupply": {
+        "title": "Cung ứng hàng hải",
+        "subtitle": "Chuỗi dịch vụ hậu cần và vệ sinh môi trường tàu biển theo chuẩn quốc tế.",
+        "items": {
+          "bunkeringAndWater": "Cung cấp nhiên liệu, nước ngọt và dầu nhờn",
+          "chandling": "Cung ứng hàng hải (vật tư, phụ tùng, hải đồ, thực phẩm)",
+          "holdCleaning": "Dọn vệ sinh hầm tàu và thu gom, xử lý rác thải"
+        }
+      }
+    }
+  },
+  "policies": {
+    "roman": "VII",
+    "eyebrow": "CÁC CHÍNH SÁCH HỖ TRỢ",
+    "title": "Đến Chân Mây, bạn được gì?",
+    "summary": "Kết hợp chính sách hỗ trợ ngân sách trực tiếp từ Chính quyền Thành phố Huế và gói ưu đãi thương mại từ VSICO dành cho hãng tàu, chủ hàng và forwarder.",
+    "tabShippingLine": "Dành cho Hãng tàu",
+    "tabCargoOwner": "Dành cho Chủ hàng & Forwarder",
+    "hueGovBadge": "CHÍNH SÁCH HỖ TRỢ TỪ CHÍNH QUYỀN TP. HUẾ",
+    "vsicoCommercialBadge": "CHÍNH SÁCH THƯƠNG MẠI VSICO",
+    "shippingAmountSuffix": "/ chuyến cập cảng",
+    "shippingCondition": "Điều kiện áp dụng: Tối thiểu {minTrips} chuyến/tháng",
+    "cargo20Label": "Container 20'",
+    "cargo40Label": "Container 40'",
+    "perContainerSuffix": "/ container",
+    "commercial": {
+      "shipping": {
+        "liftOnOff": "Chính sách ưu đãi phí nâng/hạ container tại cảng",
+        "demDet": "Chính sách lưu vỏ (Dem/Det) linh hoạt theo sản lượng",
+        "berthPriority": "Ưu tiên sắp xếp lịch tàu và cầu bến thuận tiện cho tàu cập cảng VSICO Huế",
+        "agencyFeeSupport": "Miễn phí dịch vụ đại lý tàu và hỗ trợ chi phí đại lý",
+        "otherOwnerPolicies": "Các chính sách đồng hành chuyên biệt khác dành cho chủ tàu mở tuyến"
+      },
+      "cargo": {
+        "icdLiftOnOff": "Chính sách ưu đãi nâng/hạ tại ICD Lao Bảo",
+        "demDet": "Chính sách miễn giảm lưu bãi (Dem/Det) cho hàng xuất nhập khẩu",
+        "icdCustomsSupport": "Hỗ trợ thời gian và thủ tục hải quan thông quan tại ICD Lao Bảo",
+        "portCustomsSupport": "Hỗ trợ thủ tục hải quan thông quan trực tiếp tại Cảng VSICO Huế"
+      }
+    },
+    "calculator": {
+      "title": "Máy tính ước tính mức hỗ trợ từ TP. Huế",
+      "subtitle": "Chọn đối tượng và nhập sản lượng dự kiến hàng tháng để ước tính khoản hỗ trợ trực tiếp bằng VNĐ.",
+      "modeShipping": "Hãng tàu (Theo số chuyến/tháng)",
+      "modeCargo": "Chủ hàng (Theo số lượng container)",
+      "tripsInputLabel": "Số chuyến tàu cập cảng mỗi tháng",
+      "minTripsWarning": "Cần tối thiểu {minTrips} chuyến/tháng để đủ điều kiện nhận hỗ trợ từ TP. Huế.",
+      "cont20InputLabel": "Số lượng Container 20'",
+      "cont40InputLabel": "Số lượng Container 40'",
+      "estimatedTotalLabel": "Tổng mức hỗ trợ ước tính từ TP. Huế",
+      "validityPendingNote": "Lưu ý: Thời hạn hiệu lực cụ thể của chính sách hỗ trợ đang chờ xác nhận chính thức."
+    }
+  },
+  "about": {
+    "roman": "VIII",
+    "eyebrow": "VỀ VSICO",
+    "title": "Hệ sinh thái logistics trọn gói",
+    "summary": "Năng lực tổng thể của toàn Tập đoàn VSICO với đội tàu biển, đội xe đầu kéo, mạng lưới kho và ICD trải dài từ Bắc vào Nam cùng các văn phòng đại diện quốc tế.",
+    "metrics": {
+      "fleetDwt": "Tổng trọng tải đội tàu",
+      "fleetTeu": "Sức chở đội tàu container",
+      "warehouseArea": "Tổng diện tích Kho & ICD toàn hệ thống",
+      "auditor": "Đơn vị kiểm toán độc lập ({months} tháng/lần)"
+    },
+    "outputChartTitle": "Sản lượng toàn Tập đoàn VSICO giai đoạn 2023 – 2025 (Đơn vị: TEU)",
+    "revenueChartTitle": "Doanh thu toàn Tập đoàn VSICO giai đoạn 2023 – 2025 (ĐVT: Tỷ đồng)",
+    "chartWholeGroupBadge": "Số liệu hợp nhất toàn Tập đoàn VSICO",
+    "auditNote": "Kiểm toán định kỳ {months} tháng/1 lần cho VSICO và các công ty thành viên bởi {auditor}.",
+    "warehousesTitle": "Mạng lưới Kho & ICD toàn hệ thống ({totalArea} m²)",
+    "officesTitle": "Văn phòng đại diện quốc tế",
+    "offices": {
+      "singapore": "Singapore",
+      "china": "Trung Quốc",
+      "hongKong": "Hồng Kông",
+      "cambodia": "Campuchia",
+      "laos": "Lào"
+    },
+    "warehouses": {
+      "hue": {
+        "name": "Kho VSICO Huế",
+        "location": "Cảng Chân Mây, TP. Huế"
+      },
+      "vanLam": {
+        "name": "ICD Văn Lâm",
+        "location": "Đại Đồng, Hưng Yên"
+      },
+      "laoBao": {
+        "name": "ICD Lao Bảo",
+        "location": "Cửa khẩu Lao Bảo, Quảng Trị"
+      },
+      "quangBinh": {
+        "name": "Kho Quảng Bình",
+        "location": "KCN Hòn La, Quảng Bình"
+      },
+      "thienSon": {
+        "name": "Kho Thiên Sơn",
+        "location": "Mỹ Hào, Hưng Yên"
+      },
+      "vanGiang": {
+        "name": "Kho Văn Giang",
+        "location": "Văn Giang, Hưng Yên"
+      },
+      "longAn": {
+        "name": "Kho Long An",
+        "location": "KCN Phú An Thạnh"
+      },
+      "dongNai": {
+        "name": "Kho Đồng Nai",
+        "location": "KCN An Phước, Đồng Nai"
+      }
+    }
+  },
+  "certifications": {
+    "roman": "IX",
+    "eyebrow": "CHỨNG NHẬN QUỐC TẾ & KHÁCH HÀNG",
+    "title": "Được tin cậy bởi những tên tuổi lớn",
+    "summary": "Tuân thủ hệ thống quản trị chất lượng, môi trường, an toàn và an ninh chuỗi cung ứng theo chuẩn ISO quốc tế và EcoVadis. Nhấn vào từng chứng chỉ để phóng to.",
+    "tabs": {
+      "iso": "ISO & Môi trường",
+      "transportAndPostal": "Giấy phép Vận tải & Bưu chính",
+      "agencyAndContainer": "Đại lý tàu & Sửa chữa Container",
+      "partnerAwards": "Giải thưởng Quản lý Kho & Vận hành"
+    },
+    "zoomHint": "Nhấn để phóng to chứng nhận",
+    "closeDialog": "Đóng cửa sổ xem chứng chỉ",
+    "items": {
+      "iso9001": {
+        "title": "Chứng nhận ISO 9001",
+        "subtitle": "Hệ thống quản lý chất lượng quốc tế"
+      },
+      "iso14001": {
+        "title": "Chứng nhận ISO 14001",
+        "subtitle": "Hệ thống quản lý môi trường"
+      },
+      "iso45001": {
+        "title": "Chứng nhận ISO 45001",
+        "subtitle": "Hệ thống quản lý an toàn và sức khỏe nghề nghiệp"
+      },
+      "iso28000": {
+        "title": "Chứng nhận ISO 28000",
+        "subtitle": "Hệ thống quản lý an ninh chuỗi cung ứng"
+      },
+      "iso31000": {
+        "title": "Chứng nhận ISO 31000",
+        "subtitle": "Hệ thống quản trị rủi ro doanh nghiệp"
+      },
+      "ecovadis": {
+        "title": "Chứng nhận EcoVadis",
+        "subtitle": "Đánh giá trách nhiệm xã hội và phát triển bền vững"
+      },
+      "transportLicense": {
+        "title": "Giấy chứng nhận Vận tải",
+        "subtitle": "Giấy phép vận tải đường bộ quốc tế Việt – Lào & Việt – Campuchia"
+      },
+      "postalLicense": {
+        "title": "Giấy phép Bưu chính & Nghiệp vụ",
+        "subtitle": "Giấy phép bưu chính và chứng nhận đào tạo nghiệp vụ"
+      },
+      "agencyContainer": {
+        "title": "Chứng chỉ Đại lý tàu & Sửa chữa Container",
+        "subtitle": "Đủ điều kiện hành nghề đại lý tàu biển và dịch vụ kỹ thuật container"
+      },
+      "hondaAward": {
+        "title": "Honda 101KI Supplier Award (05/2025)",
+        "subtitle": "Hạng mục Quản lý Kho và Vận hành Xuất sắc (Excellent Warehouse & Operation Management)"
+      }
+    },
+    "customersHeading": "Khách hàng tiêu biểu của hệ thống VSICO",
+    "chanMayCustomersHeading": "Danh sách khách hàng container ở khu vực Chân Mây",
+    "logoPermissionPendingNote": "Danh sách logo khách hàng đang trong quá trình xác nhận quyền hiển thị công khai trước khi phát hành chính thức.",
+    "sectors": {
+      "automotive": "Ô tô & Xe máy",
+      "electronics": "Điện tử & Gia dụng",
+      "fmcg": "Thực phẩm & Tiêu dùng",
+      "chanMayRegional": "Khu vực Chân Mây – Huế"
+    }
+  },
+  "contact": {
+    "roman": "X",
+    "eyebrow": "ĐĂNG KÝ NHẬN THÔNG TIN ƯU TIÊN",
+    "title": "Cùng mở tuyến mới qua Chân Mây",
+    "summary": "Chọn vai trò của doanh nghiệp và để lại thông tin để nhận bảng giá dịch vụ, lịch tàu và tư vấn trực tiếp về chính sách hỗ trợ tại Cảng VSICO Huế.",
+    "portAddressTitle": "Cảng VSICO Huế",
+    "portAddressValue": "Khu kinh tế Chân Mây – Lăng Cô, xã Chân Mây – Lăng Cô, Thành phố Huế",
+    "hqAddressTitle": "Trụ sở Tập đoàn VSICO",
+    "hqAddressValue": "Tầng 3, tháp 1, tòa nhà Times Tower, 35 Lê Văn Lương, Thanh Xuân, Hà Nội",
+    "hotlineLabel": "Hotline hỗ trợ",
+    "websiteLabel": "Website Tập đoàn",
+    "form": {
+      "name": "Họ và tên người liên hệ",
+      "namePlaceholder": "Nguyễn Văn A",
+      "company": "Tên doanh nghiệp / Hãng tàu",
+      "companyPlaceholder": "Công ty TNHH ...",
+      "role": "Vai trò của doanh nghiệp",
+      "roleShippingLine": "Hãng tàu (Shipping Line)",
+      "roleCargoOwner": "Chủ hàng (Cargo Owner)",
+      "roleForwarder": "Giao nhận vận tải (Freight Forwarder)",
+      "email": "Email công việc",
+      "emailPlaceholder": "contact@company.com",
+      "phone": "Số điện thoại",
+      "phonePlaceholder": "(+84) 9xx xxx xxx",
+      "message": "Nhu cầu tuyến vận chuyển / sản lượng dự kiến",
+      "messagePlaceholder": "Ví dụ: Tuyến nội Á / 50 cont 40' mỗi tháng qua ICD Lao Bảo...",
+      "submit": "Nhận bảng giá & tư vấn chính sách",
+      "submitting": "Đang xử lý...",
+      "successTitle": "Đã ghi nhận yêu cầu tư vấn ưu tiên",
+      "successMessage": "Thông tin của quý khách đã được ghi nhận trên trình duyệt (bản mô phỏng client-side). Đội ngũ kinh doanh Cảng VSICO Huế sẽ phản hồi sớm.",
+      "resetButton": "Gửi yêu cầu khác",
+      "errors": {
+        "nameMin": "Vui lòng nhập họ và tên (tối thiểu 2 ký tự).",
+        "companyMin": "Vui lòng nhập tên doanh nghiệp.",
+        "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ.",
+        "phoneMin": "Vui lòng nhập số điện thoại liên hệ hợp lệ."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Cửa ngõ kết nối Hành lang Kinh tế Đông – Tây (EWEC) · Trung tâm cảng biển và logistics xuyên biên giới tích hợp tại miền Trung Việt Nam.",
+    "quickLinks": "Điều hướng nhanh",
+    "socialLinks": "Kênh truyền thông",
+    "copyright": "© {year} VSICO Hue Port. Bản quyền nội dung, logo và chứng chỉ thuộc về VSICO và các chủ sở hữu tương ứng."
+  },
+  "common": {
+    "pendingBadge": "CHỜ XÁC NHẬN",
+    "approxPrefix": "khoảng",
+    "unitKm": "km",
+    "unitTeu": "TEU",
+    "unitDwt": "DWT",
+    "unitHa": "ha",
+    "unitMeter": "m",
+    "unitSqm": "m²"
+  }
+}

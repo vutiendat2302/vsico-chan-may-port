@@ -1,0 +1,125 @@
+# =========================================================
+# Dependencies
+# =========================================================
+node_modules/
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Keep the lockfile for the package manager used by this project.
+# Commit package-lock.json, pnpm-lock.yaml, or yarn.lock.
+
+
+# =========================================================
+# Next.js
+# =========================================================
+.next/
+out/
+.vercel/
+
+# Build output
+dist/
+build/
+
+
+# =========================================================
+# TypeScript
+# =========================================================
+*.tsbuildinfo
+
+
+# =========================================================
+# Environment variables and secrets
+# =========================================================
+.env*
+!.env.example
+!.env.*.example
+
+# Local certificates and private keys
+*.pem
+*.key
+
+
+# =========================================================
+# Caches and temporary files
+# =========================================================
+.turbo/
+.cache/
+.tmp/
+.eslintcache
+.stylelintcache
+.prettiercache
+
+
+# =========================================================
+# Tests and coverage
+# =========================================================
+coverage/
+*.lcov
+playwright-report/
+test-results/
+
+
+# =========================================================
+# Logs and process files
+# =========================================================
+*.log
+logs/
+pids/
+*.pid
+*.seed
+
+
+# =========================================================
+# IDE and editor settings
+# =========================================================
+.idea/
+
+# Ignore local VS Code files, but allow shared project recommendations/settings.
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+*.sublime-workspace
+*.sublime-project
+
+
+# =========================================================
+# Operating system files
+# =========================================================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+
+# =========================================================
+# Generated archives and miscellaneous files
+# =========================================================
+*.tgz
+*.gz
+*.bak
+*.swp
+*.swo
+
+# Storybook output (if Storybook is added later)
+storybook-static/
+
+
+# =========================================================
+# Project-specific notes
+# =========================================================
+# Do not ignore public/fonts/ or public/assets/ by default.
+# Keep website images, icons, map assets, and font files in Git
+# unless they are generated automatically and reproducible.
+#
+# GSAP, ScrollTrigger, Lenis, Framer Motion, MapLibre,
+# Recharts, next-intl, shadcn/ui, and Tailwind do not need
+# special .gitignore rules.
+

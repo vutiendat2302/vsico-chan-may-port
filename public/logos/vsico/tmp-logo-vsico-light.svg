@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" fill="none">
+  <g fill="#FFFFFF">
+    <path d="M8 10L26 42L44 10H34.5L26 26.5L17.5 10H8Z" />
+    <path d="M48 10H86V17.5H57.5V22.5H84V42H48V34.5H74.5V29.5H48V10Z" />
+    <path d="M92 10H101.5V42H92V10Z" />
+    <path d="M108 10H146V18H117.5V34H146V42H108V10Z" />
+    <path d="M152 10H194V42H152V10ZM161.5 18V34H184.5V18H161.5Z" />
+  </g>
+  <text x="8" y="55" fill="#E2E8F0" font-family="Montserrat, sans-serif" font-size="7.5" font-weight="600" letter-spacing="1.4">
+    LINK TOGETHER · SUCCEED TOGETHER
+  </text>
+</svg>
