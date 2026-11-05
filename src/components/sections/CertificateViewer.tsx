@@ -140,11 +140,11 @@ export function CertificateViewer({
         ))}
       </div>
 
-      {/* 4. Nút "Xem tất cả" mở sang trang riêng (/certifications) chuẩn phong cách Spyker: Nút đen/tím chữ nhật sang trọng */}
+      {/* 4. Nút "Xem tất cả" mở sang trang riêng (/certifications): Nút màu tím VSICO, hover giảm opacity */}
       <div className="mt-12 flex justify-center border-t border-border/80 pt-8">
         <Link
           href="/certifications"
-          className="inline-flex items-center gap-3 bg-ink px-8 py-3.5 font-body text-xs font-bold tracking-[0.22em] text-white uppercase transition-all duration-300 hover:bg-primary hover:tracking-[0.26em] hover:shadow-lg focus-visible:outline-2 focus-visible:outline-primary"
+          className="inline-flex items-center gap-3 bg-primary px-8 py-3.5 font-body text-xs font-bold tracking-[0.22em] text-white uppercase shadow-sm transition-all duration-300 hover:opacity-85 hover:shadow-md focus-visible:outline-2 focus-visible:outline-primary"
         >
           <span>{viewAllLabel}</span>
           <ArrowRight className="h-4 w-4" />

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Anchor, Cpu, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { SupportedLocale } from "@/lib/formatters";
 
@@ -16,24 +16,48 @@ export type InfrastructureRowItem = {
   hash: string;
 };
 
+export type MilestoneDisplayItem = {
+  id: string;
+  badgeNum: string;
+  dateLabel: string;
+  title: string;
+  statusLabel: string;
+  isCompleted?: boolean;
+  phaseLabel: string;
+  primaryMetric: string;
+  primaryMetricDesc: string;
+  secondaryMetric: string;
+  secondaryMetricDesc: string;
+};
+
+type TimeLeft = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
 export type InfrastructureClientProps = {
   locale: SupportedLocale;
   rows: InfrastructureRowItem[];
   viewDetailsLabel: string;
   timelineTitle: string;
-  daysRemaining: number;
+  targetIso: string;
+  initialTimeLeft: TimeLeft;
+  countdownBadge: string;
+  countdownTitle: string;
+  countdownSubtitle: string;
+  countdownUnits: {
+    days: string;
+    hours: string;
+    minutes: string;
+    seconds: string;
+  };
   phase1Label: string;
-  phase1Volume: string;
-  phase1Moves: string;
   phase2Label: string;
-  phase2Moves: string;
-  berth4Title: string;
-  berth4Status: string;
-  berth5Title: string;
-  berth5Status: string;
-  countdownPrefix: string;
-  countdownSuffix: string;
-  countdownEstNote: string;
+  berth4Date: string;
+  berth5Date: string;
+  milestones: MilestoneDisplayItem[];
 };
 
 export function InfrastructureClient({
@@ -41,21 +65,41 @@ export function InfrastructureClient({
   rows,
   viewDetailsLabel,
   timelineTitle,
-  daysRemaining,
+  targetIso,
+  initialTimeLeft,
+  countdownBadge,
+  countdownTitle,
+  countdownSubtitle,
+  countdownUnits,
   phase1Label,
-  phase1Volume,
-  phase1Moves,
   phase2Label,
-  phase2Moves,
-  berth4Title,
-  berth4Status,
-  berth5Title,
-  berth5Status,
-  countdownPrefix,
-  countdownSuffix,
-  countdownEstNote,
+  berth4Date,
+  berth5Date,
+  milestones,
 }: InfrastructureClientProps) {
   const [activeRow, setActiveRow] = useState<number>(0);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(initialTimeLeft);
+
+  // Đồng hồ đếm ngược thời gian thực cập nhật mỗi giây
+  useEffect(() => {
+    const updateCountdown = () => {
+      const target = new Date(targetIso).getTime();
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+    return () => clearInterval(timer);
+  }, [targetIso]);
 
   return (
     <div className="mt-12 sm:mt-16">
@@ -150,106 +194,241 @@ export function InfrastructureClient({
         </div>
       </div>
 
-      {/* PHẦN 2: LỘ TRÌNH TRÊN NỀN TRẮNG (GỘP HAI LỚP THÀNH MỘT TRỤC DUY NHẤT, THAY HỘP ĐEN) */}
+      {/* PHẦN 2: LỘ TRÌNH TRIỂN KHAI & TIẾN ĐỘ VẬN HÀNH */}
       <div className="mt-16 border-t border-border pt-12 sm:mt-24 sm:pt-16">
         <span className="font-body text-xs font-bold tracking-[0.24em] text-primary uppercase">
           {timelineTitle}
         </span>
 
-        {/* Trục dòng thời gian duy nhất */}
-        <div className="mt-10 sm:mt-12">
-          {/* 1. Mốc thời gian phía trên trục ray */}
-          <div className="relative w-full">
-            {/* Trục ray chính */}
-            <div className="relative h-[2px] w-full bg-border">
-              {/* Điểm 1: 08/2026 (Bến số 4 - Đã vận hành) -> Chấm đặc ● */}
-              <div className="absolute top-1/2 left-0 flex -translate-y-1/2 flex-col items-start">
-                <span className="absolute -top-7 left-0 whitespace-nowrap font-body text-xs font-bold text-muted">
-                  08/2026
+        {/* KHUNG THỜI GIAN ĐỒNG BỘ: ĐẾM NGƯỢC Ở TRÊN & CỘT MỐC THỜI GIAN ĐƯỢC CHUYỂN XUỐNG DƯỚI NÀY */}
+        <div className="mt-8 border border-border bg-surface-subtle p-6 sm:p-8 lg:p-10">
+          {/* HÀNG TRÊN: TIÊU ĐỀ + 4 BOX ĐẾM NGƯỢC (NGÀY, GIỜ, PHÚT, GIÂY) */}
+          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
+            <div className="max-w-xl">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                <span className="font-body text-xs font-bold tracking-[0.24em] text-primary uppercase">
+                  {countdownBadge}
                 </span>
-                <span className="h-3 w-3 rounded-full bg-primary ring-4 ring-primary/20" />
-                <div className="absolute top-5 left-0 whitespace-nowrap">
-                  <p className="font-heading text-sm font-bold text-ink sm:text-base">
-                    {berth4Title}
-                  </p>
-                  <p className="mt-0.5 font-body text-xs font-semibold text-primary">
-                    {berth4Status}
-                  </p>
-                </div>
+              </div>
+              <h3 className="mt-2 font-heading text-xl font-bold tracking-tight text-ink sm:text-2xl lg:text-3xl">
+                {countdownTitle}
+              </h3>
+              <p className="mt-1.5 font-body text-xs text-muted sm:text-sm">
+                {countdownSubtitle}
+              </p>
+            </div>
+
+            {/* 4 Box Đếm ngược: Ngày, Giờ, Phút, Giây */}
+            <div className="grid grid-cols-4 gap-2.5 sm:gap-3.5 lg:gap-4 shrink-0">
+              {/* Box Ngày */}
+              <div className="flex flex-col items-center justify-center border border-border bg-white px-3 py-4 shadow-sm sm:px-6 sm:py-5 min-w-[70px] sm:min-w-[95px] lg:min-w-[110px]">
+                <span className="font-body text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink tabular-nums">
+                  {timeLeft.days}
+                </span>
+                <span className="mt-1 font-body text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase">
+                  {countdownUnits.days}
+                </span>
               </div>
 
-              {/* Khấc mốc: 06/2027 (Khấc giữa 2 giai đoạn) -> Khấc ┿ */}
-              <div className="absolute top-1/2 left-[75%] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
-                <span className="absolute -top-7 whitespace-nowrap font-body text-xs font-bold text-muted">
+              {/* Box Giờ */}
+              <div className="flex flex-col items-center justify-center border border-border bg-white px-3 py-4 shadow-sm sm:px-6 sm:py-5 min-w-[70px] sm:min-w-[95px] lg:min-w-[110px]">
+                <span className="font-body text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink tabular-nums">
+                  {String(timeLeft.hours).padStart(2, "0")}
+                </span>
+                <span className="mt-1 font-body text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase">
+                  {countdownUnits.hours}
+                </span>
+              </div>
+
+              {/* Box Phút */}
+              <div className="flex flex-col items-center justify-center border border-border bg-white px-3 py-4 shadow-sm sm:px-6 sm:py-5 min-w-[70px] sm:min-w-[95px] lg:min-w-[110px]">
+                <span className="font-body text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink tabular-nums">
+                  {String(timeLeft.minutes).padStart(2, "0")}
+                </span>
+                <span className="mt-1 font-body text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase">
+                  {countdownUnits.minutes}
+                </span>
+              </div>
+
+              {/* Box Giây */}
+              <div className="flex flex-col items-center justify-center border border-primary/30 bg-primary/5 px-3 py-4 shadow-sm sm:px-6 sm:py-5 min-w-[70px] sm:min-w-[95px] lg:min-w-[110px]">
+                <span className="font-body text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-primary tabular-nums">
+                  {String(timeLeft.seconds).padStart(2, "0")}
+                </span>
+                <span className="mt-1 font-body text-[10px] sm:text-xs font-bold tracking-widest text-primary uppercase">
+                  {countdownUnits.seconds}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* ĐƯỜNG PHÂN CÁCH NGĂN KHỐI ĐẾM NGƯỢC VÀ CÁC CỘT MỐC THỜI GIAN */}
+          <div className="my-10 border-t border-border" />
+
+          {/* CỘT MỐC THỜI GIAN ĐƯỢC CHUYỂN XUỐNG ĐÂY (TRỰC TIẾP TRONG KHUNG ẢNH 2) */}
+          {/* 1. Trục tiến trình ray mốc thời gian */}
+          <div className="relative w-full pt-6 pb-2">
+            <div className="relative h-[2px] w-full bg-border">
+              {/* Mốc 01: 08/2026 */}
+              <div className="absolute top-1/2 left-0 flex -translate-y-1/2 flex-col items-start">
+                <span className="absolute -top-6 left-0 whitespace-nowrap font-body text-xs font-bold text-emerald-800">
+                  {berth4Date}
+                </span>
+                <span className="h-3.5 w-3.5 rounded-full bg-primary ring-4 ring-primary/20" />
+              </div>
+
+              {/* Khấc mốc: 06/2027 */}
+              <div className="absolute top-1/2 left-[50%] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+                <span className="absolute -top-6 whitespace-nowrap font-body text-xs font-bold text-muted">
                   06/2027
                 </span>
-                <span className="h-3 w-[2px] bg-primary" />
+                <span className="h-3.5 w-[2px] bg-primary" />
               </div>
 
-              {/* Điểm 2: 09/2027 (Gộp Bến số 5 & ICD Lao Bảo thành 1 nút) -> Chấm rỗng ○ */}
+              {/* Mốc 02 & 03: 09/2027 */}
               <div className="absolute top-1/2 right-0 flex -translate-y-1/2 flex-col items-end">
-                <span className="absolute -top-7 right-0 whitespace-nowrap font-body text-xs font-bold text-muted">
-                  09/2027
+                <span className="absolute -top-6 right-0 whitespace-nowrap font-body text-xs font-bold text-primary">
+                  {berth5Date}
                 </span>
-                <span className="h-3 w-3 rounded-full border-2 border-primary bg-white shadow-sm" />
-                <div className="absolute top-5 right-0 text-right whitespace-nowrap">
-                  <p className="font-heading text-sm font-bold text-ink sm:text-base">
-                    {berth5Title}
+                <span className="h-3.5 w-3.5 rounded-full border-2 border-primary bg-white shadow-sm" />
+              </div>
+            </div>
+          </div>
+
+          {/* 2. 3 CỘT MỐC THỜI GIAN (01, 02, 03) - CỠ CHỮ TO, NỔI BẬT, DÙNG TOÀN BỘ FONT BODY CHO SỐ */}
+          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-8 lg:gap-10">
+            {/* Cột mốc 01 */}
+            <div className="flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-7 w-7 items-center justify-center border border-emerald-300 bg-emerald-50 font-body text-xs font-extrabold text-emerald-800">
+                      01
+                    </span>
+                    <span className="flex h-7 w-7 items-center justify-center border border-border bg-white text-emerald-700">
+                      <Anchor className="h-4 w-4" />
+                    </span>
+                    <span className="font-body text-sm font-extrabold text-emerald-800 uppercase tracking-wider">
+                      {milestones[0].dateLabel}
+                    </span>
+                  </div>
+                  <span className="border border-emerald-300 bg-emerald-50 px-2 py-0.5 font-body text-[10px] font-bold text-emerald-800 uppercase">
+                    {milestones[0].statusLabel}
+                  </span>
+                </div>
+
+                <h4 className="mt-3.5 font-heading text-xl sm:text-2xl font-black text-ink leading-snug">
+                  {milestones[0].title}
+                </h4>
+
+                <div className="mt-4 border-t border-border/70 pt-3">
+                  <span className="font-body text-[11px] font-bold tracking-wider text-muted uppercase">
+                    {phase1Label}
+                  </span>
+                  <p className="mt-1.5 font-body text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+                    {milestones[0].primaryMetric}
                   </p>
-                  <p className="mt-0.5 font-body text-xs font-semibold text-muted">
-                    {berth5Status}
+                  <p className="mt-0.5 font-body text-xs text-muted">
+                    {milestones[0].primaryMetricDesc}
+                  </p>
+                  <p className="mt-3 font-body text-lg sm:text-xl font-extrabold text-primary">
+                    {milestones[0].secondaryMetric}
+                  </p>
+                  <p className="mt-0.5 font-body text-xs text-muted">
+                    {milestones[0].secondaryMetricDesc}
                   </p>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* 2. Hai giai đoạn là hai đoạn thanh mảnh nằm dưới trục, chiều dài đúng tỷ lệ (75% và 25%) */}
-          <div className="mt-24 flex items-start gap-4 sm:mt-26 sm:gap-6">
-            {/* Giai đoạn 1 (~75% chiều ngang: 08/2026 -> 06/2027) */}
-            <div className="w-[75%]">
-              <div className="flex items-center gap-2">
-                <span className="h-[2px] w-2 shrink-0 bg-primary/40" />
-                <span className="font-body text-xs font-bold tracking-wider text-primary uppercase whitespace-nowrap">
-                  {phase1Label}
-                </span>
-                <span className="h-[2px] flex-1 bg-primary/40" />
-                <span className="h-[2px] w-2 shrink-0 bg-primary/40" />
-              </div>
-              <div className="mt-2.5 space-y-0.5 font-body text-xs font-semibold text-ink/80 sm:text-sm">
-                <p>{phase1Volume}</p>
-                <p className="text-muted">{phase1Moves}</p>
+            {/* Cột mốc 02 */}
+            <div className="flex flex-col justify-between md:border-l md:border-border/80 md:pl-8 lg:pl-10">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-7 w-7 items-center justify-center border border-primary/30 bg-primary/10 font-body text-xs font-extrabold text-primary">
+                      02
+                    </span>
+                    <span className="flex h-7 w-7 items-center justify-center border border-border bg-white text-primary">
+                      <Cpu className="h-4 w-4" />
+                    </span>
+                    <span className="font-body text-sm font-extrabold text-primary uppercase tracking-wider">
+                      {milestones[1].dateLabel}
+                    </span>
+                  </div>
+                  <span className="border border-primary/25 bg-primary/10 px-2 py-0.5 font-body text-[10px] font-bold text-primary uppercase">
+                    {milestones[1].statusLabel}
+                  </span>
+                </div>
+
+                <h4 className="mt-3.5 font-heading text-xl sm:text-2xl font-black text-ink leading-snug">
+                  {milestones[1].title}
+                </h4>
+
+                <div className="mt-4 border-t border-border/70 pt-3">
+                  <span className="font-body text-[11px] font-bold tracking-wider text-muted uppercase">
+                    {phase2Label}
+                  </span>
+                  <p className="mt-1.5 font-body text-2xl sm:text-3xl font-extrabold text-primary tracking-tight">
+                    {milestones[1].primaryMetric}
+                  </p>
+                  <p className="mt-0.5 font-body text-xs text-muted">
+                    {milestones[1].primaryMetricDesc}
+                  </p>
+                  <p className="mt-3 font-body text-lg sm:text-xl font-extrabold text-ink">
+                    {milestones[1].secondaryMetric}
+                  </p>
+                  <p className="mt-0.5 font-body text-xs text-muted">
+                    {milestones[1].secondaryMetricDesc}
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Giai đoạn 2 (~25% chiều ngang: 06/2027 -> 09/2027) */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="h-[2px] w-2 shrink-0 bg-primary" />
-                <span className="font-body text-xs font-bold tracking-wider text-primary uppercase whitespace-nowrap">
-                  {phase2Label}
-                </span>
-                <span className="h-[2px] flex-1 bg-primary" />
-                <ArrowRight className="h-3 w-3 shrink-0 text-primary" />
-              </div>
-              <div className="mt-2.5 font-body text-xs font-semibold text-ink/80 sm:text-sm">
-                <p>{phase2Moves}</p>
+            {/* Cột mốc 03 */}
+            <div className="flex flex-col justify-between md:border-l md:border-border/80 md:pl-8 lg:pl-10">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-7 w-7 items-center justify-center border border-amber-300 bg-amber-50 font-body text-xs font-extrabold text-amber-800">
+                      03
+                    </span>
+                    <span className="flex h-7 w-7 items-center justify-center border border-border bg-white text-amber-700">
+                      <Layers className="h-4 w-4" />
+                    </span>
+                    <span className="font-body text-sm font-extrabold text-amber-800 uppercase tracking-wider">
+                      {milestones[2].dateLabel}
+                    </span>
+                  </div>
+                  <span className="border border-amber-300 bg-amber-50 px-2 py-0.5 font-body text-[10px] font-bold text-amber-800 uppercase">
+                    {milestones[2].statusLabel}
+                  </span>
+                </div>
+
+                <h4 className="mt-3.5 font-heading text-xl sm:text-2xl font-black text-ink leading-snug">
+                  {milestones[2].title}
+                </h4>
+
+                <div className="mt-4 border-t border-border/70 pt-3">
+                  <span className="font-body text-[11px] font-bold tracking-wider text-muted uppercase">
+                    {locale === "vi" ? "HỆ SINH THÁI KHÉP KÍN" : "CLOSED ECOSYSTEM"}
+                  </span>
+                  <p className="mt-1.5 font-body text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+                    {milestones[2].primaryMetric}
+                  </p>
+                  <p className="mt-0.5 font-body text-xs text-muted">
+                    {milestones[2].primaryMetricDesc}
+                  </p>
+                  <p className="mt-3 font-body text-lg sm:text-xl font-extrabold text-amber-700">
+                    {milestones[2].secondaryMetric}
+                  </p>
+                  <p className="mt-0.5 font-body text-xs text-muted">
+                    {milestones[2].secondaryMetricDesc}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* 3. Đếm ngược thành một dòng chữ, không ô vuông: số ngày cỡ lớn (Display), phần còn lại cỡ nhỏ */}
-          <div className="mt-10 border-t border-border pt-6">
-            <p className="font-body text-base text-ink sm:text-lg">
-              {countdownPrefix}{" "}
-              <span className="font-heading text-4xl font-black tracking-tight text-ink sm:text-5xl">
-                {daysRemaining}
-              </span>{" "}
-              {countdownSuffix}{" "}
-              <span className="font-body text-xs text-muted sm:text-sm">
-                {countdownEstNote}
-              </span>
-            </p>
           </div>
         </div>
       </div>

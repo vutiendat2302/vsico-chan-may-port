@@ -126,7 +126,7 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
                       <p className="font-body text-xs text-muted uppercase">
                         {isVi ? "Tổng diện tích cảng" : "Total port area"}
                       </p>
-                      <p className="mt-1 font-heading text-xl font-extrabold text-ink sm:text-2xl">
+                      <p className="mt-1 font-body text-xl font-extrabold text-ink sm:text-2xl">
                         20,4 ha
                       </p>
                     </div>
@@ -134,7 +134,7 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
                       <p className="font-body text-xs text-muted uppercase">
                         {isVi ? "Chiều dài cầu bến" : "Quay length"}
                       </p>
-                      <p className="mt-1 font-heading text-xl font-extrabold text-ink sm:text-2xl">
+                      <p className="mt-1 font-body text-xl font-extrabold text-ink sm:text-2xl">
                         540 m
                       </p>
                     </div>
@@ -142,7 +142,7 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
                       <p className="font-body text-xs text-muted uppercase">
                         {isVi ? "Mớn nước trước bến" : "Berth draft"}
                       </p>
-                      <p className="mt-1 font-heading text-xl font-extrabold text-ink sm:text-2xl">
+                      <p className="mt-1 font-body text-xl font-extrabold text-ink sm:text-2xl">
                         −14 m
                       </p>
                     </div>
@@ -150,7 +150,7 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
                       <p className="font-body text-xs text-muted uppercase">
                         {isVi ? "Cỡ tàu tiếp nhận" : "Vessel capacity"}
                       </p>
-                      <p className="mt-1 font-heading text-xl font-extrabold text-ink sm:text-2xl">
+                      <p className="mt-1 font-body text-xl font-extrabold text-ink sm:text-2xl">
                         4.000 TEU / 70.000 DWT
                       </p>
                     </div>
@@ -207,7 +207,7 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
                       <p className="font-body text-xs text-muted uppercase">
                         {isVi ? "Số lượng cẩu STS" : "STS Crane Count"}
                       </p>
-                      <p className="mt-1 font-heading text-xl font-extrabold text-ink sm:text-2xl">
+                      <p className="mt-1 font-body text-xl font-extrabold text-ink sm:text-2xl">
                         5 {isVi ? "cẩu bờ" : "cranes"}
                       </p>
                     </div>
@@ -215,7 +215,7 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
                       <p className="font-body text-xs text-muted uppercase">
                         {isVi ? "Sức nâng / Tầm với" : "Capacity / Outreach"}
                       </p>
-                      <p className="mt-1 font-heading text-xl font-extrabold text-ink sm:text-2xl">
+                      <p className="mt-1 font-body text-xl font-extrabold text-ink sm:text-2xl">
                         45t − 45m
                       </p>
                     </div>
@@ -223,7 +223,7 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
                       <p className="font-body text-xs text-muted uppercase">
                         {isVi ? "Năng suất Giai đoạn 1" : "Phase 1 Productivity"}
                       </p>
-                      <p className="mt-1 font-heading text-xl font-extrabold text-ink sm:text-2xl">
+                      <p className="mt-1 font-body text-xl font-extrabold text-ink sm:text-2xl">
                         40–45 {isVi ? "moves/giờ" : "moves/hr"}
                       </p>
                     </div>
@@ -231,7 +231,7 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
                       <p className="font-body text-xs text-muted uppercase">
                         {isVi ? "Năng suất Giai đoạn 2" : "Phase 2 Productivity"}
                       </p>
-                      <p className="mt-1 font-heading text-xl font-extrabold text-ink sm:text-2xl">
+                      <p className="mt-1 font-body text-xl font-extrabold text-ink sm:text-2xl">
                         80–85 {isVi ? "moves/giờ" : "moves/hr"}
                       </p>
                     </div>
@@ -302,33 +302,65 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
                   : "Commissioning Schedule for Berths & Satellite ICD"}
               </h2>
 
-              <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
                 <div className="border border-border bg-white p-7 shadow-sm">
-                  <span className="font-body text-xs font-bold text-primary uppercase">
-                    08/2026 · {isVi ? "Giai đoạn 1" : "Phase 1"}
-                  </span>
-                  <h3 className="mt-2 font-heading text-xl font-bold text-ink">
-                    {isVi ? "Vận hành Bến số 4 Cảng Chân Mây" : "Berth 4 Operations Commencement"}
+                  <div className="flex items-center justify-between">
+                    <span className="font-body text-xs font-bold text-emerald-700 uppercase">
+                      08/2026 · Mốc 01
+                    </span>
+                    <span className="border border-emerald-300 bg-emerald-50 px-2 py-0.5 font-body text-[10px] font-bold text-emerald-800 uppercase">
+                      {isVi ? "Đã vận hành" : "Operating"}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 font-heading text-xl font-bold text-ink">
+                    {isVi ? "VSICO Huế Bến 4 đi vào hoạt động" : "VSICO Hue Berth 4 Enters Operation"}
                   </h3>
-                  <p className="mt-3 font-body text-sm leading-relaxed text-muted">
-                    {isVi
-                      ? "Tiếp nhận tàu container và tàu hàng rời giai đoạn đầu, kích hoạt năng suất 40–45 moves/giờ và sản lượng mục tiêu 120.000 TEU."
-                      : "Receiving Phase 1 container and bulk cargo vessels, achieving 40–45 moves/hour with target throughput of 120,000 TEU."}
-                  </p>
+                  <div className="mt-4 border-t border-border pt-4">
+                    <p className="font-body text-2xl font-extrabold text-ink">120.000 TEU</p>
+                    <p className="mt-0.5 font-body text-xs text-muted">{isVi ? "Sản lượng container mục tiêu Giai đoạn 1" : "Target container throughput"}</p>
+                    <p className="mt-3 font-body text-lg font-bold text-primary">40–45 moves/giờ</p>
+                    <p className="mt-0.5 font-body text-xs text-muted">{isVi ? "Năng suất giải phóng tàu nhanh" : "Fast vessel turnaround productivity"}</p>
+                  </div>
+                </div>
+
+                <div className="border border-primary/40 bg-white p-7 shadow-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="font-body text-xs font-bold text-primary uppercase">
+                      09/2027 · Mốc 02
+                    </span>
+                    <span className="border border-primary/25 bg-primary/10 px-2 py-0.5 font-body text-[10px] font-bold text-primary uppercase">
+                      {isVi ? "Sắp tới" : "Upcoming"}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 font-heading text-xl font-bold text-ink">
+                    {isVi ? "VSICO Huế Bến 5 đi vào hoạt động" : "VSICO Hue Berth 5 Enters Operation"}
+                  </h3>
+                  <div className="mt-4 border-t border-border pt-4">
+                    <p className="font-body text-2xl font-extrabold text-primary">80–85 moves/giờ</p>
+                    <p className="mt-0.5 font-body text-xs text-muted">{isVi ? "Nhân đôi năng suất bốc dỡ toàn cảng" : "Doubled stevedoring productivity"}</p>
+                    <p className="mt-3 font-body text-lg font-bold text-ink">540 m cầu bến</p>
+                    <p className="mt-0.5 font-body text-xs text-muted">{isVi ? "Chiều dài bến liên tục Bến 4 & 5" : "Continuous quay length 540 m"}</p>
+                  </div>
                 </div>
 
                 <div className="border border-border bg-white p-7 shadow-sm">
-                  <span className="font-body text-xs font-bold text-primary uppercase">
-                    09/2027 · {isVi ? "Giai đoạn 2" : "Phase 2"}
-                  </span>
-                  <h3 className="mt-2 font-heading text-xl font-bold text-ink">
-                    {isVi ? "Hoàn thành Bến số 5 & ICD Lao Bảo" : "Completion of Berth 5 & Lao Bao ICD"}
+                  <div className="flex items-center justify-between">
+                    <span className="font-body text-xs font-bold text-amber-700 uppercase">
+                      09/2027 · Mốc 03
+                    </span>
+                    <span className="border border-amber-300 bg-amber-50 px-2 py-0.5 font-body text-[10px] font-bold text-amber-800 uppercase">
+                      {isVi ? "Sắp tới" : "Upcoming"}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 font-heading text-xl font-bold text-ink">
+                    {isVi ? "ICD Lao Bảo đi vào hoạt động" : "ICD Lao Bao Enters Operation"}
                   </h3>
-                  <p className="mt-3 font-body text-sm leading-relaxed text-muted">
-                    {isVi
-                      ? "Mở rộng chiều dài cầu bến lên 540 m liên tục, đưa ICD Lao Bảo 86.000 m² vào hoạt động khép kín, nâng tổng công suất toàn bến lên 80–85 moves/giờ."
-                      : "Extending total quay length to 540 continuous meters, activating the 86,000 m² Lao Bao ICD, and elevating overall handling to 80–85 moves/hour."}
-                  </p>
+                  <div className="mt-4 border-t border-border pt-4">
+                    <p className="font-body text-2xl font-extrabold text-ink">86.000 m²</p>
+                    <p className="mt-0.5 font-body text-xs text-muted">{isVi ? "Quy mô trung tâm logistics cửa khẩu" : "Border gate logistics hub area"}</p>
+                    <p className="mt-3 font-body text-lg font-bold text-amber-700">≈150 km hành lang</p>
+                    <p className="mt-0.5 font-body text-xs text-muted">{isVi ? "Tuyến khép kín nối thẳng cầu bến" : "Closed corridor to seaport"}</p>
+                  </div>
                 </div>
               </div>
 
