@@ -11,14 +11,16 @@ type RevealProps = {
   delay?: number;
   y?: number;
   duration?: number;
+  blur?: boolean;
 };
 
 export function Reveal({
   children,
   className,
   delay = 0,
-  y = 28,
+  y = 35,
   duration = 0.9,
+  blur = true,
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -33,24 +35,30 @@ export function Reveal({
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
-        { opacity: 0, y },
+        {
+          opacity: 0,
+          y,
+          filter: blur ? "blur(12px)" : "blur(0px)",
+        },
         {
           opacity: 1,
           y: 0,
+          filter: "blur(0px)",
           duration,
           delay,
           ease: "power3.out",
+          clearProps: "filter",
           scrollTrigger: {
             trigger: el,
-            start: "top 92%",
-            once: true,
+            start: "top 88%",
+            toggleActions: "restart none none reset",
           },
         },
       );
     }, el);
 
     return () => ctx.revert();
-  }, [delay, duration, prefersReducedMotion, y]);
+  }, [delay, duration, prefersReducedMotion, y, blur]);
 
   return (
     <div ref={ref} className={cn("will-change-transform", className)}>

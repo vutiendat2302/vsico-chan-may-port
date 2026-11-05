@@ -34,6 +34,15 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       smoothWheel: true,
       wheelMultiplier: 0.95,
       touchMultiplier: 1.5,
+      prevent: (node) => {
+        // Không cuộn trang khi chuột đang ở trong khu vực bản đồ
+        return (
+          node instanceof HTMLElement &&
+          (Boolean(node.closest("[data-lenis-prevent]")) ||
+            Boolean(node.closest(".maplibregl-canvas-container")) ||
+            Boolean(node.closest(".maplibregl-map")))
+        );
+      },
     });
 
     lenis.scrollTo(0, { immediate: true });

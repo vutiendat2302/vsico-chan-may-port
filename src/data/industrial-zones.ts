@@ -17,6 +17,7 @@ export type EwecNode = {
   countryKey: string;
   coordinates: GeoCoordinates;
   role: "origin" | "border-icd" | "gateway-port";
+  distanceKm: number;
 };
 
 export const chanMayPortCoordinates: GeoCoordinates = [107.989, 16.326];
@@ -29,6 +30,7 @@ export const ewecNodes: EwecNode[] = [
     countryKey: "countries.vietnam",
     coordinates: chanMayPortCoordinates,
     role: "gateway-port",
+    distanceKm: 0,
   },
   {
     id: "icd-lao-bao",
@@ -36,6 +38,7 @@ export const ewecNodes: EwecNode[] = [
     countryKey: "countries.vietnam",
     coordinates: laoBaoIcdCoordinates,
     role: "border-icd",
+    distanceKm: 150,
   },
   {
     id: "southern-laos",
@@ -43,6 +46,7 @@ export const ewecNodes: EwecNode[] = [
     countryKey: "countries.laos",
     coordinates: [104.756, 16.556],
     role: "origin",
+    distanceKm: 390,
   },
   {
     id: "northeast-thailand",
@@ -50,6 +54,7 @@ export const ewecNodes: EwecNode[] = [
     countryKey: "countries.thailand",
     coordinates: [102.835, 16.441],
     role: "origin",
+    distanceKm: 410,
   },
   {
     id: "northern-cambodia",
@@ -57,6 +62,7 @@ export const ewecNodes: EwecNode[] = [
     countryKey: "countries.cambodia",
     coordinates: [105.968, 13.525],
     role: "origin",
+    distanceKm: 750,
   },
 ];
 

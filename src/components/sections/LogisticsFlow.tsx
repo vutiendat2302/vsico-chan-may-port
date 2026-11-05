@@ -34,19 +34,20 @@ export function LogisticsFlow({ title, subtitle, steps }: LogisticsFlowProps) {
       const cards = container.querySelectorAll("[data-flow-step]");
       gsap.fromTo(
         cards,
-        { opacity: 0.25, y: 20, scale: 0.96 },
+        { opacity: 0, y: 30, scale: 0.96, filter: "blur(10px)" },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          stagger: 0.14,
-          duration: 0.65,
-          ease: "power2.out",
+          filter: "blur(0px)",
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "power3.out",
+          clearProps: "filter",
           scrollTrigger: {
             trigger: container,
             start: "top 82%",
-            end: "bottom 60%",
-            toggleActions: "play none none none",
+            toggleActions: "restart none none reset",
           },
         },
       );

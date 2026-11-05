@@ -48,7 +48,7 @@ export function Counter({
   padZero = false,
   duration = 1.8,
   className,
-  toggleActions,
+  toggleActions = "restart none none reset",
 }: CounterProps) {
   const primaryRef = useRef<HTMLSpanElement>(null);
   const secondaryRef = useRef<HTMLSpanElement>(null);
@@ -91,7 +91,7 @@ export function Counter({
         scrollTrigger: {
           trigger: containerEl,
           start: "top 95%",
-          ...(toggleActions ? { toggleActions } : { once: true }),
+          toggleActions,
         },
         onUpdate: () => {
           if (primaryRef.current) {

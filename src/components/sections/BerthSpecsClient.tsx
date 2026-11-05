@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Anchor, Maximize2, Waves, Layers, Ship, CheckCircle2 } from "lucide-react";
+import { Anchor, Maximize2, Waves, Layers, Ship } from "lucide-react";
 import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { Counter } from "@/components/motion/Counter";
@@ -55,7 +55,7 @@ function renderCleanTitle(title: string) {
   return (
     <>
       {parts[0]}
-      <span className="inline-block px-1 font-body font-semibold text-primary">
+      <span className="inline-block px-1 font-body font-bold text-primary">
         &amp;
       </span>
       {parts.slice(1).join("&")}
@@ -88,44 +88,36 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
     const cardsEl = cardsContainerRef.current;
     const showcaseEl = showcaseCardRef.current;
 
-    const cards = cardsEl ? Array.from(cardsEl.children) : [];
+    const cards = cardsEl
+      ? Array.from(cardsEl.querySelectorAll<HTMLElement>("[data-metric-card]"))
+      : [];
+    const allCards = showcaseEl ? [...cards, showcaseEl] : cards;
 
-    // Thiết lập trạng thái ban đầu
-    gsap.set(romanEl, { scale: 0.6, y: 30, opacity: 0, filter: "blur(12px)" });
+    // Thiết lập trạng thái ban đầu đồng nhất cho tiêu đề và các card
+    gsap.set(romanEl, { scale: 0.7, y: 35, opacity: 0, filter: "blur(12px)" });
     gsap.set(eyebrowEl, { letterSpacing: "0.08em", y: 20, opacity: 0 });
-    gsap.set(titleEl, { y: 70, opacity: 0, filter: "blur(20px)" });
-    gsap.set(summaryEl, { y: 40, opacity: 0, filter: "blur(10px)" });
+    gsap.set(titleEl, { y: 45, opacity: 0, filter: "blur(12px)" });
+    gsap.set(summaryEl, { y: 35, opacity: 0, filter: "blur(10px)" });
 
-    if (cards.length > 0) {
-      gsap.set(cards, {
-        y: 60,
-        scale: 0.94,
-        opacity: 0,
-        filter: "blur(14px)",
-      });
-    }
-
-    if (showcaseEl) {
-      gsap.set(showcaseEl, {
-        y: 70,
-        scale: 0.95,
-        opacity: 0,
-        filter: "blur(18px)",
-      });
-    }
+    // Thiết lập trạng thái ban đầu đồng nhất cho TOÀN BỘ CÁC CARD (4 card con + 1 card cỡ tàu)
+    gsap.set(allCards, {
+      y: 45,
+      scale: 0.98,
+      opacity: 0,
+      filter: "blur(12px)",
+    });
 
     const ctx = gsap.context(() => {
-      // 1. Dòng tiêu đề Section I
-      // toggleActions: "restart none none reset" -> Cuộn xuống thì kích hoạt lại, cuộn lên không cần, cuộn vượt qua đỉnh thì reset để cuộn xuống lại vẫn chạy
-      const headerTl = gsap.timeline({
+      // 1 Timeline duy nhất đồng bộ toàn bộ Section I: Text + 4 Card con + Card cỡ tàu cùng xuất hiện đồng điệu
+      const sectionTl = gsap.timeline({
         scrollTrigger: {
-          trigger: headingTitleRef.current,
-          start: "top 88%",
+          trigger: container,
+          start: "top 85%",
           toggleActions: "restart none none reset",
         },
       });
 
-      headerTl
+      sectionTl
         .to(
           romanEl,
           {
@@ -133,7 +125,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
-            duration: 1.0,
+            duration: 0.9,
             ease: "back.out(2)",
           },
           0,
@@ -144,10 +136,10 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
             letterSpacing: "0.22em",
             y: 0,
             opacity: 1,
-            duration: 0.9,
+            duration: 0.8,
             ease: "power3.out",
           },
-          0.1,
+          0.05,
         )
         .to(
           titleEl,
@@ -155,10 +147,10 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
-            duration: 1.2,
-            ease: "power4.out",
+            duration: 0.9,
+            ease: "power3.out",
           },
-          0.15,
+          0.1,
         )
         .to(
           summaryEl,
@@ -166,54 +158,25 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
-            duration: 1.0,
+            duration: 0.9,
             ease: "power3.out",
           },
-          0.25,
+          0.15,
+        )
+        // Đồng nhất toàn bộ 5 card (4 card con + card cỡ tàu) xuất hiện ĐỒNG THỜI cùng text với cùng hiệu ứng power3.out, unblur và trượt lên
+        .to(
+          allCards,
+          {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 0.9,
+            ease: "power3.out",
+            clearProps: "filter",
+          },
+          0.15,
         );
-
-      // 2. 4 Thẻ chỉ số hạ tầng vật lý: Xuất hiện ĐỒNG BỘ với nhịp điệu so le thanh lịch, tự khởi động lại khi cuộn xuống lại
-      if (cards.length > 0) {
-        const cardsTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: cardsEl,
-            start: "top 85%",
-            toggleActions: "restart none none reset",
-          },
-        });
-
-        cards.forEach((card, idx) => {
-          cardsTl.to(
-            card,
-            {
-              y: 0,
-              scale: 1,
-              opacity: 1,
-              filter: "blur(0px)",
-              duration: 1.0,
-              ease: "power3.out",
-            },
-            idx * 0.1,
-          );
-        });
-      }
-
-      // 3. Showcase cỡ tàu tiếp nhận 4.000 TEU / 70.000 DWT: Tự khởi động lại khi cuộn xuống lại
-      if (showcaseEl) {
-        gsap.to(showcaseEl, {
-          y: 0,
-          scale: 1,
-          opacity: 1,
-          filter: "blur(0px)",
-          duration: 1.25,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: showcaseEl,
-            start: "top 85%",
-            toggleActions: "restart none none reset",
-          },
-        });
-      }
     }, container);
 
     return () => ctx.revert();
@@ -257,13 +220,16 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
         </div>
       </div>
 
-      {/* Khối 1: 4 Thẻ Chi tiết Thông số Hạ tầng Vật lý */}
+      {/* Khối 1: 4 Thẻ Chi tiết Thông số Hạ tầng Vật lý - BẢN CUỐI CÙNG HOÀN CHỈNH */}
       <div
         ref={cardsContainerRef}
         className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
       >
         {/* Card 1: Bến cảng */}
-        <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-surface-subtle p-7 shadow-sm transition-all duration-300 will-change-transform hover:-translate-y-1 hover:border-primary/50 hover:bg-white hover:shadow-xl">
+        <div
+          data-metric-card
+          className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-surface-subtle p-7 shadow-sm transition-[border-color,background-color,box-shadow] duration-300 will-change-transform hover:border-primary/50 hover:bg-white hover:shadow-xl"
+        >
           <div>
             <div className="flex items-center justify-between">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary shadow-sm transition-transform duration-300 group-hover:scale-110">
@@ -279,6 +245,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                 value={stats.berths}
                 locale={locale}
                 padZero={true}
+                duration={1.0}
                 toggleActions="restart none none reset"
                 className="text-ink"
               />
@@ -286,18 +253,19 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
           </div>
 
           {/* Chi tiết hiển thị mượt mà khi hover */}
-          <div className="pointer-events-none mt-6 max-h-0 opacity-0 transition-all duration-500 ease-out group-hover:pointer-events-auto group-hover:max-h-40 group-hover:opacity-100">
-            <div className="border-t border-primary/15 pt-4">
+          <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-500 ease-out group-hover:max-h-40 group-hover:opacity-100">
+            <div className="mt-5 border-t border-primary/15 pt-4 transition-transform duration-500 ease-out translate-y-2 group-hover:translate-y-0">
               <p className="font-body text-xs font-bold text-primary">{t.berthsDesc}</p>
-              <p className="mt-1 font-body text-xs leading-relaxed text-muted">
-                {t.berthsSub}
-              </p>
+              <p className="mt-1 font-body text-xs leading-relaxed text-muted">{t.berthsSub}</p>
             </div>
           </div>
         </div>
 
         {/* Card 2: Cầu bến */}
-        <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-surface-subtle p-7 shadow-sm transition-all duration-300 will-change-transform hover:-translate-y-1 hover:border-primary/50 hover:bg-white hover:shadow-xl">
+        <div
+          data-metric-card
+          className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-surface-subtle p-7 shadow-sm transition-[border-color,background-color,box-shadow] duration-300 will-change-transform hover:border-primary/50 hover:bg-white hover:shadow-xl"
+        >
           <div>
             <div className="flex items-center justify-between">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary shadow-sm transition-transform duration-300 group-hover:scale-110">
@@ -313,6 +281,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                 value={stats.quayLengthMeters}
                 locale={locale}
                 suffix=" m"
+                duration={1.0}
                 toggleActions="restart none none reset"
                 className="text-ink"
               />
@@ -320,20 +289,19 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
           </div>
 
           {/* Chi tiết hiển thị mượt mà khi hover */}
-          <div className="pointer-events-none mt-6 max-h-0 opacity-0 transition-all duration-500 ease-out group-hover:pointer-events-auto group-hover:max-h-40 group-hover:opacity-100">
-            <div className="border-t border-primary/15 pt-4">
-              <p className="font-body text-xs font-bold text-primary">
-                {t.quayLengthDesc}
-              </p>
-              <p className="mt-1 font-body text-xs leading-relaxed text-muted">
-                {t.quayLengthSub}
-              </p>
+          <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-500 ease-out group-hover:max-h-40 group-hover:opacity-100">
+            <div className="mt-5 border-t border-primary/15 pt-4 transition-transform duration-500 ease-out translate-y-2 group-hover:translate-y-0">
+              <p className="font-body text-xs font-bold text-primary">{t.quayLengthDesc}</p>
+              <p className="mt-1 font-body text-xs leading-relaxed text-muted">{t.quayLengthSub}</p>
             </div>
           </div>
         </div>
 
         {/* Card 3: Độ sâu trước bến */}
-        <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-surface-subtle p-7 shadow-sm transition-all duration-300 will-change-transform hover:-translate-y-1 hover:border-primary/50 hover:bg-white hover:shadow-xl">
+        <div
+          data-metric-card
+          className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-surface-subtle p-7 shadow-sm transition-[border-color,background-color,box-shadow] duration-300 will-change-transform hover:border-primary/50 hover:bg-white hover:shadow-xl"
+        >
           <div>
             <div className="flex items-center justify-between">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary shadow-sm transition-transform duration-300 group-hover:scale-110">
@@ -349,6 +317,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                 value={stats.depthMeters}
                 locale={locale}
                 suffix=" m"
+                duration={1.0}
                 toggleActions="restart none none reset"
                 className="text-ink"
               />
@@ -356,18 +325,19 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
           </div>
 
           {/* Chi tiết hiển thị mượt mà khi hover */}
-          <div className="pointer-events-none mt-6 max-h-0 opacity-0 transition-all duration-500 ease-out group-hover:pointer-events-auto group-hover:max-h-40 group-hover:opacity-100">
-            <div className="border-t border-primary/15 pt-4">
+          <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-500 ease-out group-hover:max-h-40 group-hover:opacity-100">
+            <div className="mt-5 border-t border-primary/15 pt-4 transition-transform duration-500 ease-out translate-y-2 group-hover:translate-y-0">
               <p className="font-body text-xs font-bold text-primary">{t.depthDesc}</p>
-              <p className="mt-1 font-body text-xs leading-relaxed text-muted">
-                {t.depthSub}
-              </p>
+              <p className="mt-1 font-body text-xs leading-relaxed text-muted">{t.depthSub}</p>
             </div>
           </div>
         </div>
 
-        {/* Card 4: Diện tích cảng - ĐỒNG NHẤT MÀU SỐ VÀ CHỮ "ha" */}
-        <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-surface-subtle p-7 shadow-sm transition-all duration-300 will-change-transform hover:-translate-y-1 hover:border-primary/50 hover:bg-white hover:shadow-xl">
+        {/* Card 4: Diện tích cảng - ĐỒNG NHẤT 100% MÀU SỐ VÀ CHỮ "ha" */}
+        <div
+          data-metric-card
+          className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-surface-subtle p-7 shadow-sm transition-[border-color,background-color,box-shadow] duration-300 will-change-transform hover:border-primary/50 hover:bg-white hover:shadow-xl"
+        >
           <div>
             <div className="flex items-center justify-between">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary shadow-sm transition-transform duration-300 group-hover:scale-110">
@@ -388,18 +358,16 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
           </div>
 
           {/* Chi tiết hiển thị mượt mà khi hover */}
-          <div className="pointer-events-none mt-6 max-h-0 opacity-0 transition-all duration-500 ease-out group-hover:pointer-events-auto group-hover:max-h-40 group-hover:opacity-100">
-            <div className="border-t border-primary/15 pt-4">
+          <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-500 ease-out group-hover:max-h-40 group-hover:opacity-100">
+            <div className="mt-5 border-t border-primary/15 pt-4 transition-transform duration-500 ease-out translate-y-2 group-hover:translate-y-0">
               <p className="font-body text-xs font-bold text-primary">{t.areaDesc}</p>
-              <p className="mt-1 font-body text-xs leading-relaxed text-muted">
-                {t.areaSub}
-              </p>
+              <p className="mt-1 font-body text-xs leading-relaxed text-muted">{t.areaSub}</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Khối 2: Showcase Thẻ Cỡ Tàu Tiếp Nhận Siêu Trọng Tải trên nền sáng thanh lịch */}
+      {/* Khối 2: Showcase Thẻ Cỡ Tàu Tiếp Nhận Siêu Trọng Tải - XUẤT HIỆN ĐỒNG THỜI CÙNG 4 THẺ TRÊN */}
       <div
         ref={showcaseCardRef}
         className="relative mt-8 overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-[#FAF7FF] via-white to-[#F5EFFF] p-7 shadow-md will-change-transform sm:p-9 lg:mt-10 lg:p-12"
@@ -437,6 +405,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                     value={stats.maxContainerVesselTeu}
                     locale={locale}
                     suffix=" TEU"
+                    duration={1.0}
                     toggleActions="restart none none reset"
                     className="text-primary"
                   />
@@ -446,6 +415,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                   {t.containerVesselDesc}
                 </p>
               </div>
+
             </div>
 
             {/* Cánh phải: Tàu Hàng Rời 70.000 DWT */}
@@ -464,6 +434,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                     value={stats.maxBulkVesselDwt}
                     locale={locale}
                     suffix=" DWT"
+                    duration={1.0}
                     toggleActions="restart none none reset"
                     className="text-primary"
                   />
@@ -473,6 +444,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                   {t.bulkVesselDesc}
                 </p>
               </div>
+
             </div>
           </div>
         </div>

@@ -2,8 +2,6 @@ import { getTranslations } from "next-intl/server";
 import { ewecNodes, industrialZones } from "@/data/industrial-zones";
 import { portSpecs } from "@/data/stats";
 import { formatNumber, type SupportedLocale } from "@/lib/formatters";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Reveal } from "@/components/motion/Reveal";
 import {
   LocationClient,
   type NodeDisplayItem,
@@ -25,6 +23,13 @@ export async function Location({ locale }: LocationProps) {
     name: t(node.nameKey),
     country: t(node.countryKey),
     role: node.role,
+    distanceKm: node.distanceKm,
+    distanceText:
+      node.distanceKm === 0
+        ? locale === "vi"
+          ? "Tại cầu bến"
+          : "At port"
+        : `${formatNumber(node.distanceKm, locale)} ${tCommon("unitKm")}`,
   }));
 
   const zones: ZoneDisplayItem[] = industrialZones
@@ -44,31 +49,27 @@ export async function Location({ locale }: LocationProps) {
       className="relative bg-surface py-24 text-ink sm:py-32"
     >
       <div className="container">
-        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading
-            id="location-heading"
-            roman={t("roman")}
-            eyebrow={t("eyebrow")}
-            title={t("title")}
-            summary={t("summary", { distanceKm: distanceFormatted })}
-            variant="light"
-          />
-        </div>
-
-        <Reveal delay={0.2}>
-          <LocationClient
-            mapTabEwecLabel={t("mapTabEwec")}
-            mapTabZonesLabel={t("mapTabZones")}
-            ewecCorridorTitle={t("ewecCorridorTitle")}
-            ewecCorridorDesc={t("ewecCorridorDesc")}
-            industrialZonesTitle={t("industrialZonesTitle")}
-            selectZoneHint={t("selectZoneHint")}
-            advantageNote={t("advantageNote")}
-            portLabel={t("nodes.chanMayPort")}
-            nodes={nodes}
-            zones={zones}
-          />
-        </Reveal>
+        <LocationClient
+          roman={t("roman")}
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          summary={t("summary", { distanceKm: distanceFormatted })}
+          portExactLocationLabel={t("portExactLocationLabel")}
+          portExactLocationValue={t("portExactLocationValue")}
+          laoBaoDistanceLabel={t("laoBaoDistanceLabel")}
+          laoBaoDistanceValue={t("laoBaoDistanceValue", { distanceKm: distanceFormatted })}
+          ewecBadge={t("ewecBadge")}
+          mapTabEwecLabel={t("mapTabEwec")}
+          mapTabZonesLabel={t("mapTabZones")}
+          expandMapLabel={t("expandMap")}
+          collapseMapLabel={t("collapseMap")}
+          scrollZoomHint={t("scrollZoomHint")}
+          ewecCorridorDesc={t("ewecCorridorDesc")}
+          advantageNote={t("advantageNote")}
+          portLabel={t("nodes.chanMayPort")}
+          nodes={nodes}
+          zones={zones}
+        />
       </div>
     </section>
   );
