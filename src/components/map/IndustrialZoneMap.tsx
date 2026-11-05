@@ -57,8 +57,8 @@ export default function IndustrialZoneMap({
       data-lenis-prevent
       className={
         isExpanded
-          ? "fixed inset-4 z-50 overflow-hidden rounded-3xl border-2 border-primary bg-white shadow-2xl transition-all duration-300 md:inset-8"
-          : "relative h-[500px] w-full overflow-hidden rounded-3xl border border-primary/20 bg-surface-subtle transition-all duration-300 sm:h-[560px] lg:h-[620px]"
+          ? "fixed inset-4 z-50 overflow-hidden rounded-none border-2 border-border bg-white shadow-2xl transition-all duration-300 md:inset-8"
+          : "relative h-[500px] w-full overflow-hidden rounded-none border border-border bg-surface-subtle transition-all duration-300 sm:h-[560px] lg:h-[620px]"
       }
     >
       <Map
@@ -82,7 +82,7 @@ export default function IndustrialZoneMap({
           <button
             type="button"
             onClick={toggleExpand}
-            className="flex items-center gap-2 rounded-xl border border-border bg-white/95 px-3.5 py-2 font-body text-xs font-semibold text-ink shadow-lg backdrop-blur-md transition-all hover:border-primary hover:bg-primary hover:text-white"
+            className="flex items-center gap-2 rounded-none border border-border bg-white/95 px-3.5 py-2 font-body text-xs font-semibold text-ink shadow-lg backdrop-blur-md transition-all hover:border-primary hover:bg-primary hover:text-white"
             aria-label={isExpanded ? "Thu nhỏ bản đồ" : "Mở rộng bản đồ"}
           >
             {isExpanded ? (

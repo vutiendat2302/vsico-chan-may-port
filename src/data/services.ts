@@ -40,12 +40,11 @@ export const solutionModes: SolutionMode[] = [
     status: "confirmed",
   },
   {
-    // TODO(content): Xác nhận phạm vi tuyến và thời điểm cung cấp chính thức dịch vụ Door to Door
     id: "doorToDoor",
     titleKey: "modes.doorToDoor.title",
     descriptionKey: "modes.doorToDoor.description",
     highlightsKey: "modes.doorToDoor.highlights",
-    status: "pending",
+    status: "confirmed",
   },
 ];
 

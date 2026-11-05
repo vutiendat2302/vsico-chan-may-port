@@ -152,11 +152,10 @@ export function HeaderClient({
   // Logic hiển thị: Ban đầu luôn hiện; khi cuộn xuống thì ẩn, chỉ hiện khi di chuột vào vùng header hoặc khi menu/dropdown đang mở
   const isVisible = !isScrolled || isHovered || isMenuOpen || isLangOpen;
 
-  // Gom nhóm 10 mục điều hướng theo yêu cầu
+  // Gom nhóm 8 mục điều hướng theo yêu cầu (đã bỏ VII Chính sách & VIII Về VSICO)
   const portGroup = navItems.slice(0, 6); // I - VI (Năng lực cầu bến, Vị trí, Cảng & ICD, Giải pháp, Hạ tầng, Dịch vụ)
-  const incentiveGroup = navItems.slice(6, 7); // VII (Chính sách)
-  const aboutGroup = navItems.slice(7, 9); // VIII - IX (Về VSICO, Chứng nhận)
-  const contactGroup = navItems.slice(9, 10); // X (Nhận thông tin ưu tiên)
+  const certGroup = navItems.slice(6, 7); // VII (Chứng nhận quốc tế & Khách hàng)
+  const contactGroup = navItems.slice(7, 8); // VIII (Nhận thông tin ưu tiên)
 
   return (
     <>
@@ -350,42 +349,7 @@ export function HeaderClient({
                 {/* Vạch phân cách tinh tế */}
                 <div className="my-5 border-t border-white/10" />
 
-                {/* Nhóm 2: ƯU ĐÃI */}
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-highlight-light" />
-                    <p className="font-label text-xs font-bold tracking-[0.22em] text-highlight-light uppercase">
-                      {groupLabels.incentives}
-                    </p>
-                  </div>
-                  <ul className="mt-3.5 space-y-2.5">
-                    {incentiveGroup.map((item) => (
-                      <li key={item.href}>
-                        <a
-                          href={item.href}
-                          onClick={(e) => handleNavClick(e, item.href)}
-                          className="group flex items-baseline gap-3 py-0.5 transition-all"
-                        >
-                          <span className="w-9 font-label text-sm font-bold tracking-tight text-white/40 transition-colors group-hover:text-highlight-light">
-                            {item.roman}.
-                          </span>
-                          <span className="font-label text-sm font-semibold text-white/90 transition-all group-hover:translate-x-1 group-hover:text-white sm:text-base">
-                            {item.label}
-                          </span>
-                          <ArrowUpRight
-                            aria-hidden="true"
-                            className="h-3.5 w-3.5 text-highlight-light opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
-                          />
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Vạch phân cách tinh tế */}
-                <div className="my-5 border-t border-white/10" />
-
-                {/* Nhóm 3: VỀ VSICO */}
+                {/* Nhóm 2: VỀ VSICO & CHỨNG NHẬN */}
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-highlight-light" />
@@ -394,7 +358,7 @@ export function HeaderClient({
                     </p>
                   </div>
                   <ul className="mt-3.5 space-y-2.5">
-                    {aboutGroup.map((item) => (
+                    {certGroup.map((item) => (
                       <li key={item.href}>
                         <a
                           href={item.href}
@@ -420,7 +384,7 @@ export function HeaderClient({
                 {/* Vạch phân cách tinh tế */}
                 <div className="my-5 border-t border-white/10" />
 
-                {/* Nhóm 4: LIÊN HỆ */}
+                {/* Nhóm 3: LIÊN HỆ */}
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-highlight-light" />

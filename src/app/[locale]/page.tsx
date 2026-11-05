@@ -9,8 +9,6 @@ import { PortIcd } from "@/components/sections/PortIcd";
 import { Solutions } from "@/components/sections/Solutions";
 import { Infrastructure } from "@/components/sections/Infrastructure";
 import { Services } from "@/components/sections/Services";
-import { Policies } from "@/components/sections/Policies";
-import { About } from "@/components/sections/About";
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
@@ -42,8 +40,6 @@ export default async function HomePage({ params }: PageProps) {
         <Solutions locale={validLocale} />
         <Infrastructure />
         <Services />
-        <Policies />
-        <About />
         <Certifications />
         <Contact />
       </main>

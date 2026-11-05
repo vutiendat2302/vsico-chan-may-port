@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {
-  ArrowRight,
   Boxes,
   FileCheck2,
   Warehouse,
@@ -12,8 +11,8 @@ import { getTranslations } from "next-intl/server";
 import { portSpecs } from "@/data/stats";
 import { formatNumber, type SupportedLocale } from "@/lib/formatters";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Counter } from "@/components/motion/Counter";
 import { Reveal } from "@/components/motion/Reveal";
+import { PortIcdCorridor } from "./PortIcdCorridor";
 
 type PortIcdProps = {
   locale: SupportedLocale;
@@ -84,76 +83,28 @@ export async function PortIcd({ locale }: PortIcdProps) {
           summary={t("summary", { icdArea: icdAreaFormatted })}
         />
 
-        {/* 1. Trục hành lang kết nối Cửa khẩu - Cảng biển: Tinh giản, bỏ đóng khung card */}
-        <Reveal delay={0.15}>
-          <div className="mt-14 rounded-3xl border border-border/80 bg-surface-subtle/60 p-6 sm:p-10 lg:p-12">
-            <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
-              {/* Nút 1: ICD Lao Bảo (Cửa ngõ biên giới) */}
-              <div className="lg:col-span-4">
-                <span className="font-body text-[10px] font-bold tracking-[0.2em] text-primary uppercase">
-                  {t("icdCardBadge")}
-                </span>
-                <h3 className="mt-2 font-heading text-2xl font-bold text-ink sm:text-3xl">
-                  {t("icdCardTitle")}
-                </h3>
-                <p className="mt-1 font-body text-xs text-muted">{t("icdAreaLabel")}</p>
-                <div className="mt-3 flex items-baseline gap-2 font-body text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
-                  <Counter
-                    value={portSpecs.icdLaoBaoAreaSqm}
-                    locale={locale}
-                    className="text-ink"
-                  />
-                  <span className="text-xl font-bold text-muted sm:text-2xl">
-                    {tCommon("unitSqm")}
-                  </span>
-                </div>
-              </div>
-
-              {/* Trục liên kết khoảng cách ở giữa */}
-              <div className="flex flex-col items-center justify-center border-y border-border/60 py-6 text-center lg:col-span-4 lg:border-y-0 lg:border-x lg:px-6">
-                <span className="font-body text-xs font-bold tracking-[0.22em] text-primary uppercase">
-                  ~{distanceFormatted} {tCommon("unitKm")}
-                </span>
-                <div className="relative my-3 flex w-full max-w-[220px] items-center justify-between">
-                  <span className="h-2.5 w-2.5 rounded-full bg-primary" />
-                  <span className="h-[2px] flex-1 bg-gradient-to-r from-primary via-primary/30 to-primary" />
-                  <ArrowRight className="h-4 w-4 text-primary" aria-hidden="true" />
-                </div>
-                <p className="max-w-xs font-body text-xs leading-relaxed text-muted">
-                  {t("chainLabel", { distanceKm: distanceFormatted })}
-                </p>
-              </div>
-
-              {/* Nút 2: Cảng VSICO Chân Mây (Cửa ngõ đại dương) */}
-              <div className="lg:col-span-4 lg:pl-4">
-                <span className="font-body text-[10px] font-bold tracking-[0.2em] text-primary uppercase">
-                  {t("portCardBadge")}
-                </span>
-                <h3 className="mt-2 font-heading text-2xl font-bold text-ink sm:text-3xl">
-                  {t("portCardTitle")}
-                </h3>
-                <p className="mt-1 font-body text-xs text-muted">{t("portAreaLabel")}</p>
-                <div className="mt-3 flex items-baseline gap-2 font-body text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
-                  <Counter
-                    value={portSpecs.totalAreaHectares}
-                    decimals={1}
-                    locale={locale}
-                    className="text-ink"
-                  />
-                  <span className="text-xl font-bold text-muted sm:text-2xl">
-                    {tCommon("unitHa")}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Reveal>
+        {/* 1. Trục hành lang kết nối Cửa khẩu - Cảng biển: 2 ảnh 4:5 nối bởi trục cự ly và xe tải chạy */}
+        <PortIcdCorridor
+          locale={locale}
+          icdArea={portSpecs.icdLaoBaoAreaSqm}
+          portArea={portSpecs.totalAreaHectares}
+          distanceFormatted={distanceFormatted}
+          icdTitle={t("icdCardTitle")}
+          portTitle={t("portCardTitle")}
+          icdTagline={t("icdTagline")}
+          portTagline={t("portTagline")}
+          corridorNote={t("chainLabel", { distanceKm: distanceFormatted })}
+          truckLabel={t("truckLabel")}
+          unitSqm={tCommon("unitSqm")}
+          unitHa={tCommon("unitHa")}
+          unitKm={tCommon("unitKm")}
+        />
 
         {/* 2. Khối kể chuyện thị giác 1: Cửa ngõ biên giới (Ảnh ICD Lao Bảo & 3 Chức năng cốt lõi) */}
         <div className="mt-20 grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
           {/* Cột trái: Nhiếp ảnh điện ảnh ICD Lao Bảo */}
           <Reveal delay={0.2} className="lg:col-span-7">
-            <div className="group relative overflow-hidden rounded-3xl border border-border/80 shadow-md">
+            <div className="group relative overflow-hidden rounded-none border border-border/80 shadow-md">
               <div className="aspect-[16/10] w-full overflow-hidden bg-muted-light/20">
                 <Image
                   src="/images/icd/tmp-icd-laobao-01.webp"
@@ -248,7 +199,7 @@ export async function PortIcd({ locale }: PortIcdProps) {
 
           {/* Cột phải: Nhiếp ảnh điện ảnh Cảng VSICO Chân Mây */}
           <Reveal delay={0.25} className="order-1 lg:order-2 lg:col-span-7">
-            <div className="group relative overflow-hidden rounded-3xl border border-border/80 shadow-md">
+            <div className="group relative overflow-hidden rounded-none border border-border/80 shadow-md">
               <div className="aspect-[16/10] w-full overflow-hidden bg-muted-light/20">
                 <Image
                   src="/images/port/port-aerial-01.webp"

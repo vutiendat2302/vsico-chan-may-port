@@ -367,84 +367,83 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
         </div>
       </div>
 
-      {/* Khối 2: Showcase Thẻ Cỡ Tàu Tiếp Nhận Siêu Trọng Tải - XUẤT HIỆN ĐỒNG THỜI CÙNG 4 THẺ TRÊN */}
+      {/* Khối 2: Năng Lực Cỡ Tàu Tiếp Nhận Siêu Trọng Tải - THIẾT KẾ BIÊN TẬP (EDITORIAL), KHÔNG DÙNG CARD HỘP */}
       <div
         ref={showcaseCardRef}
-        className="relative mt-8 overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-[#FAF7FF] via-white to-[#F5EFFF] p-7 shadow-md will-change-transform sm:p-9 lg:mt-10 lg:p-12"
+        className="mt-16 border-t border-border/80 pt-10 will-change-transform sm:mt-20 sm:pt-12"
       >
-        <div className="relative z-10">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-primary/10 pb-6">
-            <div className="flex items-center gap-3.5">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-sm">
-                <Ship className="h-6 w-6" aria-hidden="true" />
+        {/* Tiêu đề & Thông điệp phụ của Cỡ tàu tiếp nhận */}
+        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Ship className="h-4 w-4" aria-hidden="true" />
               </span>
-              <div>
-                <h3 className="font-body text-sm font-bold tracking-[0.16em] text-primary uppercase">
-                  {t.vesselCapacity}
-                </h3>
-                <p className="font-body text-xs text-muted">{t.vesselSummary}</p>
+              <span className="font-body text-xs font-bold tracking-[0.2em] text-primary uppercase">
+                {t.vesselCapacity}
+              </span>
+            </div>
+            <p className="mt-2.5 max-w font-body text-sm text-muted">
+              {t.vesselSummary}
+            </p>
+          </div>
+        </div>
+
+        {/* 2 Cột Đối xứng Kiến trúc: Tàu Container 4.000 TEU & Tàu Hàng Rời 70.000 DWT */}
+        <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-14 lg:gap-20">
+          {/* Cột trái: Tàu Container 4.000 TEU */}
+          <div className="flex flex-col justify-between">
+            <div>
+              <span className="inline-block font-body text-xs font-bold tracking-[0.2em] text-primary uppercase">
+                CONTAINER CARGO
+              </span>
+
+              <h3 className="mt-2.5 font-heading text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+                {renderCleanTitle(t.containerVesselTitle)}
+              </h3>
+
+              <div className="mt-4 font-body text-5xl font-extrabold tracking-tight text-primary sm:text-6xl lg:text-7xl">
+                <Counter
+                  value={stats.maxContainerVesselTeu}
+                  locale={locale}
+                  suffix=" TEU"
+                  duration={1.0}
+                  toggleActions="restart none none reset"
+                  className="text-primary"
+                />
               </div>
+
+              <p className="mt-4 font-body text-sm leading-relaxed text-muted sm:text-base">
+                {t.containerVesselDesc}
+              </p>
             </div>
           </div>
 
-          {/* 2 Cột Đối xứng: Tàu Container 4.000 TEU & Tàu Hàng Rời 70.000 DWT */}
-          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 md:divide-x md:divide-border">
-            {/* Cánh trái: Tàu Container 4.000 TEU */}
-            <div className="flex flex-col justify-between">
-              <div>
-                <span className="inline-block rounded-full bg-primary/10 px-3.5 py-1 font-body text-[10px] font-bold tracking-[0.16em] text-primary uppercase">
-                  CONTAINER CARGO
-                </span>
+          {/* Cột phải: Tàu Hàng Rời 70.000 DWT */}
+          <div className="flex flex-col justify-between md:border-l md:border-border/80 md:pl-12 lg:pl-16">
+            <div>
+              <span className="inline-block font-body text-xs font-bold tracking-[0.2em] text-highlight-dark uppercase">
+                BULK & GENERAL CARGO
+              </span>
 
-                <h4 className="mt-3.5 font-heading text-xl font-extrabold text-ink sm:text-2xl">
-                  {renderCleanTitle(t.containerVesselTitle)}
-                </h4>
+              <h3 className="mt-2.5 font-heading text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+                {renderCleanTitle(t.bulkVesselTitle)}
+              </h3>
 
-                <div className="mt-4 font-body text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl">
-                  <Counter
-                    value={stats.maxContainerVesselTeu}
-                    locale={locale}
-                    suffix=" TEU"
-                    duration={1.0}
-                    toggleActions="restart none none reset"
-                    className="text-primary"
-                  />
-                </div>
-
-                <p className="mt-3.5 font-body text-sm leading-relaxed text-muted">
-                  {t.containerVesselDesc}
-                </p>
+              <div className="mt-4 font-body text-5xl font-extrabold tracking-tight text-primary sm:text-6xl lg:text-7xl">
+                <Counter
+                  value={stats.maxBulkVesselDwt}
+                  locale={locale}
+                  suffix=" DWT"
+                  duration={1.0}
+                  toggleActions="restart none none reset"
+                  className="text-primary"
+                />
               </div>
 
-            </div>
-
-            {/* Cánh phải: Tàu Hàng Rời 70.000 DWT */}
-            <div className="flex flex-col justify-between md:pl-8 lg:pl-12">
-              <div>
-                <span className="inline-block rounded-full bg-highlight/15 px-3.5 py-1 font-body text-[10px] font-bold tracking-[0.16em] text-highlight uppercase">
-                  BULK & GENERAL CARGO
-                </span>
-
-                <h4 className="mt-3.5 font-heading text-xl font-extrabold text-ink sm:text-2xl">
-                  {renderCleanTitle(t.bulkVesselTitle)}
-                </h4>
-
-                <div className="mt-4 font-body text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl">
-                  <Counter
-                    value={stats.maxBulkVesselDwt}
-                    locale={locale}
-                    suffix=" DWT"
-                    duration={1.0}
-                    toggleActions="restart none none reset"
-                    className="text-primary"
-                  />
-                </div>
-
-                <p className="mt-3.5 font-body text-sm leading-relaxed text-muted">
-                  {t.bulkVesselDesc}
-                </p>
-              </div>
-
+              <p className="mt-4 font-body text-sm leading-relaxed text-muted sm:text-base">
+                {t.bulkVesselDesc}
+              </p>
             </div>
           </div>
         </div>

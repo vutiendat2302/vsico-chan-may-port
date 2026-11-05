@@ -11,10 +11,10 @@
     "solutions": "IV. Solutions",
     "infrastructure": "V. Infrastructure",
     "services": "VI. Services",
-    "policies": "VII. Policies",
-    "about": "VIII. About VSICO",
-    "certifications": "IX. Certifications",
-    "contact": "X. Priority Inquiry",
+    "certifications": "VII. Certifications",
+    "contact": "VIII. Priority Inquiry",
+    "policies": "Support Policies",
+    "about": "About VSICO",
     "switchLocale": "VI",
     "switchLocaleAria": "Switch to Vietnamese",
     "openMenu": "Open navigation menu",
@@ -126,13 +126,16 @@
     "title": "One Unbroken Chain",
     "summary": "VSICO Hue Port is seamlessly connected with ICD Lao Bao (VSICO Quang Tri) spanning {icdArea} m² right next to the Vietnam–Laos border gate, forming a closed-loop operational chain from border to berth.",
     "icdCardBadge": "LAO BAO INTERNATIONAL BORDER GATE · QUANG TRI",
-    "icdCardTitle": "ICD VSICO Quang Tri (ICD Lao Bao)",
+    "icdCardTitle": "Lao Bao ICD",
+    "icdTagline": "Consolidation · Customs · Value-Added Services",
     "icdAreaLabel": "Total planned area",
     "portCardBadge": "CHAN MAY – LANG CO ECONOMIC ZONE · HUE CITY",
-    "portCardTitle": "VSICO Hue Deep-Water Seaport",
+    "portCardTitle": "Chan May Port",
+    "portTagline": "Container Berth · Bulk Berth",
     "portAreaLabel": "Total port area",
     "chainLabel": "Closed-loop transit of about {distanceKm} km along National Highway 9 – Highway 1A",
-    "imageAlt": "Aerial view of ICD VSICO Quang Tri at the Lao Bao international border gate area",
+    "truckLabel": "En-route Corridor",
+    "imageAlt": "Aerial view of ICD Lao Bao at the Lao Bao international border gate area",
     "functionsTitle": "Core Functions at ICD Lao Bao",
     "functions": {
       "consolidation": "Cross-border transit cargo staging, consolidation, and distribution",
@@ -165,7 +168,7 @@
       "doorToDoor": {
         "title": "Door to Door",
         "description": "Combines 20'/40' container tractors and {minTons} – {maxTons} ton trucks with warehouses, ICD, seaport, and container vessels from shipper to consignee.",
-        "highlights": "Official route coverage is pending confirmation"
+        "highlights": "Fleet of 20'/40' cont & {minTons} – {maxTons}T trucks · Full end-to-end multimodal logistics"
       }
     },
     "flowTitle": "Closed-Loop Logistics Flow Diagram",
@@ -394,18 +397,24 @@
     }
   },
   "certifications": {
-    "roman": "IX",
+    "roman": "VII",
     "eyebrow": "CERTIFICATIONS & CUSTOMERS",
     "title": "Trusted by Leading Industrial Names",
     "summary": "Certified to international ISO management standards and EcoVadis sustainability ratings. Click any certificate to inspect in full resolution.",
     "tabs": {
       "iso": "ISO & Sustainability",
-      "transportAndPostal": "Transport & Postal Licenses",
-      "agencyAndContainer": "Ship Agency & Container Repair",
-      "partnerAwards": "Warehouse & Operation Recognition"
+      "transportAndPostal": "Transport & Postal",
+      "agencyAndContainer": "Ship Agency & Container",
+      "partnerAwards": "Operation Awards"
     },
     "zoomHint": "Click to zoom certificate",
     "closeDialog": "Close certificate viewer",
+    "viewAll": "VIEW ALL CERTIFICATES",
+    "scrollHint": "Scroll horizontally for more",
+    "pageTitle": "International Certifications & Licenses | VSICO Hue Port",
+    "pageEyebrow": "COMPLETE DIRECTORY",
+    "pageHeading": "All VSICO Management Standards & Accreditations",
+    "pageBack": "Back to Home",
     "items": {
       "iso9001": {
         "title": "ISO 9001 Certificate",
@@ -448,9 +457,54 @@
         "subtitle": "Category: Excellent Warehouse & Operation Management"
       }
     },
-    "customersHeading": "Selected Customers Across the VSICO Network",
-    "chanMayCustomersHeading": "Container Customers in the Chan May Area",
-    "logoPermissionPendingNote": "Customer logo display permissions are being finalized prior to public production release.",
+    "chanMayCustomersKicker": "CHAN MAY – LANG CO ECONOMIC ZONE",
+    "chanMayCustomersHeading": "CONTAINER CUSTOMERS IN CHAN MAY AREA",
+    "chanMayCustomersSummary": "Leading industrial, manufacturing, and trading enterprises across Chan May – Hue relying on VSICO Hue Port for seamless container operations and regional shipping.",
+    "chanMayCustomersCta": "CONNECT WITH VSICO PORT",
+    "chanMayCustomerSub": "Chan May – Lang Co Economic Zone",
+    "chanMayEnterpriseLabel": "Container Enterprise",
+    "showcase": {
+      "shaiyo": {
+        "name": "SHAIYO-AA",
+        "badge": "BIOMASS ENERGY",
+        "desc": "Woodchip Export & Renewable Energy"
+      },
+      "kimlong": {
+        "name": "KIM LONG MOTOR",
+        "badge": "AUTOMOTIVE MANUFACTURING",
+        "desc": "Automotive Complex & Assembly Plant"
+      },
+      "americaQuartz": {
+        "name": "AMERICA QUARTZ TECH",
+        "badge": "ADVANCED MATERIALS",
+        "desc": "Engineered Quartz Stone Manufacturing"
+      },
+      "billionMax": {
+        "name": "BILLION MAX VIETNAM",
+        "badge": "CONSUMER & TOY EXPORT",
+        "desc": "Children Toys & Export Products"
+      },
+      "jon72": {
+        "name": "JON72 VIETNAM CO., LTD",
+        "badge": "EXPORT MANUFACTURING",
+        "desc": "Export Manufacturing at Chan May EZ"
+      },
+      "malpensa": {
+        "name": "MALPENSA PLANT VIETNAM",
+        "badge": "INDUSTRIAL EQUIPMENT",
+        "desc": "Precision Engineering & Components"
+      },
+      "okura": {
+        "name": "OKURA VIETNAM CO., LTD",
+        "badge": "INDUSTRIAL PACKAGING",
+        "desc": "Industrial Packaging & Logistics"
+      },
+      "vsicoLines": {
+        "name": "VSICO CONTAINER LINE",
+        "badge": "CONTAINER FEEDER SERVICE",
+        "desc": "Domestic & Intra-Asia Container Feeder"
+      }
+    },
     "sectors": {
       "automotive": "Automotive & Motorcycles",
       "electronics": "Electronics & Appliances",
@@ -459,7 +513,7 @@
     }
   },
   "contact": {
-    "roman": "X",
+    "roman": "VIII",
     "eyebrow": "PRIORITY INFORMATION REGISTRATION",
     "title": "Open Your New Route via Chan May",
     "summary": "Select your organization type and register your details to receive port tariffs, vessel schedules, and tailored support policy consultation.",

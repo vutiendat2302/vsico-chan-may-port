@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const EwecMap = dynamic(() => import("@/components/map/EwecMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-[500px] w-full items-center justify-center rounded-3xl border border-primary/20 bg-ink/95 font-body text-xs tracking-widest text-white/70 uppercase sm:h-[560px] lg:h-[620px]">
+    <div className="flex h-[500px] w-full items-center justify-center rounded-none border border-border bg-ink/95 font-body text-xs tracking-widest text-white/70 uppercase sm:h-[560px] lg:h-[620px]">
       EWEC Corridor Map...
     </div>
   ),
@@ -22,7 +22,7 @@ const IndustrialZoneMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-[500px] w-full items-center justify-center rounded-3xl border border-primary/20 bg-surface-subtle font-body text-xs tracking-widest text-muted uppercase sm:h-[560px] lg:h-[620px]">
+      <div className="flex h-[500px] w-full items-center justify-center rounded-none border border-border bg-surface-subtle font-body text-xs tracking-widest text-muted uppercase sm:h-[560px] lg:h-[620px]">
         Industrial Zones Map...
       </div>
     ),
@@ -237,14 +237,23 @@ export function LocationClient({
       {/* Tabs & Map Layout */}
       <div className="mt-12">
         <Tabs defaultValue="ewec" className="w-full">
-          <div className="flex flex-col justify-between gap-4 border-b border-border pb-4 sm:flex-row sm:items-center">
-            {/* Thanh chuyển tab */}
-            <TabsList aria-label="Location Map Views" className="bg-surface-subtle p-1">
-              <TabsTrigger value="ewec" className="gap-2 font-body font-semibold">
+          <div className="w-full">
+            {/* Thanh chuyển tab full-width (w-full) và không bo tròn (rounded-none) */}
+            <TabsList
+              aria-label="Location Map Views"
+              className="grid w-full grid-cols-1 gap-1.5 rounded-none border border-border bg-surface-subtle p-1.5 sm:grid-cols-2"
+            >
+              <TabsTrigger
+                value="ewec"
+                className="w-full justify-center gap-2 rounded-none py-3 font-body text-xs font-bold tracking-wider sm:text-sm"
+              >
                 <Compass className="h-4 w-4" aria-hidden="true" />
                 <span>{mapTabEwecLabel}</span>
               </TabsTrigger>
-              <TabsTrigger value="zones" className="gap-2 font-body font-semibold">
+              <TabsTrigger
+                value="zones"
+                className="w-full justify-center gap-2 rounded-none py-3 font-body text-xs font-bold tracking-wider sm:text-sm"
+              >
                 <Navigation className="h-4 w-4" aria-hidden="true" />
                 <span>{mapTabZonesLabel}</span>
               </TabsTrigger>
@@ -257,7 +266,7 @@ export function LocationClient({
               {/* CỘT TRÁI: THÔNG TIN CHI TIẾT (Bỏ title, bỏ quốc gia, chỉ giữ mô tả + danh sách vị trí) */}
               <div
                 ref={leftColRef}
-                className="flex flex-col justify-between rounded-3xl border border-border bg-surface-subtle p-6 will-change-transform sm:p-8 lg:col-span-4"
+                className="flex flex-col justify-between rounded-none border border-border bg-surface-subtle p-6 will-change-transform sm:p-8 lg:col-span-4"
               >
                 <div>
                   <p className="font-body text-sm leading-relaxed text-ink/80">
@@ -272,7 +281,7 @@ export function LocationClient({
                         <div
                           key={node.id}
                           className={cn(
-                            "flex items-center justify-between gap-3.5 rounded-2xl border p-3.5 transition-all duration-300",
+                            "flex items-center justify-between gap-3.5 rounded-none border p-3.5 transition-all duration-300",
                             isPort
                               ? "border-primary bg-primary text-white shadow-md"
                               : isIcd
@@ -283,7 +292,7 @@ export function LocationClient({
                           <div className="flex items-center gap-3">
                             <span
                               className={cn(
-                                "flex h-8 w-8 shrink-0 items-center justify-center rounded-xl",
+                                "flex h-8 w-8 shrink-0 items-center justify-center rounded-none",
                                 isPort
                                   ? "bg-white/20 text-highlight-light"
                                   : isIcd
@@ -329,7 +338,7 @@ export function LocationClient({
           <TabsContent value="zones" className="mt-8">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
               {/* CỘT TRÁI: DANH SÁCH 6 KCN (Bỏ title, bỏ description, danh sách tinh gọn) */}
-              <div className="flex flex-col justify-between rounded-3xl border border-border bg-surface-subtle p-6 sm:p-8 lg:col-span-4">
+              <div className="flex flex-col justify-between rounded-none border border-border bg-surface-subtle p-6 sm:p-8 lg:col-span-4">
                 <div>
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
                     {zones.map((zone) => {
@@ -340,7 +349,7 @@ export function LocationClient({
                           type="button"
                           onClick={() => setSelectedZoneId(zone.id)}
                           className={cn(
-                            "flex items-center justify-between rounded-2xl border p-4 text-left transition-all duration-200",
+                            "flex items-center justify-between rounded-none border p-4 text-left transition-all duration-200",
                             isSelected
                               ? "border-primary bg-primary text-white shadow-lg"
                               : "border-border bg-white text-ink hover:border-primary/50",
@@ -374,6 +383,11 @@ export function LocationClient({
                   </div>
                 </div>
 
+                {advantageNote && (
+                  <p className="mt-6 border-t border-border pt-4 font-body text-xs leading-relaxed text-muted">
+                    {advantageNote}
+                  </p>
+                )}
               </div>
 
               {/* CỘT PHẢI: BẢN ĐỒ CỰ LY 6 KCN (lg:col-span-8) */}

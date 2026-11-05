@@ -11,10 +11,10 @@
     "solutions": "IV. Giải pháp",
     "infrastructure": "V. Hạ tầng",
     "services": "VI. Dịch vụ",
-    "policies": "VII. Chính sách",
-    "about": "VIII. Về VSICO",
-    "certifications": "IX. Chứng nhận",
-    "contact": "X. Nhận thông tin ưu tiên",
+    "certifications": "VII. Chứng nhận",
+    "contact": "VIII. Nhận thông tin ưu tiên",
+    "policies": "Chính sách ưu đãi",
+    "about": "Về VSICO",
     "switchLocale": "EN",
     "switchLocaleAria": "Chuyển sang tiếng Anh",
     "openMenu": "Mở danh mục điều hướng",
@@ -126,13 +126,16 @@
     "title": "Một chuỗi, không đứt đoạn",
     "summary": "Cảng VSICO Huế được kết nối đồng bộ với ICD Lao Bảo (VSICO Quảng Trị) rộng {icdArea} m² sát khu vực cửa khẩu Việt – Lào, hình thành chuỗi vận hành khép kín từ biên giới ra tới cầu bến.",
     "icdCardBadge": "CỬA KHẨU QUỐC TẾ LAO BẢO · QUẢNG TRỊ",
-    "icdCardTitle": "ICD VSICO Quảng Trị (ICD Lao Bảo)",
+    "icdCardTitle": "ICD Lao Bảo",
+    "icdTagline": "Gom hàng · Thông quan · DV giá trị gia tăng",
     "icdAreaLabel": "Tổng diện tích quy hoạch",
     "portCardBadge": "KHU KINH TẾ CHÂN MÂY – LĂNG CÔ · TP. HUẾ",
-    "portCardTitle": "Cảng Nước Sâu VSICO Huế",
+    "portCardTitle": "Cảng Chân Mây",
+    "portTagline": "Bến container · Bến hàng rời",
     "portAreaLabel": "Quy mô diện tích cảng",
     "chainLabel": "Hành trình khép kín khoảng {distanceKm} km dọc trục Quốc lộ 9 – Quốc lộ 1A",
-    "imageAlt": "Toàn cảnh ICD VSICO Quảng Trị tại khu vực cửa khẩu quốc tế Lao Bảo",
+    "truckLabel": "Chạy dọc tuyến",
+    "imageAlt": "Toàn cảnh ICD Lao Bảo tại khu vực cửa khẩu quốc tế Lao Bảo",
     "functionsTitle": "Chức năng cốt lõi tại ICD Lao Bảo",
     "functions": {
       "consolidation": "Tập kết, gom hàng và phân phối hàng quá cảnh xuyên biên giới",
@@ -165,7 +168,7 @@
       "doorToDoor": {
         "title": "Door to Door",
         "description": "Kết hợp đội xe container 20’/40’ và xe tải {minTons} – {maxTons} tấn cùng kho bãi, ICD, cảng và tàu biển thành chuỗi từ kho người gửi tới kho người nhận.",
-        "highlights": "Đang chờ xác nhận phạm vi tuyến áp dụng chính thức"
+        "highlights": "Đội xe cont 20'/40' & xe tải {minTons} – {maxTons} tấn · Vận chuyển trọn gói đa phương thức"
       }
     },
     "flowTitle": "Sơ đồ luồng vận hành Logistics khép kín",
@@ -394,18 +397,24 @@
     }
   },
   "certifications": {
-    "roman": "IX",
+    "roman": "VII",
     "eyebrow": "CHỨNG NHẬN QUỐC TẾ & KHÁCH HÀNG",
     "title": "Được tin cậy bởi những tên tuổi lớn",
     "summary": "Tuân thủ hệ thống quản trị chất lượng, môi trường, an toàn và an ninh chuỗi cung ứng theo chuẩn ISO quốc tế và EcoVadis. Nhấn vào từng chứng chỉ để phóng to.",
     "tabs": {
       "iso": "ISO & Môi trường",
-      "transportAndPostal": "Giấy phép Vận tải & Bưu chính",
-      "agencyAndContainer": "Đại lý tàu & Sửa chữa Container",
-      "partnerAwards": "Giải thưởng Quản lý Kho & Vận hành"
+      "transportAndPostal": "Vận tải & Bưu chính",
+      "agencyAndContainer": "Đại lý tàu & Container",
+      "partnerAwards": "Giải thưởng Vận hành"
     },
     "zoomHint": "Nhấn để phóng to chứng nhận",
     "closeDialog": "Đóng cửa sổ xem chứng chỉ",
+    "viewAll": "XEM TẤT CẢ CHỨNG NHẬN",
+    "scrollHint": "Kéo ngang để xem thêm",
+    "pageTitle": "Hệ Thống Chứng Nhận Quốc Tế & Giấy Phép | Cảng VSICO Huế",
+    "pageEyebrow": "DANH MỤC ĐẦY ĐỦ",
+    "pageHeading": "Toàn bộ Hệ thống Chứng nhận & Giấy phép VSICO",
+    "pageBack": "Quay lại trang chủ",
     "items": {
       "iso9001": {
         "title": "Chứng nhận ISO 9001",
@@ -448,9 +457,54 @@
         "subtitle": "Hạng mục Quản lý Kho và Vận hành Xuất sắc (Excellent Warehouse & Operation Management)"
       }
     },
-    "customersHeading": "Khách hàng tiêu biểu của hệ thống VSICO",
-    "chanMayCustomersHeading": "Danh sách khách hàng container ở khu vực Chân Mây",
-    "logoPermissionPendingNote": "Danh sách logo khách hàng đang trong quá trình xác nhận quyền hiển thị công khai trước khi phát hành chính thức.",
+    "chanMayCustomersKicker": "KHU KINH TẾ CHÂN MÂY – LĂNG CÔ",
+    "chanMayCustomersHeading": "KHÁCH HÀNG CONTAINER KHU VỰC CHÂN MÂY",
+    "chanMayCustomersSummary": "Các tập đoàn sản xuất, xuất nhập khẩu và logistics công nghiệp chủ lực tại Chân Mây – Huế tin tưởng lựa chọn dịch vụ khai thác và vận tải container của Cảng VSICO Huế.",
+    "chanMayCustomersCta": "KẾT NỐI HỢP TÁC VẬN TẢI",
+    "chanMayCustomerSub": "Khu kinh tế Chân Mây – Lăng Cô",
+    "chanMayEnterpriseLabel": "Doanh nghiệp Container",
+    "showcase": {
+      "shaiyo": {
+        "name": "SHAIYO-AA",
+        "badge": "NĂNG LƯỢNG SINH KHỐI",
+        "desc": "Xuất khẩu dăm gỗ & Năng lượng tái tạo"
+      },
+      "kimlong": {
+        "name": "KIM LONG MOTOR",
+        "badge": "SẢN XUẤT Ô TÔ",
+        "desc": "Tổ hợp sản xuất & Lắp ráp ô tô Chân Mây"
+      },
+      "americaQuartz": {
+        "name": "AMERICA QUARTZ TECH",
+        "badge": "VẬT LIỆU CÔNG NGHỆ CAO",
+        "desc": "Sản xuất thạch anh nhân tạo cao cấp"
+      },
+      "billionMax": {
+        "name": "BILLION MAX VIỆT NAM",
+        "badge": "THIẾT BỊ & ĐỒ CHƠI",
+        "desc": "Sản xuất đồ chơi & Thiết bị trẻ em xuất khẩu"
+      },
+      "jon72": {
+        "name": "CÔNG TY TNHH JON72 VIỆT NAM",
+        "badge": "CÔNG NGHIỆP XUẤT KHẨU",
+        "desc": "Gia công & Sản xuất xuất khẩu KKT Chân Mây"
+      },
+      "malpensa": {
+        "name": "MALPENSA PLANT VIỆT NAM",
+        "badge": "THIẾT BỊ CÔNG NGHIỆP",
+        "desc": "Cơ khí chính xác & Thiết bị phụ trợ"
+      },
+      "okura": {
+        "name": "CÔNG TY TNHH OKURA VIỆT NAM",
+        "badge": "BAO BÌ & PHỤ TRỢ",
+        "desc": "Bao bì công nghiệp & Dịch vụ container"
+      },
+      "vsicoLines": {
+        "name": "VSICO CONTAINER LINE",
+        "badge": "VẬN TẢI BIỂN CHUYÊN TUYẾN",
+        "desc": "Đội tàu container kết nối nội địa & Nội Á"
+      }
+    },
     "sectors": {
       "automotive": "Ô tô & Xe máy",
       "electronics": "Điện tử & Gia dụng",
@@ -459,7 +513,7 @@
     }
   },
   "contact": {
-    "roman": "X",
+    "roman": "VIII",
     "eyebrow": "ĐĂNG KÝ NHẬN THÔNG TIN ƯU TIÊN",
     "title": "Cùng mở tuyến mới qua Chân Mây",
     "summary": "Chọn vai trò của doanh nghiệp và để lại thông tin để nhận bảng giá dịch vụ, lịch tàu và tư vấn trực tiếp về chính sách hỗ trợ tại Cảng VSICO Huế.",

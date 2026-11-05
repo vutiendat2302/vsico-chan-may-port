@@ -44,23 +44,13 @@ export async function Header({ locale }: HeaderProps) {
       label: t("services").replace(/^[IVXLCDM]+\.\s*/, ""),
     },
     {
-      href: "#policies",
-      roman: "VII",
-      label: t("policies").replace(/^[IVXLCDM]+\.\s*/, ""),
-    },
-    {
-      href: "#about",
-      roman: "VIII",
-      label: t("about").replace(/^[IVXLCDM]+\.\s*/, ""),
-    },
-    {
       href: "#certifications",
-      roman: "IX",
+      roman: "VII",
       label: t("certifications").replace(/^[IVXLCDM]+\.\s*/, ""),
     },
     {
       href: "#contact",
-      roman: "X",
+      roman: "VIII",
       label: t("contact").replace(/^[IVXLCDM]+\.\s*/, ""),
     },
   ];
