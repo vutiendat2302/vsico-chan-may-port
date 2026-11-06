@@ -6,7 +6,6 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { type SupportedLocale } from "@/lib/formatters";
 import { ContactForm } from "./ContactForm";
-import { PortMap } from "./PortMap";
 
 type ContactProps = {
   locale?: SupportedLocale;
@@ -182,23 +181,6 @@ export async function Contact({ locale = "vi" }: ContactProps = {}) {
               <Reveal delay={0.15}>{renderContactInfo()}</Reveal>
             </div>
           </div>
-        </div>
-
-        {/* ========================================================================= */}
-        {/* BẢN ĐỒ VỊ TRÍ CẢNG CHÂN MÂY (GOOGLE MAPS EMBED)                           */}
-        {/* ========================================================================= */}
-        <div className="mt-16 border-t border-border/80 pt-12 sm:mt-20 lg:mt-24 lg:pt-16">
-          <Reveal y={24} duration={1}>
-            <PortMap
-              locale={locale}
-              eyebrow={t("mapEyebrow")}
-              title={t("mapTitle")}
-              portName={t("mapPortName")}
-              address={t("mapAddress")}
-              openInMapsLabel={t("openInMaps")}
-              iframeTitle={t("mapIframeTitle")}
-            />
-          </Reveal>
         </div>
       </div>
     </section>

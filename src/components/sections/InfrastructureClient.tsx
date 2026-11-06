@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentProps } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { Link } from "@/i18n/routing";
 import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { MOTION_TOKENS } from "@/lib/motion";
@@ -214,9 +215,9 @@ export function InfrastructureClient({
             {rows.map((row, idx) => {
               const isSelected = idx === activeRow;
               return (
-                <a
+                <Link
                   key={row.id}
-                  href={`/${locale}/infrastructure${row.hash}`}
+                  href={`/infrastructure${row.hash}` as ComponentProps<typeof Link>["href"]}
                   onMouseEnter={() => setActiveRow(idx)}
                   onFocus={() => setActiveRow(idx)}
                   className={cn(
@@ -258,19 +259,19 @@ export function InfrastructureClient({
                     )}
                     aria-hidden="true"
                   />
-                </a>
+                </Link>
               );
             })}
           </div>
 
           <div className="mt-6 px-5 sm:px-6">
-            <a
-              href={`/${locale}/infrastructure`}
+            <Link
+              href="/infrastructure"
               className="inline-flex items-center gap-2 font-label text-xs font-bold tracking-wider text-primary uppercase transition-colors hover:text-primary-dark"
             >
               <span>{viewDetailsLabel}</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

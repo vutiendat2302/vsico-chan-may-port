@@ -15,7 +15,7 @@ import {
   Anchor,
   Boxes,
 } from "lucide-react";
-import { Link, type AppLocale } from "@/i18n/routing";
+import { Link, useRouter, type AppLocale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 export type NavItem = {
@@ -41,6 +41,8 @@ type HeaderClientProps = {
     incentives: string;
     aboutVsico: string;
     contact: string;
+    aboutUs?: string;
+    newsEvents?: string;
   };
   vsicoSystem: {
     title: string;
@@ -75,24 +77,67 @@ export function HeaderClient({
   hotlineTel,
   portAddress,
 }: HeaderClientProps) {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
 
   const langRef = useRef<HTMLDivElement>(null);
+  const lastMouseY = useRef<number>(9999);
 
-  // Theo dõi vị trí cuộn trang
+  // Theo dõi vị trí cuộn trang: Khi cuộn trang (scrollPos > 30), ẩn header
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY;
-      setIsScrolled(scrollPos > 60);
+      const scrolled = scrollPos > 30;
+      setIsScrolled(scrolled);
+
+      // Khi người dùng cuộn trang, tự động ẩn header (trừ khi đang mở menu drawer hoặc dropdown ngôn ngữ)
+      if (scrolled && !isMenuOpen && !isLangOpen) {
+        setIsHovered(false);
+      }
     };
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMenuOpen, isLangOpen]);
+
+  // Khi đã cuộn: di chuyển chuột vào đỉnh màn hình (<= 64px) thì hiện header; di chuyển ra (> 70px) thì ẩn ngay
+  useEffect(() => {
+    if (!isScrolled) {
+      setIsHovered(false);
+      return;
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      lastMouseY.current = e.clientY;
+
+      if (isMenuOpen || isLangOpen) return;
+
+      if (e.clientY <= 64) {
+        setIsHovered(true);
+      } else if (e.clientY > 70) {
+        setIsHovered(false);
+      }
+    };
+
+    const handleMouseLeave = () => {
+      lastMouseY.current = 9999;
+      if (!isMenuOpen && !isLangOpen) {
+        setIsHovered(false);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [isScrolled, isMenuOpen, isLangOpen]);
 
   // Xử lý đóng dropdown ngôn ngữ khi click ra ngoài hoặc bấm Escape
   useEffect(() => {
@@ -138,18 +183,27 @@ export function HeaderClient({
 
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      e.preventDefault();
       setIsMenuOpen(false);
       setIsLangOpen(false);
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
+      setIsHovered(false);
+      if (href.startsWith("#")) {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+        } else {
+          router.push(
+            (locale === "vi" ? `/${href}` : `/${locale}/${href}`) as Parameters<
+              typeof router.push
+            >[0],
+          );
+        }
       }
     },
-    [],
+    [router, locale],
   );
 
-  // Logic hiển thị: Ban đầu luôn hiện; khi cuộn xuống thì ẩn, chỉ hiện khi di chuột vào vùng header hoặc khi menu/dropdown đang mở
+  // Logic hiển thị: Ban đầu luôn hiện; khi cuộn xuống thì ẩn, chỉ hiện khi di chuột vào đỉnh hoặc khi menu/dropdown đang mở
   const isVisible = !isScrolled || isHovered || isMenuOpen || isLangOpen;
 
   // Gom nhóm 8 mục điều hướng theo yêu cầu (đã bỏ VII Chính sách & VIII Về VSICO)
@@ -159,17 +213,14 @@ export function HeaderClient({
 
   return (
     <>
-      {/* Vùng cảm ứng vô hình ở sát đỉnh màn hình để đón chuột rê vào khi đã cuộn */}
-      <div
-        aria-hidden="true"
-        onMouseEnter={() => setIsHovered(true)}
-        className="pointer-events-auto fixed inset-x-0 top-0 z-40 h-20"
-      />
-
       {/* Header chính: Giữ nguyên cố định, màu tím hoàng gia + gradient + blur mờ */}
       <header
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseLeave={() => {
+          if (!isMenuOpen && !isLangOpen) {
+            setIsHovered(false);
+          }
+        }}
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-300 ease-out",
           isVisible
@@ -409,6 +460,100 @@ export function HeaderClient({
                           <ArrowUpRight
                             aria-hidden="true"
                             className="h-3.5 w-3.5 text-highlight-light opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+                          />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Vạch phân cách tinh tế */}
+                <div className="my-5 border-t border-white/10" />
+
+                {/* Nhóm 4: VỀ CHÚNG TÔI (CẢNG CHÂN MÂY) */}
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-highlight-light" />
+                      <p className="font-label text-xs font-bold tracking-[0.22em] text-highlight-light uppercase">
+                        {groupLabels.aboutUs || (locale === "vi" ? "VỀ CHÚNG TÔI" : "ABOUT US")}
+                      </p>
+                    </div>
+                    <Link
+                      href="/about"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="font-label text-[11px] font-semibold text-highlight-light/80 hover:text-white transition-colors"
+                    >
+                      {locale === "vi" ? "Xem tất cả →" : "View all →"}
+                    </Link>
+                  </div>
+                  <ul className="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {[
+                      { href: `/${locale}/about#overview`, label: locale === "vi" ? "Lời giới thiệu" : "Overview" },
+                      { href: `/${locale}/about#leaders`, label: locale === "vi" ? "Ban lãnh đạo" : "Leadership" },
+                      { href: `/${locale}/about#history`, label: locale === "vi" ? "Lịch sử hình thành" : "Milestones" },
+                      { href: `/${locale}/about#org`, label: locale === "vi" ? "Bộ máy tổ chức" : "Organization" },
+                      { href: `/${locale}/about#goals`, label: locale === "vi" ? "Mục tiêu phát triển" : "Strategic Goals" },
+                      { href: `/${locale}/about#map`, label: locale === "vi" ? "Vị trí & Bản đồ" : "Location & Map" },
+                    ].map((item) => (
+                      <li key={item.href}>
+                        <a
+                          href={item.href}
+                          onClick={(e) => handleNavClick(e, item.href)}
+                          className="group flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-3 py-2 transition-all hover:border-white/20 hover:bg-white/[0.06]"
+                        >
+                          <span className="font-label text-xs text-white/85 group-hover:text-white transition-colors">
+                            {item.label}
+                          </span>
+                          <ArrowUpRight
+                            aria-hidden="true"
+                            className="h-3.5 w-3.5 text-highlight-light opacity-0 transition-all group-hover:opacity-100"
+                          />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Vạch phân cách tinh tế */}
+                <div className="my-5 border-t border-white/10" />
+
+                {/* Nhóm 5: TIN TỨC & SỰ KIỆN */}
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-highlight-light" />
+                      <p className="font-label text-xs font-bold tracking-[0.22em] text-highlight-light uppercase">
+                        {groupLabels.newsEvents || (locale === "vi" ? "TIN TỨC & SỰ KIỆN" : "NEWS & EVENTS")}
+                      </p>
+                    </div>
+                    <Link
+                      href="/news"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="font-label text-[11px] font-semibold text-highlight-light/80 hover:text-white transition-colors"
+                    >
+                      {locale === "vi" ? "Xem bản tin →" : "View newsroom →"}
+                    </Link>
+                  </div>
+                  <ul className="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {[
+                      { href: `/${locale}/news`, label: locale === "vi" ? "Sự kiện nổi bật" : "Featured Events" },
+                      { href: `/${locale}/news`, label: locale === "vi" ? "Vận tải & Hàng hải" : "Maritime & Logistics" },
+                      { href: `/${locale}/news`, label: locale === "vi" ? "Tin nội bộ & Đoàn thể" : "Corporate News" },
+                      { href: `/${locale}/news`, label: locale === "vi" ? "Quan hệ cổ đông" : "Shareholders" },
+                    ].map((item, idx) => (
+                      <li key={idx}>
+                        <a
+                          href={item.href}
+                          onClick={(e) => handleNavClick(e, item.href)}
+                          className="group flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-3 py-2 transition-all hover:border-white/20 hover:bg-white/[0.06]"
+                        >
+                          <span className="font-label text-xs text-white/85 group-hover:text-white transition-colors">
+                            {item.label}
+                          </span>
+                          <ArrowUpRight
+                            aria-hidden="true"
+                            className="h-3.5 w-3.5 text-highlight-light opacity-0 transition-all group-hover:opacity-100"
                           />
                         </a>
                       </li>

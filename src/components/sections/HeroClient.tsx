@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { ArrowDownRight, Sparkles } from "lucide-react";
 import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { isReturningNavigation } from "@/lib/navigationState";
 
 type HeroClientProps = {
   brandTitle: string;
@@ -37,13 +38,37 @@ export function HeroClient({
   useEffect(() => {
     ensureGsapRegistered();
 
-    if (prefersReducedMotion) {
+    const isAlreadyPreloaded =
+      typeof window !== "undefined" &&
+      (isReturningNavigation() ||
+        Boolean(
+          (window as unknown as { __VSICO_PRELOADER_LIFTED__?: boolean })
+            .__VSICO_PRELOADER_LIFTED__,
+        ));
+
+    if (prefersReducedMotion || isAlreadyPreloaded) {
       if (brandTitleRef.current) brandTitleRef.current.style.opacity = "1";
       if (locationSubRef.current) locationSubRef.current.style.opacity = "0.6";
       if (headlineRef.current) headlineRef.current.style.opacity = "1";
       if (taglineRef.current) taglineRef.current.style.opacity = "0.7";
       if (ctaGroupRef.current) ctaGroupRef.current.style.opacity = "1";
       if (scrollHintRef.current) scrollHintRef.current.style.opacity = "1";
+
+      if (contentWrapperRef.current) {
+        gsap.to(contentWrapperRef.current, {
+          y: -100,
+          scale: 0.94,
+          opacity: 0,
+          filter: "blur(8px)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: contentWrapperRef.current,
+            start: "center center",
+            end: "bottom top",
+            scrub: 1.2,
+          },
+        });
+      }
       return;
     }
 
@@ -137,22 +162,11 @@ export function HeroClient({
       );
     };
 
-    // Kiểm tra nếu Preloader đã nhấc lên trước đó
-    const isAlreadyLifted =
-      typeof window !== "undefined" &&
-      Boolean(
-        (window as unknown as { __VSICO_PRELOADER_LIFTED__?: boolean })
-          .__VSICO_PRELOADER_LIFTED__,
-      );
+    // Đồng bộ kích hoạt hiệu ứng chữ Hero khi Preloader trượt lên
+    window.addEventListener("vsico:preloader-lift", runCinematicReveal, { once: true });
 
-    if (isAlreadyLifted) {
-      runCinematicReveal();
-    } else {
-      window.addEventListener("vsico:preloader-lift", runCinematicReveal, { once: true });
-    }
-
-    // Fallback an toàn sau 1.1s nếu vì lý do nào đó sự kiện chưa bắt được
-    const safetyTimer = window.setTimeout(runCinematicReveal, 1100);
+    // Fallback an toàn sau 1200ms nếu vì lý do nào đó sự kiện chưa bắt được
+    const safetyTimer = window.setTimeout(runCinematicReveal, 1200);
 
     // Hiệu ứng "thu đóng giữa các lớp" cinematic khi cuộn xuống
     if (wrapper) {

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Map, { Layer, Marker, NavigationControl, Source, type MapRef } from "react-map-gl/maplibre";
 import { Maximize2, Minimize2 } from "lucide-react";
+import { Spinner } from "@/components/ui/Spinner";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { chanMayPortCoordinates, industrialZones } from "@/data/industrial-zones";
 import { industrialZoneRoadRoutes } from "@/data/routes-geojson";
@@ -25,6 +26,7 @@ export default function IndustrialZoneMap({
   zoneLabels,
 }: IndustrialZoneMapProps) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isMapLoaded, setIsMapLoaded] = useState<boolean>(false);
   const mapRef = useRef<MapRef>(null);
 
   const toggleExpand = () => {
@@ -78,8 +80,18 @@ export default function IndustrialZoneMap({
         dragPan={true}
         doubleClickZoom={true}
         attributionControl={false}
+        onLoad={() => setIsMapLoaded(true)}
         style={{ width: "100%", height: "100%" }}
       >
+        {!isMapLoaded && (
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 bg-surface/90 backdrop-blur-sm">
+            <Spinner size="lg" variant="primary" />
+            <span className="font-label text-xs font-semibold tracking-wider text-muted uppercase">
+              Đang khởi tạo bản đồ kết nối hạ tầng...
+            </span>
+          </div>
+        )}
+
         <NavigationControl position="top-right" showCompass={false} />
 
         {/* Nút phóng to / thu nhỏ đặt trực tiếp trong góc bản đồ */}

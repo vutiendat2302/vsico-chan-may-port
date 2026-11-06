@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <html lang="vi">
+    <html lang="vi" data-scroll-behavior="smooth">
       <body className="flex min-h-screen items-center justify-center bg-surface font-body text-ink">
         <div className="text-center">
           <h1 className="text-4xl font-bold">404</h1>

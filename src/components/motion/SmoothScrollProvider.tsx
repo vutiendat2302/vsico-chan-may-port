@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { ensureGsapRegistered, gsap, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { markAppInitialized } from "@/lib/navigationState";
 
 type SmoothScrollProviderProps = {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
   useEffect(() => {
     ensureGsapRegistered();
+    markAppInitialized();
 
     if (prefersReducedMotion) {
       if ("scrollRestoration" in window.history) {
@@ -30,10 +32,10 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     window.scrollTo(0, 0);
 
     const lenis = new Lenis({
-      duration: 0.85,
+      duration: 1.15,
       smoothWheel: true,
-      wheelMultiplier: 1.15,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 0.88,
+      touchMultiplier: 1.2,
       prevent: (node) => {
         // Không cuộn trang khi chuột đang ở trong khu vực bản đồ
         return (

@@ -46,7 +46,7 @@ export function Counter({
   secondarySuffix = "",
   decimals = 0,
   padZero = false,
-  duration = 0.65,
+  duration = 0.85,
   className,
   toggleActions = "restart none none reset",
 }: CounterProps) {
@@ -90,7 +90,7 @@ export function Counter({
         ease: "power2.out",
         scrollTrigger: {
           trigger: containerEl,
-          start: "top 95%",
+          start: "top 85%",
           toggleActions,
         },
         onUpdate: () => {

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ZoomIn, ShieldCheck, ArrowRight } from "lucide-react";
 import type { CertificateCategoryId } from "@/data/certificates";
 import { Link } from "@/i18n/routing";
+import { Spinner } from "@/components/ui/Spinner";
 import {
   Dialog,
   DialogContent,
@@ -44,6 +45,7 @@ export function CertificateViewer({
 }: CertificateViewerProps) {
   const [activeTab, setActiveTab] = useState<CertificateCategoryId>("iso");
   const [selectedCert, setSelectedCert] = useState<CertificateDisplayItem | null>(null);
+  const [isModalImageLoading, setIsModalImageLoading] = useState(true);
 
   const activeCategoryItems = items.filter((item) => item.categoryId === activeTab);
   // Hiển thị 3-4 chứng chỉ đại diện
@@ -92,7 +94,10 @@ export function CertificateViewer({
         {displayedItems.map((cert) => (
           <article
             key={cert.id}
-            onClick={() => setSelectedCert(cert)}
+            onClick={() => {
+              setIsModalImageLoading(true);
+              setSelectedCert(cert);
+            }}
             className="group flex w-[280px] shrink-0 cursor-pointer flex-col border border-border bg-white text-left transition-all duration-300 hover:border-primary hover:shadow-xl sm:w-[320px] lg:w-auto"
           >
             {/* Ảnh chứng chỉ: Chiếm 7 phần chiều cao (aspect-[7/10] hoặc chiều cao 70% card) */}
@@ -177,13 +182,25 @@ export function CertificateViewer({
 
             {/* Khung ảnh to lớn, tràn rộng, hiển thị chi tiết tài liệu chuẩn */}
             <div className="relative mt-4 h-[75vh] min-h-[450px] w-full overflow-hidden border border-white/10 bg-black/60">
+              {isModalImageLoading && (
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/70 backdrop-blur-sm">
+                  <Spinner size="lg" variant="gold" />
+                  <span className="font-label text-xs font-semibold tracking-wider text-white/70 uppercase">
+                    Đang nạp ảnh chứng nhận...
+                  </span>
+                </div>
+              )}
               <Image
                 src={selectedCert.image}
                 alt={selectedCert.title}
                 fill
                 sizes="95vw"
                 priority
-                className="object-contain p-2"
+                onLoad={() => setIsModalImageLoading(false)}
+                className={cn(
+                  "object-contain p-2 transition-opacity duration-300",
+                  isModalImageLoading ? "opacity-0" : "opacity-100",
+                )}
               />
             </div>
           </DialogContent>

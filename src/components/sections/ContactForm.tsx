@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ArrowUpRight, Check, AlertCircle, Info } from "lucide-react";
+import { Spinner } from "@/components/ui/Spinner";
 
 export type RoleDetails = {
   label: string;
@@ -395,8 +396,17 @@ export function ContactForm({ labels }: ContactFormProps) {
           disabled={isSubmitting}
           className="inline-flex h-[52px] w-full items-center justify-center gap-2.5 rounded-[2px] bg-primary px-8 font-body text-xs font-bold tracking-[0.18em] text-white uppercase shadow-sm outline-none transition-all duration-200 hover:opacity-90 hover:shadow-md focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
-          <span>{isSubmitting ? labels.submitting : currentRoleData.submit}</span>
-          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          {isSubmitting ? (
+            <>
+              <Spinner size="xs" variant="white" />
+              <span>{labels.submitting}</span>
+            </>
+          ) : (
+            <>
+              <span>{currentRoleData.submit}</span>
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </>
+          )}
         </button>
       </div>
     </form>

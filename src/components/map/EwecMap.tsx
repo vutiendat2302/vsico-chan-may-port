@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Map, { Layer, Marker, NavigationControl, Source, type MapRef } from "react-map-gl/maplibre";
 import { Maximize2, Minimize2 } from "lucide-react";
+import { Spinner } from "@/components/ui/Spinner";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { ewecNodes } from "@/data/industrial-zones";
 import { ewecDetailedRoutesGeoJson } from "@/data/routes-geojson";
@@ -17,6 +18,7 @@ const DEFAULT_MAP_STYLE =
 
 export default function EwecMap({ nodeLabels }: EwecMapProps) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isMapLoaded, setIsMapLoaded] = useState<boolean>(false);
   const mapRef = useRef<MapRef>(null);
 
   const toggleExpand = () => {
@@ -47,8 +49,18 @@ export default function EwecMap({ nodeLabels }: EwecMapProps) {
         dragPan={true}
         doubleClickZoom={true}
         attributionControl={false}
+        onLoad={() => setIsMapLoaded(true)}
         style={{ width: "100%", height: "100%" }}
       >
+        {!isMapLoaded && (
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 bg-[#0B0A14]/90 backdrop-blur-sm">
+            <Spinner size="lg" variant="gold" />
+            <span className="font-label text-xs font-semibold tracking-wider text-white/80 uppercase">
+              Đang khởi tạo bản đồ hành lang...
+            </span>
+          </div>
+        )}
+
         <NavigationControl position="top-right" showCompass={false} />
 
         {/* Nút phóng to / thu nhỏ đặt trực tiếp trong góc bản đồ */}

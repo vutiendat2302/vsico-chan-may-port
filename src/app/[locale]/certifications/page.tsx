@@ -1,7 +1,7 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
-import { routing, type AppLocale } from "@/i18n/routing";
+import { Link, routing, type AppLocale } from "@/i18n/routing";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
 import { certificateCategories, certificates } from "@/data/certificates";
@@ -39,13 +39,13 @@ export default async function CertificationsPage({ params }: CertPageProps) {
       <main className="pt-28 pb-24 lg:pt-36 lg:pb-32">
         <div className="container">
           {/* Breadcrumb / Quay lại trang chủ và cuộn ngay đến Section VII Chứng nhận */}
-          <a
-            href={`/${validLocale}#certifications`}
+          <Link
+            href="/#certifications"
             className="inline-flex items-center gap-2 font-body text-xs font-semibold tracking-wider text-primary uppercase transition-colors hover:text-primary-dark"
           >
             <ArrowLeft className="h-4 w-4" />
             <span>{t("pageBack")}</span>
-          </a>
+          </Link>
 
           {/* Tiêu đề trang phong cách Spyker Editorial sang trọng */}
           <div className="mt-8 max-w-4xl border-b border-border pb-10">

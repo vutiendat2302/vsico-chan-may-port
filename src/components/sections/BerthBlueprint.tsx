@@ -124,13 +124,13 @@ export function BerthBlueprint({ locale, stats, t }: BerthBlueprintProps) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top 85%",
+          start: "top 80%",
           toggleActions: "play none none none",
         },
       });
 
-      // Xuất hiện ĐỒNG LOẠT tất cả các thành phần trong 0.5s, không để lần lượt
-      const DURATION = 0.5;
+      // Xuất hiện ĐỒNG LOẠT tất cả các thành phần trong 0.7s để kịp quan sát rõ nét
+      const DURATION = 0.7;
       const EASE = "power2.out";
 
       tl.to(`#${idPrefix}-seabed-line`, { strokeDashoffset: 0, duration: DURATION, ease: EASE }, 0)

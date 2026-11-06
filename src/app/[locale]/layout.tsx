@@ -57,7 +57,9 @@ export default async function LocaleLayout({ children, params }: RootLayoutProps
   return (
     <html
       lang={locale}
+      data-scroll-behavior="smooth"
       className={`${heading.variable} ${body.variable} ${label.variable}`}
+      suppressHydrationWarning
     >
       <head>
         <script

@@ -1,7 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import { ArrowLeft, Anchor, Cpu, Users, Calendar, ArrowRight } from "lucide-react";
-import { routing, type AppLocale } from "@/i18n/routing";
+import { Link, routing, type AppLocale } from "@/i18n/routing";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
 
@@ -42,13 +42,13 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
       <main className="pt-28 pb-24 lg:pt-36 lg:pb-32">
         <div className="container">
           {/* Breadcrumb / Quay lại Section V Hạ tầng trên trang chủ */}
-          <a
-            href={`/${validLocale}#infrastructure`}
+          <Link
+            href="/#infrastructure"
             className="inline-flex items-center gap-2 font-body text-xs font-semibold tracking-wider text-primary uppercase transition-colors hover:text-primary-dark"
           >
             <ArrowLeft className="h-4 w-4" />
             <span>{isVi ? "Quay lại trang chủ" : "Back to Home"}</span>
-          </a>
+          </Link>
 
           {/* Tiêu đề trang phong cách Spyker Editorial sang trọng */}
           <div className="mt-8 max-w-4xl border-b border-border pb-10">
@@ -366,13 +366,13 @@ export default async function InfrastructurePage({ params }: InfraPageProps) {
 
               {/* Nút quay lại trang chủ cuối trang */}
               <div className="mt-12 text-center">
-                <a
-                  href={`/${validLocale}#infrastructure`}
+                <Link
+                  href="/#infrastructure"
                   className="inline-flex items-center gap-2 border border-primary bg-primary px-7 py-3.5 font-body text-xs font-bold tracking-wider text-white uppercase transition-colors hover:bg-primary-dark"
                 >
                   <span>{isVi ? "Khám phá các phần khác trên trang chủ" : "Explore other sections on Homepage"}</span>
                   <ArrowRight className="h-4 w-4" />
-                </a>
+                </Link>
               </div>
             </section>
           </div>

@@ -1,71 +1,88 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { useLocale } from "next-intl";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { isReturningNavigation, markAppInitialized } from "@/lib/navigationState";
 
 type PreloaderProps = {
   brandSubtitle?: string;
 };
 
-export function Preloader({ brandSubtitle = "CHÂN MÂY · HUẾ" }: PreloaderProps) {
-  const reducedMotion = useReducedMotion();
-  const [isSliding, setIsSliding] = useState(false);
-  const [isDone, setIsDone] = useState(false);
+export function Preloader({ brandSubtitle }: PreloaderProps) {
+  const locale = useLocale();
+  const displaySubtitle =
+    brandSubtitle ?? (locale === "en" ? "CHAN MAY · HUE" : "CHÂN MÂY · HUẾ");
 
-  const finishEarly = useCallback(() => {
-    setIsSliding(true);
+  const reducedMotion = useReducedMotion();
+  const isReturning = isReturningNavigation();
+
+  const [isSliding, setIsSliding] = useState(false);
+  const [isDone, setIsDone] = useState(isReturning);
+
+  const markDoneAndLift = useCallback(() => {
     if (typeof window !== "undefined") {
+      markAppInitialized();
       (
         window as unknown as { __VSICO_PRELOADER_LIFTED__?: boolean }
       ).__VSICO_PRELOADER_LIFTED__ = true;
       window.dispatchEvent(new CustomEvent("vsico:preloader-lift"));
     }
+  }, []);
+
+  const finishEarly = useCallback(() => {
+    setIsSliding(true);
+    markDoneAndLift();
     const timer = window.setTimeout(() => {
       setIsDone(true);
       document.body.style.overflow = "";
     }, 450);
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [markDoneAndLift]);
 
   useEffect(() => {
-    // Đảm bảo luôn cuộn về đầu trang ngay khi mount
-    if (typeof window !== "undefined") {
-      if ("scrollRestoration" in window.history) {
-        window.history.scrollRestoration = "manual";
-      }
-      window.scrollTo(0, 0);
-    }
+    if (typeof window === "undefined") return;
 
-    if (reducedMotion) {
+    // Nếu là quay lại trang chủ (chuyển trang nội bộ) hoặc bật giảm chuyển động: Bỏ qua preloader
+    if (isReturning || reducedMotion) {
       setIsDone(true);
-      if (typeof window !== "undefined") {
-        (
-          window as unknown as { __VSICO_PRELOADER_LIFTED__?: boolean }
-        ).__VSICO_PRELOADER_LIFTED__ = true;
-        window.dispatchEvent(new CustomEvent("vsico:preloader-lift"));
-      }
+      markDoneAndLift();
+      document.body.style.overflow = "";
       return;
     }
+
+    // Đảm bảo luôn cuộn về đầu trang ngay khi load trang chủ
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+    (
+      window as unknown as { __VSICO_PRELOADER_LIFTED__?: boolean }
+    ).__VSICO_PRELOADER_LIFTED__ = false;
 
     // Khóa cuộn trang khi loader đang chạy
     document.body.style.overflow = "hidden";
 
-    // Giai đoạn 1: Giữ logo hiện rõ trong thời gian ngắn (khoảng 650ms) rồi kéo lên
+    // Giai đoạn 1: Giữ logo hiện rõ trong 600ms rồi kéo rèm tím lên
     const slideTimer = window.setTimeout(() => {
       setIsSliding(true);
-      if (typeof window !== "undefined") {
-        (
-          window as unknown as { __VSICO_PRELOADER_LIFTED__?: boolean }
-        ).__VSICO_PRELOADER_LIFTED__ = true;
-        window.dispatchEvent(new CustomEvent("vsico:preloader-lift"));
-      }
-    }, 650);
+      markDoneAndLift();
 
-    // Giai đoạn 2: Sau khi màn tím trượt lên hoàn tất (khoảng 700ms) -> kết thúc
+      // Nếu URL có hash (#...), cuộn mượt đến mục đó khi Preloader nhấc lên
+      if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }, 600);
+
+    // Giai đoạn 2: Sau khi màn tím trượt lên hoàn tất -> mở khóa và hoàn tất (khoảng 1.1s)
     const doneTimer = window.setTimeout(() => {
       setIsDone(true);
       document.body.style.overflow = "";
-    }, 1200);
+      markAppInitialized();
+    }, 1100);
 
     // Cho phép click hoặc bấm phím để bỏ qua ngay
     const handleKeyDown = () => finishEarly();
@@ -77,10 +94,9 @@ export function Preloader({ brandSubtitle = "CHÂN MÂY · HUẾ" }: PreloaderPr
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [reducedMotion, finishEarly]);
+  }, [isReturning, reducedMotion, finishEarly, markDoneAndLift]);
 
-  // Chỉ unmount khi animation trượt lên hoàn thành (isDone = true)
-  // Trong SSR và khi trang vừa mở: Preloader luôn hiển thị ngay lập tức (không kiểm tra mounted)
+  // Chỉ unmount khi animation trượt lên hoàn thành (isDone = true) hoặc khi quay lại trang
   if (isDone) {
     return null;
   }
@@ -91,6 +107,7 @@ export function Preloader({ brandSubtitle = "CHÂN MÂY · HUẾ" }: PreloaderPr
       role="status"
       aria-live="polite"
       aria-label="Loading VSICO Hue Port"
+      suppressHydrationWarning
       onClick={finishEarly}
       className={`fixed inset-0 z-[100] flex min-h-dvh w-screen cursor-pointer flex-col items-center justify-center bg-[#3E116C] transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] ${
         isSliding ? "-translate-y-full" : "translate-y-0"
@@ -143,7 +160,7 @@ export function Preloader({ brandSubtitle = "CHÂN MÂY · HUẾ" }: PreloaderPr
         <div className="mt-7 flex items-center gap-3">
           <span className="h-px w-12 bg-highlight-light/40" />
           <span className="font-label text-base font-bold tracking-[0.3em] text-highlight-light uppercase sm:text-lg">
-            {brandSubtitle}
+            {displaySubtitle}
           </span>
           <span className="h-px w-12 bg-highlight-light/40" />
         </div>

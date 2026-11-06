@@ -30,7 +30,6 @@ export default async function HomePage({ params }: PageProps) {
     <div id="top">
       {/* Intro Loader kiểu Spyker Cars: Màn tím logo VSICO trắng hiện dần rồi kéo lên */}
       <Preloader brandSubtitle={tNav("brandSubtitle")} />
-
       <Header locale={validLocale} />
       <main>
         <Hero locale={validLocale} />

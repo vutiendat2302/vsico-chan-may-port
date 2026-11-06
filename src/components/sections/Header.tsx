@@ -73,6 +73,8 @@ export async function Header({ locale }: HeaderProps) {
         incentives: t("groupIncentives"),
         aboutVsico: t("groupAboutVsico"),
         contact: t("groupContact"),
+        aboutUs: t("aboutUs"),
+        newsEvents: t("newsEvents"),
       }}
       vsicoSystem={{
         title: t("vsicoSystemTitle"),

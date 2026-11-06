@@ -5,10 +5,10 @@
 
 export const MOTION_TOKENS = {
   duration: {
-    fast: 0.25,
-    normal: 0.45,
-    cinematic: 0.55,
-    slow: 0.75,
+    fast: 0.32,
+    normal: 0.58,
+    cinematic: 0.72,
+    slow: 0.95,
   },
   ease: {
     out: "power3.out",
@@ -28,12 +28,12 @@ export const MOTION_TOKENS = {
     lg: "blur(6px)",
   },
   stagger: {
-    fast: 0.04,
-    normal: 0.06,
-    cinematic: 0.08,
+    fast: 0.05,
+    normal: 0.08,
+    cinematic: 0.1,
   },
   scrollTrigger: {
-    start: "top 95%",
+    start: "top 85%",
     // onEnter onLeave onEnterBack onLeaveBack
     // 1. onEnter: "restart" -> Cứ lướt xuống là kích hoạt lại hiệu ứng xuất hiện
     // 2. onLeave: "none" -> Tiếp tục lướt xuống dưới thì giữ nguyên trạng thái

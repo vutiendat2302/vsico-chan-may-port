@@ -8,12 +8,16 @@ import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { MOTION_TOKENS } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+import { Spinner } from "@/components/ui/Spinner";
 
 const EwecMap = dynamic(() => import("@/components/map/EwecMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-[500px] w-full items-center justify-center rounded-none border border-border bg-ink/95 font-body text-xs tracking-widest text-white/70 uppercase sm:h-[560px] lg:h-[620px]">
-      EWEC Corridor Map...
+    <div className="flex h-[500px] w-full flex-col items-center justify-center gap-3.5 rounded-none border border-border bg-[#0B0A14] p-6 text-center sm:h-[560px] lg:h-[620px]">
+      <Spinner size="lg" variant="gold" />
+      <span className="font-label text-xs font-semibold tracking-widest text-white/70 uppercase">
+        Đang tải bản đồ hành lang EWEC...
+      </span>
     </div>
   ),
 });
@@ -23,8 +27,11 @@ const IndustrialZoneMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-[500px] w-full items-center justify-center rounded-none border border-border bg-surface-subtle font-body text-xs tracking-widest text-muted uppercase sm:h-[560px] lg:h-[620px]">
-        Industrial Zones Map...
+      <div className="flex h-[500px] w-full flex-col items-center justify-center gap-3.5 rounded-none border border-border bg-surface-subtle p-6 text-center sm:h-[560px] lg:h-[620px]">
+        <Spinner size="lg" variant="primary" />
+        <span className="font-label text-xs font-semibold tracking-widest text-muted uppercase">
+          Đang tải bản đồ khu công nghiệp...
+        </span>
       </div>
     ),
   },
