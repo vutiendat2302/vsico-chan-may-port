@@ -111,6 +111,10 @@ Desktop.ini
 # Storybook output (if Storybook is added later)
 storybook-static/
 
+# Large documents & presentations (>50MB)
+*.pdf
+docs/*.pdf
+
 
 # =========================================================
 # Project-specific notes
