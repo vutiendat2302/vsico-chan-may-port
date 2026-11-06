@@ -15,7 +15,7 @@ type IndustrialZoneMapProps = {
 
 const DEFAULT_MAP_STYLE =
   process.env.NEXT_PUBLIC_MAP_STYLE_URL ||
-  "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json";
+  "https://tiles.openfreemap.org/styles/liberty";
 
 export default function IndustrialZoneMap({
   selectedZoneId,

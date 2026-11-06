@@ -59,7 +59,12 @@
     "bulkVesselTitle": "Bulk & General Cargo Vessels",
     "bulkVesselDwt": "70,000 DWT",
     "bulkVesselDesc": "Accommodates bulk carriers up to 70,000 DWT, featuring an enclosed conveyor system for environmental protection.",
-    "officialPlanningNote": "Port infrastructure approved under official Chan May – Lang Co Economic Zone planning."
+    "officialPlanningNote": "Port infrastructure approved under official Chan May – Lang Co Economic Zone planning.",
+    "videoTitle": "Modern Deep-Water Port Simulation",
+    "videoPlayAria": "Play Chan May Port simulation video",
+    "videoPauseAria": "Pause video",
+    "videoMuteAria": "Mute audio",
+    "videoUnmuteAria": "Unmute audio"
   },
   "hero": {
     "brandTitle": "VSICO HUE PORT",
@@ -250,47 +255,58 @@
     }
   },
   "timeline": {
-    "berth4": "VSICO Hue – Berth 4 enters operation",
-    "berth4Desc": "Receives Phase 1 container and bulk vessels at the Chan May – Lang Co Economic Zone.",
-    "berth5": "VSICO Hue – Berth 5 enters operation",
-    "berth5Desc": "Expands total quay length to 540 m, raising handling productivity to 80 – 85 moves/hour.",
-    "icdLaoBao": "ICD Lao Bao enters operation",
-    "icdLaoBaoDesc": "Completes the 86,000 m² border logistics hub connecting Lao Bao Border Gate directly to the seaport.",
-    "statusOperating": "Operating",
-    "statusUpcoming": "Upcoming",
-    "monthOnlyNote": "Milestone dates are displayed by scheduled month and year."
+    "sectionLabel": "ROADMAP",
+    "berth4": "Berth 4",
+    "transition": "",
+    "berth5Icd": "Berth 5 · Lao Bao ICD",
+    "statusOperating": "OPERATIONAL",
+    "statusUpcoming": "UPCOMING",
+    "phase1Label": "PHASE 1",
+    "phase2Label": "PHASE 2",
+    "targetThroughputLabel": "TARGET THROUGHPUT",
+    "handlingProductivityLabel": "HANDLING PRODUCTIVITY",
+    "movesUnit": "moves/hour",
+    "teuUnit": "TEU",
+    "phase2Advantage": "enhanced comprehensive handling capacity",
+    "countdownPrefix": "Only",
+    "countdownSuffix": "days until 09/2027 (estimated)",
+    "countdownCompleted": "Now fully operational"
   },
   "services": {
     "roman": "VI",
-    "eyebrow": "ON-PORT SERVICES",
-    "title": "Three Core Cargo & Maritime Service Pillars",
-    "summary": "Comprehensive cargo stevedoring, vessel technical support, and international-standard marine supply services right at Chan May berths.",
+    "eyebrow": "PORT SERVICES",
+    "title": "3 Maritime Service Pillars",
+    "summary": "",
     "groups": {
       "cargoAndYard": {
-        "title": "Cargo Handling & Yard Operations",
-        "subtitle": "Container and bulk stevedoring, yard storage, and standard container maintenance.",
+        "num": "01",
+        "title": "Cargo Handling\n& Yard Operations",
+        "imageAlt": "Container and bulk stevedoring at VSICO Chan May Port",
         "items": {
-          "stevedoring": "Container and dry bulk cargo stevedoring services",
-          "yardStorage": "Container yard storage, CFS, and bulk warehouse management",
-          "containerRepair": "Container inspection, cleaning, and repair services"
+          "stevedoring": "Container & dry bulk stevedoring",
+          "yardStorage": "Yard storage",
+          "containerRepair": "Container repair & maintenance"
         }
       },
       "vesselSupport": {
-        "title": "Vessel Husbandry & Support",
-        "subtitle": "Dedicated support for shipowners and masters throughout every port call.",
+        "num": "02",
+        "title": "Vessel Support",
+        "imageAlt": "Vessel berthing and tugboat assistance at VSICO Chan May Port",
         "items": {
-          "agencyFree": "Shipping agency services (Complimentary)",
-          "tugboat": "Harbor tugboat assistance for safe berthing and unberthing",
-          "shipRepair": "Alongside vessel maintenance and repair services"
+          "agencyFree": "Shipping agency",
+          "agencyFreeTag": "COMPLIMENTARY",
+          "tugboat": "Tugboat assistance",
+          "shipRepair": "Alongside vessel repair"
         }
       },
       "maritimeSupply": {
-        "title": "Marine Supply & Environmental Services",
-        "subtitle": "Full chandling, bunkering, and vessel sanitation at berth.",
+        "num": "03",
+        "title": "Marine Supply",
+        "imageAlt": "Marine bunkering, fresh water, and provisions at berth",
         "items": {
-          "bunkeringAndWater": "Marine fuel bunkering, fresh water, and lubricants supply",
-          "chandling": "Ship chandling (stores, spare parts, nautical charts, provisions)",
-          "holdCleaning": "Cargo hold cleaning and shipboard waste collection"
+          "bunkeringAndWater": "Fuel bunkering, fresh water, lubricants",
+          "chandling": "Stores, spare parts, nautical charts, food",
+          "holdCleaning": "Hold cleaning, garbage disposal"
         }
       }
     }

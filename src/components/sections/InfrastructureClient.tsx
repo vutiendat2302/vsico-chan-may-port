@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowRight, Anchor, Cpu, Layers } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { ensureGsapRegistered, gsap } from "@/lib/gsap";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { MOTION_TOKENS } from "@/lib/motion";
+import { Counter } from "@/components/motion/Counter";
 import { cn } from "@/lib/utils";
 import type { SupportedLocale } from "@/lib/formatters";
 
@@ -16,98 +20,179 @@ export type InfrastructureRowItem = {
   hash: string;
 };
 
-export type MilestoneDisplayItem = {
-  id: string;
-  badgeNum: string;
-  dateLabel: string;
-  title: string;
-  statusLabel: string;
-  isCompleted?: boolean;
-  phaseLabel: string;
-  primaryMetric: string;
-  primaryMetricDesc: string;
-  secondaryMetric: string;
-  secondaryMetricDesc: string;
-};
-
-type TimeLeft = {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-};
-
 export type InfrastructureClientProps = {
   locale: SupportedLocale;
   rows: InfrastructureRowItem[];
   viewDetailsLabel: string;
-  timelineTitle: string;
-  targetIso: string;
-  initialTimeLeft: TimeLeft;
-  countdownBadge: string;
-  countdownTitle: string;
-  countdownSubtitle: string;
-  countdownUnits: {
-    days: string;
-    hours: string;
-    minutes: string;
-    seconds: string;
-  };
+  timelineLabel: string;
+  berth4Title: string;
+  berth4Status: string;
+  berth4Date: string;
+  transitionDate: string;
+  berth5IcdTitle: string;
+  berth5IcdStatus: string;
+  berth5IcdDate: string;
   phase1Label: string;
   phase2Label: string;
-  berth4Date: string;
-  berth5Date: string;
-  milestones: MilestoneDisplayItem[];
+  targetThroughputLabel: string;
+  handlingProductivityLabel: string;
+  phase1Volume: number;
+  phase1VolumeFormatted: string;
+  phase1MovesRange: string;
+  phase2MovesRange: string;
+  movesUnit: string;
+  teuUnit: string;
+  phase2Advantage: string;
+  daysRemaining: number;
+  countdownPrefix: string;
+  countdownSuffix: string;
+  countdownCompleted: string;
 };
 
 export function InfrastructureClient({
   locale,
   rows,
   viewDetailsLabel,
-  timelineTitle,
-  targetIso,
-  initialTimeLeft,
-  countdownBadge,
-  countdownTitle,
-  countdownSubtitle,
-  countdownUnits,
+  timelineLabel,
+  berth4Title,
+  berth4Status,
+  berth4Date,
+  transitionDate,
+  berth5IcdTitle,
+  berth5IcdStatus,
+  berth5IcdDate,
   phase1Label,
   phase2Label,
-  berth4Date,
-  berth5Date,
-  milestones,
+  targetThroughputLabel,
+  handlingProductivityLabel,
+  phase1Volume,
+  phase1VolumeFormatted,
+  phase1MovesRange,
+  phase2MovesRange,
+  movesUnit,
+  teuUnit,
+  phase2Advantage,
+  daysRemaining,
+  countdownPrefix,
+  countdownSuffix,
+  countdownCompleted,
 }: InfrastructureClientProps) {
   const [activeRow, setActiveRow] = useState<number>(0);
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(initialTimeLeft);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const timelineSectionRef = useRef<HTMLDivElement>(null);
+  const desktopRailProgressRef = useRef<HTMLDivElement>(null);
+  const desktopNodesRef = useRef<HTMLDivElement>(null);
+  const desktopPhasesRef = useRef<HTMLDivElement>(null);
+  const mobileRailProgressRef = useRef<HTMLDivElement>(null);
+  const mobileItemsRef = useRef<HTMLOListElement>(null);
 
-  // Đồng hồ đếm ngược thời gian thực cập nhật mỗi giây
+  const prefersReducedMotion = useReducedMotion();
+
+  // Hiệu ứng GSAP nhẹ: vẽ trục từ trái sang phải và hiển thị mốc tuần tự
   useEffect(() => {
-    const updateCountdown = () => {
-      const target = new Date(targetIso).getTime();
-      const now = Date.now();
-      const diff = Math.max(0, target - now);
+    ensureGsapRegistered();
+    if (prefersReducedMotion) return;
 
-      const totalSeconds = Math.floor(diff / 1000);
-      const days = Math.floor(totalSeconds / 86400);
-      const hours = Math.floor((totalSeconds % 86400) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
+    const timelineEl = timelineSectionRef.current;
+    if (!timelineEl) return;
 
-      setTimeLeft({ days, hours, minutes, seconds });
-    };
+    const desktopRail = desktopRailProgressRef.current;
+    const desktopNodes = desktopNodesRef.current?.children;
+    const desktopPhases = desktopPhasesRef.current?.children;
+    const mobileRail = mobileRailProgressRef.current;
+    const mobileItems = mobileItemsRef.current?.children;
 
-    updateCountdown();
-    const timer = setInterval(updateCountdown, 1000);
-    return () => clearInterval(timer);
-  }, [targetIso]);
+    // Trạng thái ban đầu
+    if (desktopRail) gsap.set(desktopRail, { scaleX: 0, transformOrigin: "left center" });
+    if (desktopNodes) gsap.set(desktopNodes, { opacity: 0, y: 10 });
+    if (desktopPhases) gsap.set(desktopPhases, { opacity: 0, y: 15 });
+    if (mobileRail) gsap.set(mobileRail, { scaleY: 0, transformOrigin: "top center" });
+    if (mobileItems) gsap.set(mobileItems, { opacity: 0, x: -10 });
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: timelineEl,
+          start: MOTION_TOKENS.scrollTrigger.start,
+          toggleActions: MOTION_TOKENS.scrollTrigger.toggleActions,
+          once: false,
+        },
+      });
+
+      // Desktop: Vẽ trục ngang và hiện mốc
+      if (desktopRail) {
+        tl.to(desktopRail, {
+          scaleX: 1,
+          duration: 0.9,
+          ease: "power2.inOut",
+        });
+      }
+      if (desktopNodes && desktopNodes.length > 0) {
+        tl.to(
+          desktopNodes,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.15,
+            ease: "power2.out",
+          },
+          "-=0.5",
+        );
+      }
+      if (desktopPhases && desktopPhases.length > 0) {
+        tl.to(
+          desktopPhases,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.2,
+            ease: "power2.out",
+          },
+          "-=0.3",
+        );
+      }
+
+      // Mobile: Vẽ trục dọc
+      if (mobileRail) {
+        tl.to(
+          mobileRail,
+          {
+            scaleY: 1,
+            duration: 0.9,
+            ease: "power2.inOut",
+          },
+          0,
+        );
+      }
+      if (mobileItems && mobileItems.length > 0) {
+        tl.to(
+          mobileItems,
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            stagger: 0.2,
+            ease: "power2.out",
+          },
+          0.3,
+        );
+      }
+    }, timelineEl);
+
+    return () => ctx.revert();
+  }, [prefersReducedMotion]);
+
+  const isCountdownActive = daysRemaining > 0;
 
   return (
-    <div className="mt-12 sm:mt-16">
+    <div ref={containerRef} className="mt-12 sm:mt-16 bg-white text-ink">
       {/* PHẦN 1: HẠ TẦNG, THIẾT BỊ, NHÂN SỰ (1 ẢNH LỚN BÊN TRÁI, 3 DÒNG BÊN PHẢI) */}
       <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
         {/* CỘT TRÁI (~55-60%): ẢNH LỚN ĐỔI THEO DÒNG ĐANG CHỌN, CROSSFADE NHẸ, KHÔNG BO TRÒN */}
         <div className="lg:col-span-7">
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-none border border-border/80 bg-ink shadow-sm">
+          <div className="relative aspect-[16/10] w-full overflow-hidden border border-border bg-ink">
             {rows.map((row, idx) => (
               <div
                 key={row.id}
@@ -140,7 +225,12 @@ export function InfrastructureClient({
                   href={`/${locale}/infrastructure${row.hash}`}
                   onMouseEnter={() => setActiveRow(idx)}
                   onFocus={() => setActiveRow(idx)}
-                  className="group flex items-center justify-between py-6 transition-colors"
+                  className={cn(
+                    "group flex items-center justify-between px-5 py-5 sm:px-6 sm:py-6 transition-colors duration-200",
+                    isSelected
+                      ? "bg-slate-100/70 text-ink hover:bg-slate-100"
+                      : "bg-transparent text-ink/80 hover:bg-slate-100/70 hover:text-ink",
+                  )}
                 >
                   <div className="flex items-baseline gap-5 sm:gap-6">
                     <span
@@ -162,9 +252,6 @@ export function InfrastructureClient({
                       >
                         {row.title}
                       </h4>
-                      <p className="mt-1 font-body text-sm font-semibold text-muted">
-                        {row.metric}
-                      </p>
                     </div>
                   </div>
 
@@ -182,10 +269,10 @@ export function InfrastructureClient({
             })}
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 px-5 sm:px-6">
             <a
               href={`/${locale}/infrastructure`}
-              className="inline-flex items-center gap-2 font-body text-xs font-bold tracking-wider text-primary uppercase transition-colors hover:text-primary-dark"
+              className="inline-flex items-center gap-2 font-label text-xs font-bold tracking-wider text-primary uppercase transition-colors hover:text-primary-dark"
             >
               <span>{viewDetailsLabel}</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -194,244 +281,265 @@ export function InfrastructureClient({
         </div>
       </div>
 
-      {/* PHẦN 2: LỘ TRÌNH TRIỂN KHAI & TIẾN ĐỘ VẬN HÀNH */}
-      <div className="mt-16 border-t border-border pt-12 sm:mt-24 sm:pt-16">
-        <span className="font-body text-xs font-bold tracking-[0.24em] text-primary uppercase">
-          {timelineTitle}
-        </span>
+      {/* PHẦN 2: LỘ TRÌNH (MỘT TRỤC THỜI GIAN DUY NHẤT, NỀN TRẮNG, KHÔNG CARD) */}
+      <section
+        ref={timelineSectionRef}
+        aria-label={timelineLabel}
+        className="mt-20 border-t border-border pt-14 sm:mt-28 sm:pt-18 bg-white"
+      >
+        {/* Nhãn section: Label */}
+        <header>
+          <span className="font-label text-xs font-bold tracking-[0.24em] text-primary uppercase">
+            {timelineLabel}
+          </span>
+        </header>
 
-        {/* KHUNG THỜI GIAN ĐỒNG BỘ: ĐẾM NGƯỢC Ở TRÊN & CỘT MỐC THỜI GIAN ĐƯỢC CHUYỂN XUỐNG DƯỚI NÀY */}
-        <div className="mt-8 border border-border bg-surface-subtle p-6 sm:p-8 lg:p-10">
-          {/* HÀNG TRÊN: TIÊU ĐỀ + 4 BOX ĐẾM NGƯỢC (NGÀY, GIỜ, PHÚT, GIÂY) */}
-          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
-            <div className="max-w-xl">
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                <span className="font-body text-xs font-bold tracking-[0.24em] text-primary uppercase">
-                  {countdownBadge}
-                </span>
-              </div>
-              <h3 className="mt-2 font-heading text-xl font-bold tracking-tight text-ink sm:text-2xl lg:text-3xl">
-                {countdownTitle}
-              </h3>
-              <p className="mt-1.5 font-body text-xs text-muted sm:text-sm">
-                {countdownSubtitle}
-              </p>
-            </div>
+        {/* ============================================================== */}
+        {/* BỐ CỤC DESKTOP (MD TRỞ LÊN): TRỤC NGANG TOÀN CHIỀU RỘNG CONTAINER */}
+        {/* ============================================================== */}
+        <div className="hidden md:block mt-12 sm:mt-14">
+          <ol className="relative w-full list-none p-0 m-0">
+            {/* TRỤC CHÍNH (ĐƯỜNG KẺ MẢNH 2PX) */}
+            <div className="relative h-[2px] w-full bg-border" aria-hidden="true">
+              {/* Phần đã qua (0% -> 55%): Tô màu tím đậm (GSAP vẽ dần) */}
+              <div
+                ref={desktopRailProgressRef}
+                className="absolute inset-y-0 left-0 w-[55%] bg-primary will-change-transform"
+              />
 
-            {/* 4 Box Đếm ngược: Ngày, Giờ, Phút, Giây */}
-            <div className="grid grid-cols-4 gap-2.5 sm:gap-3.5 lg:gap-4 shrink-0">
-              {/* Box Ngày */}
-              <div className="flex flex-col items-center justify-center border border-border bg-white px-3 py-4 shadow-sm sm:px-6 sm:py-5 min-w-[70px] sm:min-w-[95px] lg:min-w-[110px]">
-                <span className="font-body text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink tabular-nums">
-                  {timeLeft.days}
-                </span>
-                <span className="mt-1 font-body text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase">
-                  {countdownUnits.days}
-                </span>
-              </div>
-
-              {/* Box Giờ */}
-              <div className="flex flex-col items-center justify-center border border-border bg-white px-3 py-4 shadow-sm sm:px-6 sm:py-5 min-w-[70px] sm:min-w-[95px] lg:min-w-[110px]">
-                <span className="font-body text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink tabular-nums">
-                  {String(timeLeft.hours).padStart(2, "0")}
-                </span>
-                <span className="mt-1 font-body text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase">
-                  {countdownUnits.hours}
-                </span>
-              </div>
-
-              {/* Box Phút */}
-              <div className="flex flex-col items-center justify-center border border-border bg-white px-3 py-4 shadow-sm sm:px-6 sm:py-5 min-w-[70px] sm:min-w-[95px] lg:min-w-[110px]">
-                <span className="font-body text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink tabular-nums">
-                  {String(timeLeft.minutes).padStart(2, "0")}
-                </span>
-                <span className="mt-1 font-body text-[10px] sm:text-xs font-bold tracking-widest text-muted uppercase">
-                  {countdownUnits.minutes}
-                </span>
-              </div>
-
-              {/* Box Giây */}
-              <div className="flex flex-col items-center justify-center border border-primary/30 bg-primary/5 px-3 py-4 shadow-sm sm:px-6 sm:py-5 min-w-[70px] sm:min-w-[95px] lg:min-w-[110px]">
-                <span className="font-body text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-primary tabular-nums">
-                  {String(timeLeft.seconds).padStart(2, "0")}
-                </span>
-                <span className="mt-1 font-body text-[10px] sm:text-xs font-bold tracking-widest text-primary uppercase">
-                  {countdownUnits.seconds}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* ĐƯỜNG PHÂN CÁCH NGĂN KHỐI ĐẾM NGƯỢC VÀ CÁC CỘT MỐC THỜI GIAN */}
-          <div className="my-10 border-t border-border" />
-
-          {/* CỘT MỐC THỜI GIAN ĐƯỢC CHUYỂN XUỐNG ĐÂY (TRỰC TIẾP TRONG KHUNG ẢNH 2) */}
-          {/* 1. Trục tiến trình ray mốc thời gian */}
-          <div className="relative w-full pt-6 pb-2">
-            <div className="relative h-[2px] w-full bg-border">
-              {/* Mốc 01: 08/2026 */}
-              <div className="absolute top-1/2 left-0 flex -translate-y-1/2 flex-col items-start">
-                <span className="absolute -top-6 left-0 whitespace-nowrap font-body text-xs font-bold text-emerald-800">
+              {/* MỐC 08/2026: NẰM TẠI 0% */}
+              <li className="absolute top-1/2 left-0 -translate-y-1/2 flex flex-col items-start">
+                <span className="absolute -top-7 left-0 whitespace-nowrap font-label text-xs font-bold tracking-wider text-primary uppercase">
                   {berth4Date}
                 </span>
-                <span className="h-3.5 w-3.5 rounded-full bg-primary ring-4 ring-primary/20" />
-              </div>
+                <span
+                  className="h-3.5 w-3.5 rounded-full bg-primary ring-4 ring-primary/20"
+                  aria-hidden="true"
+                />
+                <div className="absolute top-5 left-0 whitespace-nowrap">
+                  <p className="font-body text-base font-bold text-ink">
+                    {berth4Title}
+                  </p>
+                  <p className="mt-0.5 font-label text-xs font-bold tracking-wider text-primary uppercase">
+                    {berth4Status}
+                  </p>
+                </div>
+              </li>
 
-              {/* Khấc mốc: 06/2027 */}
-              <div className="absolute top-1/2 left-[50%] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
-                <span className="absolute -top-6 whitespace-nowrap font-body text-xs font-bold text-muted">
-                  06/2027
+              {/* MỐC 06/2027: NẰM TẠI 55% (VẠCH ĐỨNG CHIA ┿, KHÔNG CÓ CHẤM) */}
+              <li className="absolute top-1/2 left-[55%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                <span className="absolute -top-7 whitespace-nowrap font-label text-xs font-bold tracking-wider text-muted uppercase">
+                  {transitionDate}
                 </span>
-                <span className="h-3.5 w-[2px] bg-primary" />
-              </div>
+                <span className="h-3.5 w-[2px] bg-primary" aria-hidden="true" />
+              </li>
 
-              {/* Mốc 02 & 03: 09/2027 */}
-              <div className="absolute top-1/2 right-0 flex -translate-y-1/2 flex-col items-end">
-                <span className="absolute -top-6 right-0 whitespace-nowrap font-body text-xs font-bold text-primary">
-                  {berth5Date}
+              {/* MỐC 09/2027: NẰM TẠI 100% (CHẤM RỖNG ○, GỘP BẾN SỐ 5 & ICD LAO BẢO) */}
+              <li className="absolute top-1/2 right-0 -translate-y-1/2 flex flex-col items-end text-right">
+                <span className="absolute -top-7 right-0 whitespace-nowrap font-label text-xs font-bold tracking-wider text-muted uppercase">
+                  {berth5IcdDate}
                 </span>
-                <span className="h-3.5 w-3.5 rounded-full border-2 border-primary bg-white shadow-sm" />
-              </div>
+                <span
+                  className="h-3.5 w-3.5 rounded-full border-2 border-primary bg-white shadow-sm"
+                  aria-hidden="true"
+                />
+                <div className="absolute top-5 right-0 whitespace-nowrap">
+                  <p className="font-body text-base font-bold text-ink">
+                    {berth5IcdTitle}
+                  </p>
+                  <p className="mt-0.5 font-label text-xs font-bold tracking-wider text-muted uppercase">
+                    {berth5IcdStatus}
+                  </p>
+                </div>
+              </li>
             </div>
-          </div>
+          </ol>
 
-          {/* 2. 3 CỘT MỐC THỜI GIAN (01, 02, 03) - CỠ CHỮ TO, NỔI BẬT, DÙNG TOÀN BỘ FONT BODY CHO SỐ */}
-          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-8 lg:gap-10">
-            {/* Cột mốc 01 */}
-            <div className="flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-7 w-7 items-center justify-center border border-emerald-300 bg-emerald-50 font-body text-xs font-extrabold text-emerald-800">
-                      01
-                    </span>
-                    <span className="flex h-7 w-7 items-center justify-center border border-border bg-white text-emerald-700">
-                      <Anchor className="h-4 w-4" />
-                    </span>
-                    <span className="font-body text-sm font-extrabold text-emerald-800 uppercase tracking-wider">
-                      {milestones[0].dateLabel}
-                    </span>
-                  </div>
-                  <span className="border border-emerald-300 bg-emerald-50 px-2 py-0.5 font-body text-[10px] font-bold text-emerald-800 uppercase">
-                    {milestones[0].statusLabel}
-                  </span>
-                </div>
-
-                <h4 className="mt-3.5 font-heading text-xl sm:text-2xl font-black text-ink leading-snug">
-                  {milestones[0].title}
-                </h4>
-
-                <div className="mt-4 border-t border-border/70 pt-3">
-                  <span className="font-body text-[11px] font-bold tracking-wider text-muted uppercase">
-                    {phase1Label}
-                  </span>
-                  <p className="mt-1.5 font-body text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
-                    {milestones[0].primaryMetric}
-                  </p>
-                  <p className="mt-0.5 font-body text-xs text-muted">
-                    {milestones[0].primaryMetricDesc}
-                  </p>
-                  <p className="mt-3 font-body text-lg sm:text-xl font-extrabold text-primary">
-                    {milestones[0].secondaryMetric}
-                  </p>
-                  <p className="mt-0.5 font-body text-xs text-muted">
-                    {milestones[0].secondaryMetricDesc}
-                  </p>
-                </div>
+          {/* HAI GIAI ĐOẠN LÀ HAI ĐOẠN NGOẶC / THANH MẢNH DƯỚI TRỤC (55% & 45%) */}
+          <div
+            ref={desktopPhasesRef}
+            className="mt-28 flex items-start gap-6 lg:gap-10"
+          >
+            {/* GIAI ĐOẠN 1: CHIẾM 55% CHIỀU NGANG */}
+            <div className="w-[55%] shrink-0">
+              {/* Thanh ngoặc: ├──────── GIAI ĐOẠN 1 ────────────────┤ */}
+              <div className="flex items-center gap-2" aria-hidden="true">
+                <span className="h-2.5 w-[1.5px] bg-primary shrink-0" />
+                <span className="h-[1.5px] w-6 bg-primary/40 shrink-0" />
+                <span className="font-label text-xs font-bold tracking-[0.18em] text-primary uppercase whitespace-nowrap">
+                  {phase1Label}
+                </span>
+                <span className="h-[1.5px] flex-1 bg-primary/40" />
+                <span className="h-2.5 w-[1.5px] bg-primary/40 shrink-0" />
               </div>
-            </div>
 
-            {/* Cột mốc 02 */}
-            <div className="flex flex-col justify-between md:border-l md:border-border/80 md:pl-8 lg:pl-10">
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-7 w-7 items-center justify-center border border-primary/30 bg-primary/10 font-body text-xs font-extrabold text-primary">
-                      02
-                    </span>
-                    <span className="flex h-7 w-7 items-center justify-center border border-border bg-white text-primary">
-                      <Cpu className="h-4 w-4" />
-                    </span>
-                    <span className="font-body text-sm font-extrabold text-primary uppercase tracking-wider">
-                      {milestones[1].dateLabel}
-                    </span>
-                  </div>
-                  <span className="border border-primary/25 bg-primary/10 px-2 py-0.5 font-body text-[10px] font-bold text-primary uppercase">
-                    {milestones[1].statusLabel}
+              {/* Nội dung Giai đoạn 1 căn trái theo điểm 08/2026 */}
+              <div className="mt-8 space-y-7">
+                <div>
+                  <span className="block font-label text-[11px] font-bold tracking-[0.16em] text-muted uppercase">
+                    {targetThroughputLabel}
                   </span>
+                  <div className="mt-1.5 font-body text-xl sm:text-xl lg:text-2xl font-extrabold tracking-tight text-ink tabular-nums">
+                    {prefersReducedMotion ? (
+                      <span>
+                        {phase1VolumeFormatted} {teuUnit}
+                      </span>
+                    ) : (
+                      <Counter
+                        value={phase1Volume}
+                        locale={locale}
+                        suffix={` ${teuUnit}`}
+                        duration={1.2}
+                      />
+                    )}
+                  </div>
                 </div>
 
-                <h4 className="mt-3.5 font-heading text-xl sm:text-2xl font-black text-ink leading-snug">
-                  {milestones[1].title}
-                </h4>
-
-                <div className="mt-4 border-t border-border/70 pt-3">
-                  <span className="font-body text-[11px] font-bold tracking-wider text-muted uppercase">
-                    {phase2Label}
+                <div>
+                  <span className="block font-label text-[11px] font-bold tracking-[0.16em] text-muted uppercase">
+                    {handlingProductivityLabel}
                   </span>
-                  <p className="mt-1.5 font-body text-2xl sm:text-3xl font-extrabold text-primary tracking-tight">
-                    {milestones[1].primaryMetric}
-                  </p>
-                  <p className="mt-0.5 font-body text-xs text-muted">
-                    {milestones[1].primaryMetricDesc}
-                  </p>
-                  <p className="mt-3 font-body text-lg sm:text-xl font-extrabold text-ink">
-                    {milestones[1].secondaryMetric}
-                  </p>
-                  <p className="mt-0.5 font-body text-xs text-muted">
-                    {milestones[1].secondaryMetricDesc}
-                  </p>
+                  <div className="mt-1.5 font-body text-lg sm:text-lg lg:text-lg font-extrabold tracking-tight text-primary tabular-nums">
+                    {phase1MovesRange} {movesUnit}
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Cột mốc 03 */}
-            <div className="flex flex-col justify-between md:border-l md:border-border/80 md:pl-8 lg:pl-10">
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-7 w-7 items-center justify-center border border-amber-300 bg-amber-50 font-body text-xs font-extrabold text-amber-800">
-                      03
-                    </span>
-                    <span className="flex h-7 w-7 items-center justify-center border border-border bg-white text-amber-700">
-                      <Layers className="h-4 w-4" />
-                    </span>
-                    <span className="font-body text-sm font-extrabold text-amber-800 uppercase tracking-wider">
-                      {milestones[2].dateLabel}
-                    </span>
+            {/* GIAI ĐOẠN 2: CHIẾM 45% CHIỀU NGANG */}
+            <div className="flex-1 min-w-0">
+              {/* Thanh ngoặc: ├──────── GIAI ĐOẠN 2 ────────────────→ */}
+              <div className="flex items-center gap-2" aria-hidden="true">
+                <span className="h-2.5 w-[1.5px] bg-primary shrink-0" />
+                <span className="h-[1.5px] w-6 bg-primary shrink-0" />
+                <span className="font-label text-xs font-bold tracking-[0.18em] text-primary uppercase whitespace-nowrap">
+                  {phase2Label}
+                </span>
+                <span className="h-[1.5px] flex-1 bg-primary" />
+                <ArrowRight className="h-3 w-3 text-primary shrink-0" />
+              </div>
+
+              {/* Nội dung Giai đoạn 2 căn trái theo điểm 06/2027 */}
+              <div className="mt-8 space-y-7">
+                <div>
+                  <span className="block font-label text-[11px] font-bold tracking-[0.16em] text-muted uppercase">
+                    {handlingProductivityLabel}
+                  </span>
+                  <div className="mt-1.5 font-body text-xl sm:lg lg:text-xl font-extrabold tracking-tight text-primary tabular-nums">
+                    {phase2MovesRange} {movesUnit}
                   </div>
-                  <span className="border border-amber-300 bg-amber-50 px-2 py-0.5 font-body text-[10px] font-bold text-amber-800 uppercase">
-                    {milestones[2].statusLabel}
-                  </span>
-                </div>
-
-                <h4 className="mt-3.5 font-heading text-xl sm:text-2xl font-black text-ink leading-snug">
-                  {milestones[2].title}
-                </h4>
-
-                <div className="mt-4 border-t border-border/70 pt-3">
-                  <span className="font-body text-[11px] font-bold tracking-wider text-muted uppercase">
-                    {locale === "vi" ? "HỆ SINH THÁI KHÉP KÍN" : "CLOSED ECOSYSTEM"}
-                  </span>
-                  <p className="mt-1.5 font-body text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
-                    {milestones[2].primaryMetric}
-                  </p>
-                  <p className="mt-0.5 font-body text-xs text-muted">
-                    {milestones[2].primaryMetricDesc}
-                  </p>
-                  <p className="mt-3 font-body text-lg sm:text-xl font-extrabold text-amber-700">
-                    {milestones[2].secondaryMetric}
-                  </p>
-                  <p className="mt-0.5 font-body text-xs text-muted">
-                    {milestones[2].secondaryMetricDesc}
-                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+
+        {/* ============================================================== */}
+        {/* BỐ CỤC MOBILE (DƯỚI MD): TRỤC DỌC BÊN TRÁI, NỘI DUNG BÊN PHẢI */}
+        {/* ============================================================== */}
+        <div className="block md:hidden mt-10">
+          <ol
+            ref={mobileItemsRef}
+            className="relative list-none p-0 m-0 space-y-12 pl-8 border-l-2 border-border"
+          >
+            {/* Đường tiến trình dọc GSAP vẽ */}
+            <div
+              ref={mobileRailProgressRef}
+              className="absolute left-[-2px] top-0 h-[60%] w-[2px] bg-primary"
+              aria-hidden="true"
+            />
+
+            {/* MỐC 08/2026 */}
+            <li className="relative">
+              <span
+                className="absolute -left-[41px] top-1 h-4 w-4 rounded-full bg-primary ring-4 ring-primary/20"
+                aria-hidden="true"
+              />
+              <span className="font-label text-xs font-bold tracking-wider text-primary uppercase">
+                {berth4Date}
+              </span>
+              <p className="mt-1 font-body text-lg font-bold text-ink">
+                {berth4Title}
+              </p>
+              <p className="mt-0.5 font-label text-xs font-bold tracking-wider text-primary uppercase">
+                {berth4Status}
+              </p>
+
+              {/* Giai đoạn 1 */}
+              <div className="mt-6 border-t border-border pt-4">
+                <span className="font-label text-xs font-bold tracking-wider text-primary uppercase">
+                  {phase1Label}
+                </span>
+
+                <div className="mt-4">
+                  <span className="block font-label text-[11px] font-bold tracking-[0.16em] text-muted uppercase">
+                    {targetThroughputLabel}
+                  </span>
+                  <p className="mt-1 font-body text-lg font-extrabold text-ink tabular-nums">
+                    {phase1VolumeFormatted} {teuUnit}
+                  </p>
+                </div>
+
+                <div className="mt-4">
+                  <span className="block font-label text-[11px] font-bold tracking-[0.16em] text-muted uppercase">
+                    {handlingProductivityLabel}
+                  </span>
+                  <p className="mt-1 font-body text-sm font-extrabold text-primary tabular-nums">
+                    {phase1MovesRange} {movesUnit}
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            {/* MỐC 06/2027 */}
+            <li className="relative">
+              <span
+                className="absolute -left-[35px] top-1.5 h-3.5 w-[2px] bg-primary"
+                aria-hidden="true"
+              />
+              <span className="font-label text-xs font-bold tracking-wider text-muted uppercase">
+                {transitionDate}
+              </span>
+
+              {/* Giai đoạn 2 */}
+              <div className="mt-4 border-t border-border pt-4">
+                <span className="font-label text-xs font-bold tracking-wider text-primary uppercase">
+                  {phase2Label}
+                </span>
+
+                <div className="mt-4">
+                  <span className="block font-label text-[11px] font-bold tracking-[0.16em] text-muted uppercase">
+                    {handlingProductivityLabel}
+                  </span>
+                  <p className="mt-1 font-body text-2xl font-extrabold text-primary tabular-nums">
+                    {phase2MovesRange} {movesUnit}
+                  </p>
+                  <p className="mt-1 font-body text-xs font-medium text-muted">
+                    {phase2Advantage}
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            {/* MỐC 09/2027 */}
+            <li className="relative">
+              <span
+                className="absolute -left-[41px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-white shadow-sm"
+                aria-hidden="true"
+              />
+              <span className="font-label text-xs font-bold tracking-wider text-muted uppercase">
+                {berth5IcdDate}
+              </span>
+              <p className="mt-1 font-body text-lg font-bold text-ink">
+                {berth5IcdTitle}
+              </p>
+              <p className="mt-0.5 font-label text-xs font-bold tracking-wider text-muted uppercase">
+                {berth5IcdStatus}
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
     </div>
   );
 }

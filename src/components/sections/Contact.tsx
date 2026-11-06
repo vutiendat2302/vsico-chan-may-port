@@ -66,7 +66,7 @@ export async function Contact() {
     >
       <div className="container relative">
         {/* DẢI ẢNH NGANG: Chiều cao nhỏ bằng 1/3 hiện tại (~180px), khép trang kiểu điện ảnh letterbox */}
-        <Reveal>
+        <Reveal scale={0.96} duration={1.1}>
           <div className="relative mb-12 w-full overflow-hidden rounded-[2px] border border-border/60 shadow-xs lg:mb-14">
             <div className="relative h-[120px] w-full sm:h-[150px] lg:h-[180px]">
               <Image
@@ -88,7 +88,7 @@ export async function Contact() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           {/* CỘT TRÁI (Desktop): Tiêu đề & Thông tin liên hệ (Dính sticky khi cuộn) */}
           <div className="hidden lg:col-span-5 lg:block lg:sticky lg:top-28 lg:self-start">
-            <Reveal>
+            <Reveal x={-25} duration={1}>
               <SectionHeading
                 roman={t("roman")}
                 eyebrow={t("eyebrow")}
@@ -114,7 +114,7 @@ export async function Contact() {
 
           {/* CỘT PHẢI: Form đăng ký nhận thông tin ưu tiên (Thuần túy, không khung bao) */}
           <div className="lg:col-span-7">
-            <Reveal delay={0.1}>
+            <Reveal x={25} delay={0.12} duration={1}>
               <ContactForm
                 labels={{
                   roleLegend: t("form.roleLegend"),

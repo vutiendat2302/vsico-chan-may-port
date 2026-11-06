@@ -59,7 +59,12 @@
     "bulkVesselTitle": "Tàu Hàng Rời & Hàng Tổng Hợp",
     "bulkVesselDwt": "70.000 DWT",
     "bulkVesselDesc": "Tiếp nhận tàu hàng rời trọng tải tới 70.000 DWT, tích hợp băng tải kín bảo vệ môi trường.",
-    "officialPlanningNote": "Hạ tầng tiếp nhận đã được phê duyệt quy hoạch tại Khu kinh tế Chân Mây – Lăng Cô."
+    "officialPlanningNote": "Hạ tầng tiếp nhận đã được phê duyệt quy hoạch tại Khu kinh tế Chân Mây – Lăng Cô.",
+    "videoTitle": "Mô phỏng cảng biển quy mô & hiện đại",
+    "videoPlayAria": "Phát video mô phỏng Cảng Chân Mây",
+    "videoPauseAria": "Tạm dừng video",
+    "videoMuteAria": "Tắt tiếng",
+    "videoUnmuteAria": "Bật tiếng"
   },
   "hero": {
     "brandTitle": "CẢNG VSICO HUẾ",
@@ -250,47 +255,58 @@
     }
   },
   "timeline": {
-    "berth4": "VSICO Huế – Bến số 4 đi vào hoạt động",
-    "berth4Desc": "Tiếp nhận tàu container và tàu hàng rời giai đoạn 1 tại Khu kinh tế Chân Mây – Lăng Cô.",
-    "berth5": "VSICO Huế – Bến số 5 đi vào hoạt động",
-    "berth5Desc": "Mở rộng chiều dài cầu bến lên 540 m, nâng năng suất giải phóng tàu lên 80 – 85 moves/giờ.",
-    "icdLaoBao": "ICD Lao Bảo đi vào hoạt động",
-    "icdLaoBaoDesc": "Khép kín chuỗi logistics vùng biên 86.000 m² kết nối trực tiếp cửa khẩu Lao Bảo với cảng biển.",
-    "statusOperating": "Đã vận hành",
-    "statusUpcoming": "Sắp tới",
-    "monthOnlyNote": "Thời điểm các cột mốc hiển thị theo tháng và năm dự kiến."
+    "sectionLabel": "LỘ TRÌNH",
+    "berth4": "Bến số 4",
+    "transition": "",
+    "berth5Icd": "Bến số 5 · ICD Lao Bảo",
+    "statusOperating": "ĐÃ VẬN HÀNH",
+    "statusUpcoming": "SẮP TỚI",
+    "phase1Label": "GIAI ĐOẠN 1",
+    "phase2Label": "GIAI ĐOẠN 2",
+    "targetThroughputLabel": "SẢN LƯỢNG MỤC TIÊU",
+    "handlingProductivityLabel": "NĂNG SUẤT KHAI THÁC",
+    "movesUnit": "moves/giờ",
+    "teuUnit": "TEU",
+    "phase2Advantage": "nâng cao năng suất khai thác",
+    "countdownPrefix": "Còn",
+    "countdownSuffix": "ngày tới 09/2027 (dự kiến)",
+    "countdownCompleted": "Đã đi vào hoạt động"
   },
   "services": {
     "roman": "VI",
     "eyebrow": "DỊCH VỤ TẠI CẢNG",
-    "title": "Ba nhóm dịch vụ khai thác & hậu cần hàng hải",
-    "summary": "Đáp ứng trọn vẹn nhu cầu xếp dỡ hàng hóa, hỗ trợ kỹ thuật tàu biển và cung ứng hàng hải ngay tại cầu bến Chân Mây.",
+    "title": "3 nhóm dịch vụ hàng hải",
+    "summary": "",
     "groups": {
       "cargoAndYard": {
-        "title": "Khai thác hàng & Bến bãi",
-        "subtitle": "Vận hành xếp dỡ container, hàng rời và bảo dưỡng vỏ cont tiêu chuẩn.",
+        "num": "01",
+        "title": "Khai thác hàng\n& bến bãi",
+        "imageAlt": "Xếp dỡ container và hàng rời tại bến cảng VSICO Chân Mây",
         "items": {
-          "stevedoring": "Dịch vụ xếp dỡ hàng hóa container và hàng rời",
-          "yardStorage": "Dịch vụ lưu bãi và quản lý kho CFS / kho hàng rời",
-          "containerRepair": "Dịch vụ kiểm tra, vệ sinh và sửa chữa container"
+          "stevedoring": "Xếp dỡ container và hàng rời",
+          "yardStorage": "Lưu bãi",
+          "containerRepair": "Sửa chữa container"
         }
       },
       "vesselSupport": {
+        "num": "02",
         "title": "Hỗ trợ tàu biển",
-        "subtitle": "Đồng hành cùng chủ tàu và thuyền trưởng trong suốt thời gian tàu làm hàng.",
+        "imageAlt": "Tàu cập cầu bến và hỗ trợ tàu lai tại Cảng VSICO Huế",
         "items": {
-          "agencyFree": "Dịch vụ đại lý tàu biển (Miễn phí)",
-          "tugboat": "Dịch vụ tàu lai dắt hỗ trợ cập và rời cầu an toàn",
-          "shipRepair": "Dịch vụ bảo trì và sửa chữa tàu biển tại bến"
+          "agencyFree": "Đại lý tàu",
+          "agencyFreeTag": "MIỄN PHÍ",
+          "tugboat": "Tàu lai",
+          "shipRepair": "Sửa chữa tàu biển"
         }
       },
       "maritimeSupply": {
+        "num": "03",
         "title": "Cung ứng hàng hải",
-        "subtitle": "Chuỗi dịch vụ hậu cần và vệ sinh môi trường tàu biển theo chuẩn quốc tế.",
+        "imageAlt": "Cung ứng nhiên liệu, nước ngọt và vật tư hàng hải",
         "items": {
-          "bunkeringAndWater": "Cung cấp nhiên liệu, nước ngọt và dầu nhờn",
-          "chandling": "Cung ứng hàng hải (vật tư, phụ tùng, hải đồ, thực phẩm)",
-          "holdCleaning": "Dọn vệ sinh hầm tàu và thu gom, xử lý rác thải"
+          "bunkeringAndWater": "Nhiên liệu, nước ngọt, dầu nhờn",
+          "chandling": "Vật tư, phụ tùng, hải đồ, thực phẩm",
+          "holdCleaning": "Vệ sinh hầm tàu, đổ rác"
         }
       }
     }

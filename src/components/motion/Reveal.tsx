@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { MOTION_TOKENS } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 type RevealProps = {
@@ -10,17 +11,25 @@ type RevealProps = {
   className?: string;
   delay?: number;
   y?: number;
+  x?: number;
+  scale?: number;
   duration?: number;
   blur?: boolean;
+  toggleActions?: string;
+  once?: boolean;
 };
 
 export function Reveal({
   children,
   className,
   delay = 0,
-  y = 35,
-  duration = 0.9,
+  y = MOTION_TOKENS.distance.md,
+  x = 0,
+  scale = 1,
+  duration = MOTION_TOKENS.duration.cinematic,
   blur = true,
+  toggleActions = MOTION_TOKENS.scrollTrigger.toggleActions,
+  once = MOTION_TOKENS.scrollTrigger.once,
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -38,27 +47,32 @@ export function Reveal({
         {
           opacity: 0,
           y,
-          filter: blur ? "blur(12px)" : "blur(0px)",
+          x,
+          scale,
+          filter: blur ? MOTION_TOKENS.blur.md : MOTION_TOKENS.blur.none,
         },
         {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
+          x: 0,
+          scale: 1,
+          filter: MOTION_TOKENS.blur.none,
           duration,
           delay,
-          ease: "power3.out",
-          clearProps: "filter",
+          ease: MOTION_TOKENS.ease.cinematic,
+          clearProps: "filter,willChange",
           scrollTrigger: {
             trigger: el,
-            start: "top 88%",
-            toggleActions: "restart none none reset",
+            start: MOTION_TOKENS.scrollTrigger.start,
+            toggleActions,
+            once,
           },
         },
       );
     }, el);
 
     return () => ctx.revert();
-  }, [delay, duration, prefersReducedMotion, y, blur]);
+  }, [delay, duration, prefersReducedMotion, y, x, scale, blur, toggleActions, once]);
 
   return (
     <div ref={ref} className={cn("will-change-transform", className)}>

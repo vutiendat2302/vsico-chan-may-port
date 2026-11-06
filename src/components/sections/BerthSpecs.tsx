@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { portSpecs } from "@/data/stats";
 import { formatNumber, type SupportedLocale } from "@/lib/formatters";
 import { BerthSpecsClient } from "./BerthSpecsClient";
+import { PortVideoShowcase } from "./PortVideoShowcase";
 
 type BerthSpecsProps = {
   locale: SupportedLocale;
@@ -19,7 +20,7 @@ export async function BerthSpecs({ locale }: BerthSpecsProps) {
     <section
       id="berth-specs"
       aria-labelledby="berth-specs-heading"
-      className="relative scroll-mt-16 overflow-hidden bg-surface py-24 text-ink sm:py-32"
+      className="relative scroll-mt-16 overflow-hidden bg-surface pt-24 pb-0 text-ink sm:pt-32 sm:pb-0"
     >
       <BerthSpecsClient
         locale={locale}
@@ -58,6 +59,14 @@ export async function BerthSpecs({ locale }: BerthSpecsProps) {
           bulkVesselDesc: t("bulkVesselDesc"),
           officialPlanningNote: t("officialPlanningNote"),
         }}
+      />
+
+      {/* Video mô phỏng cảng quy mô full màn hình ở dưới cùng phần 1 */}
+      <PortVideoShowcase
+        videoPlayAria={t("videoPlayAria")}
+        videoPauseAria={t("videoPauseAria")}
+        videoMuteAria={t("videoMuteAria")}
+        videoUnmuteAria={t("videoUnmuteAria")}
       />
     </section>
   );

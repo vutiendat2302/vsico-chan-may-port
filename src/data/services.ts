@@ -15,12 +15,18 @@ export type LogisticsFlowStep = {
   sublabelKey: string;
 };
 
-export type PortServiceGroup = {
+export type PortServiceItemConfig = {
+  key: string;
+  tagKey?: string;
+};
+
+export type PortServiceColumn = {
   id: "cargoAndYard" | "vesselSupport" | "maritimeSupply";
-  roman: "01" | "02" | "03";
+  num: "01" | "02" | "03";
+  image: string;
+  imageAltKey: string;
   titleKey: string;
-  subtitleKey: string;
-  itemKeys: string[];
+  items: PortServiceItemConfig[];
   status: ContentStatus;
 };
 
@@ -93,41 +99,50 @@ export const logisticsFlowSteps: LogisticsFlowStep[] = [
   },
 ];
 
-export const portServiceGroups: PortServiceGroup[] = [
+export const portServiceColumns: PortServiceColumn[] = [
   {
     id: "cargoAndYard",
-    roman: "01",
+    num: "01",
+    image: "/images/port/port-aerial-02.webp",
+    imageAltKey: "groups.cargoAndYard.imageAlt",
     titleKey: "groups.cargoAndYard.title",
-    subtitleKey: "groups.cargoAndYard.subtitle",
-    itemKeys: [
-      "groups.cargoAndYard.items.stevedoring",
-      "groups.cargoAndYard.items.yardStorage",
-      "groups.cargoAndYard.items.containerRepair",
+    items: [
+      { key: "groups.cargoAndYard.items.stevedoring" },
+      { key: "groups.cargoAndYard.items.yardStorage" },
+      { key: "groups.cargoAndYard.items.containerRepair" },
     ],
     status: "confirmed",
   },
   {
     id: "vesselSupport",
-    roman: "02",
+    num: "02",
+    image: "/images/port/tmp-port-berth-01.webp",
+    imageAltKey: "groups.vesselSupport.imageAlt",
     titleKey: "groups.vesselSupport.title",
-    subtitleKey: "groups.vesselSupport.subtitle",
-    itemKeys: [
-      "groups.vesselSupport.items.agencyFree",
-      "groups.vesselSupport.items.tugboat",
-      "groups.vesselSupport.items.shipRepair",
+    items: [
+      {
+        key: "groups.vesselSupport.items.agencyFree",
+        tagKey: "groups.vesselSupport.items.agencyFreeTag",
+      },
+      { key: "groups.vesselSupport.items.tugboat" },
+      { key: "groups.vesselSupport.items.shipRepair" },
     ],
     status: "confirmed",
   },
   {
     id: "maritimeSupply",
-    roman: "03",
+    num: "03",
+    image: "/images/port/port-aerial-01.webp",
+    imageAltKey: "groups.maritimeSupply.imageAlt",
     titleKey: "groups.maritimeSupply.title",
-    subtitleKey: "groups.maritimeSupply.subtitle",
-    itemKeys: [
-      "groups.maritimeSupply.items.bunkeringAndWater",
-      "groups.maritimeSupply.items.chandling",
-      "groups.maritimeSupply.items.holdCleaning",
+    items: [
+      { key: "groups.maritimeSupply.items.bunkeringAndWater" },
+      { key: "groups.maritimeSupply.items.chandling" },
+      { key: "groups.maritimeSupply.items.holdCleaning" },
     ],
     status: "confirmed",
   },
 ];
+
+// Alias để tương thích ngược nếu cần
+export const portServiceGroups = portServiceColumns;

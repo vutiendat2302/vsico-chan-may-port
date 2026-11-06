@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Truck } from "lucide-react";
 import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { MOTION_TOKENS } from "@/lib/motion";
 import { Counter } from "@/components/motion/Counter";
 import type { SupportedLocale } from "@/lib/formatters";
 
@@ -87,8 +88,9 @@ export function PortIcdCorridor({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
-          start: "top 82%",
-          toggleActions: "restart none none reset",
+          start: MOTION_TOKENS.scrollTrigger.start,
+          toggleActions: MOTION_TOKENS.scrollTrigger.toggleActions,
+          once: false,
         },
       });
 

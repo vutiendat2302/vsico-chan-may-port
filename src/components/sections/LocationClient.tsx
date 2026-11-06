@@ -6,6 +6,7 @@ import { Compass, MapPin, Navigation } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { MOTION_TOKENS } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const EwecMap = dynamic(() => import("@/components/map/EwecMap"), {
@@ -124,8 +125,9 @@ export function LocationClient({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
-          start: "top 85%",
-          once: true,
+          start: MOTION_TOKENS.scrollTrigger.start,
+          toggleActions: MOTION_TOKENS.scrollTrigger.toggleActions,
+          once: false,
         },
       });
 

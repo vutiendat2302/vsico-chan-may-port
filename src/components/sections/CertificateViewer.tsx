@@ -88,10 +88,7 @@ export function CertificateViewer({
       </div>
 
       {/* 3. Slot các chứng chỉ: Phong cách Spyker Cars (ảnh vuông góc/khung chữ nhật, full w, không card tròn) */}
-      <div
-        data-lenis-prevent
-        className="mt-8 flex gap-6 overflow-x-auto pb-4 scrollbar-thin lg:grid lg:grid-cols-4 lg:gap-8 lg:overflow-visible lg:pb-0"
-      >
+      <div className="mt-8 flex gap-6 overflow-x-auto pb-4 scrollbar-thin lg:grid lg:grid-cols-4 lg:gap-8 lg:overflow-visible lg:pb-0">
         {displayedItems.map((cert) => (
           <article
             key={cert.id}

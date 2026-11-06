@@ -75,13 +75,15 @@ export async function PortIcd({ locale }: PortIcdProps) {
     >
       <div className="relative z-10 container">
         {/* Tiêu đề phong cách Editorial thanh lịch */}
-        <SectionHeading
-          id="port-icd-heading"
-          roman={t("roman")}
-          eyebrow={t("eyebrow")}
-          title={t("title")}
-          summary={t("summary", { icdArea: icdAreaFormatted })}
-        />
+        <Reveal>
+          <SectionHeading
+            id="port-icd-heading"
+            roman={t("roman")}
+            eyebrow={t("eyebrow")}
+            title={t("title")}
+            summary={t("summary", { icdArea: icdAreaFormatted })}
+          />
+        </Reveal>
 
         {/* 1. Trục hành lang kết nối Cửa khẩu - Cảng biển: 2 ảnh 4:5 nối bởi trục cự ly và xe tải chạy */}
         <PortIcdCorridor

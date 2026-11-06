@@ -110,13 +110,11 @@ export async function Certifications() {
         </Reveal>
 
         {/* Khách hàng container khu vực Chân Mây: Bố cục Spyker Heritage với 7 Logo rải rác ngẫu nhiên, chuột parallax & sóng nước */}
-        <Reveal delay={0.15}>
-          <ChanMayCustomerShowcase
-            heading={t("chanMayCustomersHeading")}
-            summary={t("chanMayCustomersSummary")}
-            items={showcaseItems}
-          />
-        </Reveal>
+        <ChanMayCustomerShowcase
+          heading={t("chanMayCustomersHeading")}
+          summary={t("chanMayCustomersSummary")}
+          items={showcaseItems}
+        />
       </div>
     </section>
   );

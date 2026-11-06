@@ -1,29 +1,24 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { countdownTargetIso } from "@/data/timeline";
-import { type SupportedLocale } from "@/lib/formatters";
+import {
+  countdownTargetIso,
+  timelineMilestones,
+  timelinePhases,
+  getMilestoneStatus,
+  getDaysRemaining,
+} from "@/data/timeline";
+import { formatNumber, type SupportedLocale } from "@/lib/formatters";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/motion/Reveal";
 import {
   InfrastructureClient,
   type InfrastructureRowItem,
-  type MilestoneDisplayItem,
 } from "./InfrastructureClient";
 
 export async function Infrastructure() {
   const t = await getTranslations("infrastructure");
+  const tTimeline = await getTranslations("timeline");
   const locale = (await getLocale()) as SupportedLocale;
   const isVi = locale === "vi";
-
-  // Tính số ngày và thời gian đếm ngược ban đầu cho SSR
-  const targetTime = new Date(countdownTargetIso).getTime();
-  const now = Date.now();
-  const diff = Math.max(0, targetTime - now);
-  const totalSeconds = Math.floor(diff / 1000);
-  const days = Math.floor(totalSeconds / 86400);
-  const hours = Math.floor((totalSeconds % 86400) / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  const initialTimeLeft = { days, hours, minutes, seconds };
 
   const rows: InfrastructureRowItem[] = [
     {
@@ -61,72 +56,27 @@ export async function Infrastructure() {
     },
   ];
 
-  // 3 Cột mốc lộ trình theo đúng slide chính thức của VSICO
-  const milestones: MilestoneDisplayItem[] = [
-    {
-      id: "berth-4",
-      badgeNum: "01",
-      dateLabel: isVi ? "THÁNG 8/2026" : "AUGUST 2026",
-      title: isVi
-        ? "VSICO Huế Bến 4 đi vào hoạt động"
-        : "VSICO Hue Berth 4 Enters Operation",
-      statusLabel: isVi ? "Đã vận hành" : "Operating",
-      isCompleted: true,
-      phaseLabel: isVi
-        ? "GIAI ĐOẠN 1 · NĂNG LỰC KHAI THÁC BAN ĐẦU"
-        : "PHASE 1 · INITIAL OPERATIONAL CAPACITY",
-      primaryMetric: "120.000 TEU",
-      primaryMetricDesc: isVi
-        ? "Sản lượng container mục tiêu giai đoạn đầu"
-        : "Initial target container throughput",
-      secondaryMetric: "40–45 moves/giờ",
-      secondaryMetricDesc: isVi
-        ? "Năng suất xếp dỡ giải phóng tàu nhanh"
-        : "Fast vessel stevedoring productivity",
-    },
-    {
-      id: "berth-5",
-      badgeNum: "02",
-      dateLabel: isVi ? "THÁNG 9/2027" : "SEPTEMBER 2027",
-      title: isVi
-        ? "VSICO Huế Bến 5 đi vào hoạt động"
-        : "VSICO Hue Berth 5 Enters Operation",
-      statusLabel: isVi ? "Sắp tới (dự kiến)" : "Upcoming (Estimated)",
-      isCompleted: false,
-      phaseLabel: isVi
-        ? "GIAI ĐOẠN 2 · NHÂN ĐÔI NĂNG SUẤT TOÀN DIỆN"
-        : "PHASE 2 · FULL-BERTH DOUBLED PRODUCTIVITY",
-      primaryMetric: "80–85 moves/giờ",
-      primaryMetricDesc: isVi
-        ? "Năng suất khai thác đồng bộ toàn bến"
-        : "Integrated dual-berth stevedoring rate",
-      secondaryMetric: "540 m cầu bến",
-      secondaryMetricDesc: isVi
-        ? "Chiều dài bến liên tục Bến số 4 & Bến số 5"
-        : "Continuous quay length across Berth 4 & 5",
-    },
-    {
-      id: "icd-lao-bao",
-      badgeNum: "03",
-      dateLabel: isVi ? "THÁNG 9/2027" : "SEPTEMBER 2027",
-      title: isVi
-        ? "ICD Lao Bảo đi vào hoạt động"
-        : "ICD Lao Bao Enters Operation",
-      statusLabel: isVi ? "Sắp tới (dự kiến)" : "Upcoming (Estimated)",
-      isCompleted: false,
-      phaseLabel: isVi
-        ? "HỆ SINH THÁI KHÉP KÍN · CỬA KHẨU ĐẾN CẢNG BIỂN"
-        : "CLOSED CORRIDOR · BORDER TO DEEP SEAPORT",
-      primaryMetric: "86.000 m²",
-      primaryMetricDesc: isVi
-        ? "Quy mô trung tâm logistics cửa khẩu"
-        : "Border gate logistics hub area",
-      secondaryMetric: "≈150 km hành lang",
-      secondaryMetricDesc: isVi
-        ? "Tuyến khép kín nối thẳng cầu bến Chân Mây"
-        : "Closed corridor directly to Chan May berth",
-    },
-  ];
+  const now = Date.now();
+  const m1 = timelineMilestones[0];
+  const m2 = timelineMilestones[1];
+  const m3 = timelineMilestones[2];
+
+  const m1Status = getMilestoneStatus(m1, now);
+  const m3Status = getMilestoneStatus(m3, now);
+
+  const phase1 = timelinePhases[0];
+  const phase2 = timelinePhases[1];
+
+  const phase1Throughput = phase1.figures.find((f) => f.id === "target-throughput");
+  const phase1Moves = phase1.figures.find((f) => f.id === "handling-productivity-1");
+  const phase2Moves = phase2.figures.find((f) => f.id === "handling-productivity-2");
+
+  const phase1VolumeNum = phase1Throughput?.numberValue ?? 120000;
+  const phase1VolumeFormatted = formatNumber(phase1VolumeNum, locale);
+  const phase1MovesRange = `${phase1Moves?.rangeMin ?? 40}–${phase1Moves?.rangeMax ?? 45}`;
+  const phase2MovesRange = `${phase2Moves?.rangeMin ?? 80}–${phase2Moves?.rangeMax ?? 85}`;
+
+  const daysRemaining = getDaysRemaining(countdownTargetIso, now);
 
   return (
     <section
@@ -135,47 +85,47 @@ export async function Infrastructure() {
     >
       <div className="container">
         {/* Tiêu đề Section V */}
-        <SectionHeading
-          roman={t("roman")}
-          eyebrow={isVi ? "V · HẠ TẦNG & NĂNG LỰC" : "V · INFRASTRUCTURE & CAPACITY"}
-          title={isVi ? "Hạ tầng cảng nước sâu" : "Deep-Water Port Infrastructure"}
-        />
+        <Reveal>
+          <SectionHeading
+            roman={t("roman")}
+            eyebrow={isVi ? "HẠ TẦNG & NĂNG LỰC" : "INFRASTRUCTURE & CAPACITY"}
+            title={isVi ? "Hạ tầng cảng nước sâu" : "Deep-Water Port Infrastructure"}
+          />
+        </Reveal>
 
         {/* Khối tương tác Hạ tầng & Lộ trình thời gian */}
-        <InfrastructureClient
-          locale={locale}
-          rows={rows}
-          viewDetailsLabel={
-            isVi ? "Xem chi tiết hạ tầng" : "View infrastructure details"
-          }
-          timelineTitle={isVi ? "LỘ TRÌNH PHÁT TRIỂN & TIẾN ĐỘ VẬN HÀNH" : "DEVELOPMENT ROADMAP & OPERATIONAL SCHEDULE"}
-          targetIso={countdownTargetIso}
-          initialTimeLeft={initialTimeLeft}
-          countdownBadge={
-            isVi ? "CỘT MỐC THÁNG 09/2027 (DỰ KIẾN)" : "SEPTEMBER 2027 MILESTONE (ESTIMATED)"
-          }
-          countdownTitle={
-            isVi
-              ? "Đếm ngược tới thời điểm Bến số 5 & ICD Lao Bảo hoàn thành"
-              : "Countdown to Berth 5 & Lao Bao ICD Commissioning"
-          }
-          countdownSubtitle={
-            isVi
-              ? "Hoàn thiện 540 m cầu bến liên tục và hành lang logistics khép kín từ Cửa khẩu quốc tế Lao Bảo đến Cảng nước sâu Chân Mây."
-              : "Completing 540 m continuous deep-water quay and seamless logistics corridor from Lao Bao International Border Gate to Chan May Port."
-          }
-          countdownUnits={{
-            days: isVi ? "Ngày" : "Days",
-            hours: isVi ? "Giờ" : "Hours",
-            minutes: isVi ? "Phút" : "Mins",
-            seconds: isVi ? "Giây" : "Secs",
-          }}
-          phase1Label={isVi ? "Giai đoạn 1 (08/2026 – 06/2027)" : "Phase 1 (08/2026 – 06/2027)"}
-          phase2Label={isVi ? "Giai đoạn 2 (Từ 09/2027)" : "Phase 2 (From 09/2027)"}
-          berth4Date="08/2026"
-          berth5Date="09/2027"
-          milestones={milestones}
-        />
+        <Reveal delay={0.1}>
+          <InfrastructureClient
+            locale={locale}
+            rows={rows}
+            viewDetailsLabel={
+              isVi ? "Xem chi tiết hạ tầng" : "View infrastructure details"
+            }
+            timelineLabel={tTimeline("sectionLabel")}
+            berth4Title={tTimeline("berth4")}
+            berth4Status={m1Status === "operating" ? tTimeline("statusOperating") : tTimeline("statusUpcoming")}
+            berth4Date={m1.displayDate}
+            transitionDate={m2.displayDate}
+            berth5IcdTitle={tTimeline("berth5Icd")}
+            berth5IcdStatus={m3Status === "operating" ? tTimeline("statusOperating") : tTimeline("statusUpcoming")}
+            berth5IcdDate={m3.displayDate}
+            phase1Label={tTimeline("phase1Label")}
+            phase2Label={tTimeline("phase2Label")}
+            targetThroughputLabel={tTimeline("targetThroughputLabel")}
+            handlingProductivityLabel={tTimeline("handlingProductivityLabel")}
+            phase1Volume={phase1VolumeNum}
+            phase1VolumeFormatted={phase1VolumeFormatted}
+            phase1MovesRange={phase1MovesRange}
+            phase2MovesRange={phase2MovesRange}
+            movesUnit={tTimeline("movesUnit")}
+            teuUnit={tTimeline("teuUnit")}
+            phase2Advantage={tTimeline("phase2Advantage")}
+            daysRemaining={daysRemaining}
+            countdownPrefix={tTimeline("countdownPrefix")}
+            countdownSuffix={tTimeline("countdownSuffix")}
+            countdownCompleted={tTimeline("countdownCompleted")}
+          />
+        </Reveal>
       </div>
     </section>
   );
