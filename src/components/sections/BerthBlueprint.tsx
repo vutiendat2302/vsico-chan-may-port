@@ -104,16 +104,16 @@ export function BerthBlueprint({ locale, stats, t }: BerthBlueprintProps) {
       prepStrokeDraw(`#${idPrefix}-depth-axis-line`);
       prepStrokeDraw(`#${idPrefix}-plan-outline`);
 
-      // 2. Trạng thái khởi đầu
+      // 2. Trạng thái khởi đầu (độ lệch nhỏ, xuất hiện nhanh đồng loạt)
       gsap.set(`#${idPrefix}-seabed-hatch-rect`, { clipPath: "inset(0 100% 0 0)" });
-      gsap.set(`#${idPrefix}-water-clip-rect`, { attr: { y: 400, height: 0 } });
+      gsap.set(`#${idPrefix}-water-clip-rect`, { attr: { y: 320, height: 80 } });
       gsap.set(`#${idPrefix}-quay-piles`, { opacity: 0 });
       gsap.set(`#${idPrefix}-berth-divider`, { opacity: 0, scaleY: 0, transformOrigin: "top center" });
       gsap.set([`#${idPrefix}-tick-left-540`, `#${idPrefix}-tick-right-540`], { opacity: 0 });
-      gsap.set(`#${idPrefix}-ship`, { x: -240, opacity: 0 });
+      gsap.set(`#${idPrefix}-ship`, { x: -40, opacity: 0 });
       gsap.set([`#${idPrefix}-depth-arrow-top`, `#${idPrefix}-depth-arrow-bot`], { opacity: 0 });
       gsap.set(`#${idPrefix}-plan-clip-rect`, { attr: { width: 0, height: 0 } });
-      gsap.set([`#${idPrefix}-berth-main-callout`, `#${idPrefix}-berth-sublabels`], { opacity: 0, y: 6 });
+      gsap.set([`#${idPrefix}-berth-main-callout`, `#${idPrefix}-berth-sublabels`], { opacity: 0, y: 4 });
 
       if (elNum540) elNum540.textContent = "0";
       if (elNumDepth) elNumDepth.textContent = "0";
@@ -124,73 +124,50 @@ export function BerthBlueprint({ locale, stats, t }: BerthBlueprintProps) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top 72%",
-          toggleActions: "play none complete none",
+          start: "top 85%",
+          toggleActions: "play none none none",
         },
       });
 
-      // BƯỚC 1 (0.0s -> 0.8s): Đáy biển vẽ dần từ trái sang phải, mặt nước dâng lên
-      tl.to(`#${idPrefix}-seabed-line`, { strokeDashoffset: 0, duration: 0.75, ease: "power2.inOut" }, 0)
-        .to(`#${idPrefix}-seabed-hatch-rect`, { clipPath: "inset(0 0% 0 0)", duration: 0.75, ease: "power2.inOut" }, 0.05)
-        .to(`#${idPrefix}-water-clip-rect`, { attr: { y: 210, height: 190 }, duration: 0.85, ease: "power2.out" }, 0.15)
+      // Xuất hiện ĐỒNG LOẠT tất cả các thành phần trong 0.5s, không để lần lượt
+      const DURATION = 0.5;
+      const EASE = "power2.out";
 
-      // BƯỚC 2 (0.7s -> 1.4s): Cầu bến mọc lên, cọc cắm xuống, vạch chia 2 bến hiện
-        .to(`#${idPrefix}-quay-deck-rect`, { strokeDashoffset: 0, duration: 0.65, ease: "power2.out" }, 0.7)
-        .to(`#${idPrefix}-quay-piles`, { opacity: 1, duration: 0.5 }, 0.85)
-        .to(`#${idPrefix}-berth-divider`, { opacity: 1, scaleY: 1, duration: 0.4, ease: "power2.out" }, 1.05)
-
-      // BƯỚC 3 (1.3s -> 2.2s): Đường kích thước 540 m kéo dài, số đếm lên
-        .to([`#${idPrefix}-tick-left-540`, `#${idPrefix}-tick-right-540`], { opacity: 1, duration: 0.25 }, 1.25)
-        .to(`#${idPrefix}-line-540`, { strokeDashoffset: 0, duration: 0.85, ease: "power2.inOut" }, 1.3)
+      tl.to(`#${idPrefix}-seabed-line`, { strokeDashoffset: 0, duration: DURATION, ease: EASE }, 0)
+        .to(`#${idPrefix}-seabed-hatch-rect`, { clipPath: "inset(0 0% 0 0)", duration: DURATION, ease: EASE }, 0)
+        .to(`#${idPrefix}-water-clip-rect`, { attr: { y: 210, height: 190 }, duration: DURATION, ease: EASE }, 0)
+        .to(`#${idPrefix}-quay-deck-rect`, { strokeDashoffset: 0, duration: DURATION, ease: EASE }, 0)
+        .to(`#${idPrefix}-quay-piles`, { opacity: 1, duration: DURATION, ease: EASE }, 0)
+        .to(`#${idPrefix}-berth-divider`, { opacity: 1, scaleY: 1, duration: DURATION, ease: EASE }, 0)
+        .to([`#${idPrefix}-tick-left-540`, `#${idPrefix}-tick-right-540`], { opacity: 1, duration: DURATION * 0.8 }, 0)
+        .to(`#${idPrefix}-line-540`, { strokeDashoffset: 0, duration: DURATION, ease: EASE }, 0)
+        .to(`#${idPrefix}-ship`, { x: 0, opacity: 1, duration: DURATION, ease: EASE }, 0)
+        .to(`#${idPrefix}-depth-axis-line`, { strokeDashoffset: 0, duration: DURATION, ease: EASE }, 0)
+        .to([`#${idPrefix}-depth-arrow-top`, `#${idPrefix}-depth-arrow-bot`], { opacity: 1, duration: DURATION * 0.8 }, 0)
+        .to(`#${idPrefix}-plan-outline`, { strokeDashoffset: 0, duration: DURATION, ease: EASE }, 0)
+        .to(`#${idPrefix}-plan-clip-rect`, { attr: { width: 160, height: 110 }, duration: DURATION, ease: EASE }, 0)
+        .to([`#${idPrefix}-berth-main-callout`, `#${idPrefix}-berth-sublabels`], { opacity: 1, y: 0, duration: DURATION, ease: EASE }, 0)
         .to(counters, {
           len: 540,
-          duration: 0.9,
-          ease: "power2.out",
+          depth: 14,
+          area: 20.4,
+          duration: DURATION,
+          ease: EASE,
           onUpdate: () => {
             if (elNum540) elNum540.textContent = String(Math.round(counters.len));
-          },
-        }, 1.3)
-
-      // BƯỚC 4 (1.9s -> 3.1s): Tàu trượt vào từ trái, giảm tốc, dừng sát bến, mặt nước gợn nhẹ
-        .to(`#${idPrefix}-ship`, { x: 0, opacity: 1, duration: 1.2, ease: "power3.out" }, 1.9)
-        .fromTo(
-          `#${idPrefix}-water-ripple`,
-          { y: 0 },
-          { y: 3.5, duration: 0.22, yoyo: true, repeat: 1, ease: "sine.inOut" },
-          2.85,
-        )
-
-      // BƯỚC 5 (2.7s -> 3.5s): Đường −14 m thả từ mặt nước xuống đáy, số đếm
-        .to(`#${idPrefix}-depth-axis-line`, { strokeDashoffset: 0, duration: 0.65, ease: "power2.out" }, 2.75)
-        .to([`#${idPrefix}-depth-arrow-top`, `#${idPrefix}-depth-arrow-bot`], { opacity: 1, duration: 0.25 }, 3.15)
-        .to(counters, {
-          depth: 14,
-          duration: 0.7,
-          ease: "power2.out",
-          onUpdate: () => {
-            const val = Math.round(counters.depth);
-            if (elNumDepth) elNumDepth.textContent = val === 0 ? "0" : `−${val}`;
-          },
-        }, 2.75)
-
-      // BƯỚC 6 (3.3s -> 4.1s): Mặt bằng vẽ viền rồi tô gạch chéo, số 20,4 ha đếm
-        .to(`#${idPrefix}-plan-outline`, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, 3.3)
-        .to(`#${idPrefix}-plan-clip-rect`, { attr: { width: 160, height: 110 }, duration: 0.55, ease: "power2.out" }, 3.55)
-        .to(counters, {
-          area: 20.4,
-          duration: 0.75,
-          ease: "power2.out",
-          onUpdate: () => {
+            const valDepth = Math.round(counters.depth);
+            if (elNumDepth) elNumDepth.textContent = valDepth === 0 ? "0" : `−${valDepth}`;
             if (elNumPlan) {
-              const val = counters.area.toFixed(1);
-              elNumPlan.textContent = isVi ? val.replace(".", ",") : val;
+              const valArea = counters.area.toFixed(1);
+              elNumPlan.textContent = isVi ? valArea.replace(".", ",") : valArea;
             }
           },
-        }, 3.35)
-
-      // BƯỚC 7 (4.0s -> 4.5s): Cuối cùng nhãn “02” hiện, hai nhãn bến sáng lên
-        .to(`#${idPrefix}-berth-main-callout`, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 4.0)
-        .to(`#${idPrefix}-berth-sublabels`, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 4.15);
+          onComplete: () => {
+            if (elNum540) elNum540.textContent = "540";
+            if (elNumDepth) elNumDepth.textContent = "−14";
+            if (elNumPlan) elNumPlan.textContent = formattedArea;
+          },
+        }, 0);
     }, section);
 
     return () => ctx.revert();
