@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { ensureGsapRegistered, gsap } from "@/lib/gsap";
+import { ensureGsapRegistered, gsap, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { MOTION_TOKENS } from "@/lib/motion";
 

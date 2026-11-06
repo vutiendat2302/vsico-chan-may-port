@@ -30,9 +30,9 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     window.scrollTo(0, 0);
 
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 0.85,
       smoothWheel: true,
-      wheelMultiplier: 0.95,
+      wheelMultiplier: 1.15,
       touchMultiplier: 1.5,
       prevent: (node) => {
         // Không cuộn trang khi chuột đang ở trong khu vực bản đồ

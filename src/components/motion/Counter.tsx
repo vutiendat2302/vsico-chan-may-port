@@ -46,7 +46,7 @@ export function Counter({
   secondarySuffix = "",
   decimals = 0,
   padZero = false,
-  duration = 1.8,
+  duration = 0.65,
   className,
   toggleActions = "restart none none reset",
 }: CounterProps) {
@@ -134,8 +134,9 @@ export function Counter({
       ref={containerRef}
       aria-label={fullAriaLabel}
       className={cn("tabular-nums", className)}
+      suppressHydrationWarning
     >
-      <span ref={primaryRef} aria-hidden="true">
+      <span ref={primaryRef} aria-hidden="true" suppressHydrationWarning>
         {finalPrimaryText}
       </span>
       {finalSecondaryText !== null && (
@@ -143,7 +144,7 @@ export function Counter({
           <span aria-hidden="true" className="mx-1.5 text-white/40">
             /
           </span>
-          <span ref={secondaryRef} aria-hidden="true">
+          <span ref={secondaryRef} aria-hidden="true" suppressHydrationWarning>
             {finalSecondaryText}
           </span>
         </>

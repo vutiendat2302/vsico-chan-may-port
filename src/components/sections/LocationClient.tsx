@@ -108,16 +108,16 @@ export function LocationClient({
 
     // Cinematic Initial Setup
     if (header) {
-      gsap.set(header, { opacity: 0, y: 50, filter: "blur(14px)" });
+      gsap.set(header, { opacity: 0, y: 20, filter: "blur(4px)" });
     }
     if (infoCards) {
-      gsap.set(infoCards, { opacity: 0, scale: 0.94, y: 40, filter: "blur(12px)" });
+      gsap.set(infoCards, { opacity: 0, scale: 0.98, y: 16, filter: "blur(4px)" });
     }
     if (leftCol) {
-      gsap.set(leftCol, { opacity: 0, x: -100, filter: "blur(16px)" });
+      gsap.set(leftCol, { opacity: 0, x: -25, filter: "blur(4px)" });
     }
     if (rightCol) {
-      gsap.set(rightCol, { opacity: 0, x: 100, filter: "blur(16px)" });
+      gsap.set(rightCol, { opacity: 0, x: 25, filter: "blur(4px)" });
     }
 
     const ctx = gsap.context(() => {
@@ -136,8 +136,8 @@ export function LocationClient({
           opacity: 1,
           y: 0,
           filter: "blur(0px)",
-          duration: 1.1,
-          ease: "power4.out",
+          duration: 0.45,
+          ease: "power3.out",
         });
       }
 
@@ -149,10 +149,10 @@ export function LocationClient({
             scale: 1,
             y: 0,
             filter: "blur(0px)",
-            duration: 0.9,
-            ease: "back.out(1.5)",
+            duration: 0.45,
+            ease: "power3.out",
           },
-          "-=0.7",
+          "-=0.3",
         );
       }
 
@@ -164,20 +164,20 @@ export function LocationClient({
             opacity: 1,
             x: 0,
             filter: "blur(0px)",
-            duration: 1.3,
-            ease: "power4.out",
+            duration: 0.5,
+            ease: "power3.out",
           },
-          "-=0.5",
+          "-=0.25",
         ).to(
           rightCol,
           {
             opacity: 1,
             x: 0,
             filter: "blur(0px)",
-            duration: 1.3,
-            ease: "power4.out",
+            duration: 0.5,
+            ease: "power3.out",
           },
-          "-=1.1",
+          "-=0.4",
         );
       }
     }, container);

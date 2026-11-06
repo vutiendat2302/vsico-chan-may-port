@@ -192,6 +192,7 @@ export async function Policies() {
                   cont40InputLabel: t("calculator.cont40InputLabel"),
                   estimatedTotalLabel: t("calculator.estimatedTotalLabel"),
                   validityPendingNote: t("calculator.validityPendingNote"),
+                  ctaContact: t("calculator.ctaContact"),
                 }}
               />
             </Reveal>

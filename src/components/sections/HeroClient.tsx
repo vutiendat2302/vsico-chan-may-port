@@ -235,9 +235,9 @@ export function HeroClient({
               />
             </a>
 
-            {/* Nút viền mờ: Nhận chính sách ưu đãi ✦ */}
+            {/* Nút viền mờ: Nhận chính sách ưu đãi ✦ (liên kết tới phần liên hệ) */}
             <a
-              href="#policies"
+              href="#contact"
               className="group inline-flex items-center justify-center gap-2.5 rounded-full border border-white/35 bg-white/10 px-8 py-4 font-label text-xs font-bold tracking-[0.2em] text-amber-600 uppercase shadow-lg backdrop-blur-md transition-all hover:scale-[1.03] hover:border-highlight-light hover:bg-white/80 hover:text-highlight-light focus-visible:outline-white"
             >
               <Sparkles

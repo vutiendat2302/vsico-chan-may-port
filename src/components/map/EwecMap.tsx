@@ -4,11 +4,8 @@ import { useRef, useState } from "react";
 import Map, { Layer, Marker, NavigationControl, Source, type MapRef } from "react-map-gl/maplibre";
 import { Maximize2, Minimize2 } from "lucide-react";
 import "maplibre-gl/dist/maplibre-gl.css";
-import {
-  chanMayPortCoordinates,
-  ewecNodes,
-  laoBaoIcdCoordinates,
-} from "@/data/industrial-zones";
+import { ewecNodes } from "@/data/industrial-zones";
+import { ewecDetailedRoutesGeoJson } from "@/data/routes-geojson";
 
 type EwecMapProps = {
   nodeLabels: Record<string, { name: string; country: string; distanceText?: string }>;
@@ -17,37 +14,6 @@ type EwecMapProps = {
 const DEFAULT_MAP_STYLE =
   process.env.NEXT_PUBLIC_MAP_STYLE_URL ||
   "https://tiles.openfreemap.org/styles/liberty";
-
-const ewecRouteGeoJson = {
-  type: "FeatureCollection" as const,
-  features: [
-    {
-      type: "Feature" as const,
-      properties: { route: "main-ewec" },
-      geometry: {
-        type: "LineString" as const,
-        coordinates: [
-          [102.835, 16.441], // Northeast Thailand
-          [104.756, 16.556], // Southern Laos
-          laoBaoIcdCoordinates, // ICD Lao Bao
-          chanMayPortCoordinates, // VSICO Hue Port
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: { route: "cambodia-branch" },
-      geometry: {
-        type: "LineString" as const,
-        coordinates: [
-          [105.968, 13.525], // Northern Cambodia
-          laoBaoIcdCoordinates, // ICD Lao Bao
-          chanMayPortCoordinates, // VSICO Hue Port
-        ],
-      },
-    },
-  ],
-};
 
 export default function EwecMap({ nodeLabels }: EwecMapProps) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -107,19 +73,27 @@ export default function EwecMap({ nodeLabels }: EwecMapProps) {
           </button>
         </div>
 
-        <Source id="ewec-routes" type="geojson" data={ewecRouteGeoJson}>
+        <Source id="ewec-routes" type="geojson" data={ewecDetailedRoutesGeoJson}>
           <Layer
             id="ewec-route-glow"
             type="line"
+            layout={{
+              "line-join": "round",
+              "line-cap": "round",
+            }}
             paint={{
               "line-color": "#5b21b6",
-              "line-width": 10,
+              "line-width": 8,
               "line-opacity": 0.45,
             }}
           />
           <Layer
             id="ewec-route-line"
             type="line"
+            layout={{
+              "line-join": "round",
+              "line-cap": "round",
+            }}
             paint={{
               "line-color": "#f59e0b",
               "line-width": 3.5,

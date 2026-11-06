@@ -5,6 +5,7 @@ import Map, { Layer, Marker, NavigationControl, Source, type MapRef } from "reac
 import { Maximize2, Minimize2 } from "lucide-react";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { chanMayPortCoordinates, industrialZones } from "@/data/industrial-zones";
+import { industrialZoneRoadRoutes } from "@/data/routes-geojson";
 
 type IndustrialZoneMapProps = {
   selectedZoneId: string;
@@ -47,7 +48,11 @@ export default function IndustrialZoneMap({
       },
       geometry: {
         type: "LineString" as const,
-        coordinates: [chanMayPortCoordinates, zone.coordinates],
+        coordinates:
+          industrialZoneRoadRoutes[zone.id] ?? [
+            chanMayPortCoordinates,
+            zone.coordinates,
+          ],
       },
     })),
   };
@@ -104,6 +109,10 @@ export default function IndustrialZoneMap({
             id="iz-route-inactive"
             type="line"
             filter={["==", ["get", "active"], false]}
+            layout={{
+              "line-join": "round",
+              "line-cap": "round",
+            }}
             paint={{
               "line-color": "#94a3b8",
               "line-width": 2,
@@ -115,6 +124,10 @@ export default function IndustrialZoneMap({
             id="iz-route-active-glow"
             type="line"
             filter={["==", ["get", "active"], true]}
+            layout={{
+              "line-join": "round",
+              "line-cap": "round",
+            }}
             paint={{
               "line-color": "#5b21b6",
               "line-width": 8,
@@ -125,6 +138,10 @@ export default function IndustrialZoneMap({
             id="iz-route-active"
             type="line"
             filter={["==", ["get", "active"], true]}
+            layout={{
+              "line-join": "round",
+              "line-cap": "round",
+            }}
             paint={{
               "line-color": "#5b21b6",
               "line-width": 4,

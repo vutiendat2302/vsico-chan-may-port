@@ -41,7 +41,7 @@ export default async function HomePage({ params }: PageProps) {
         <Infrastructure />
         <Services />
         <Certifications />
-        <Contact />
+        <Contact locale={validLocale} />
       </main>
       <Footer />
     </div>

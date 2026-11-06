@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Calculator, AlertCircle } from "lucide-react";
+import { Calculator, AlertCircle, ArrowRight } from "lucide-react";
 import { hueCitySupportPolicies } from "@/data/policies";
 import { formatVnd, formatApproxUsd, type SupportedLocale } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
@@ -19,6 +19,7 @@ type PolicyCalculatorProps = {
     cont40InputLabel: string;
     estimatedTotalLabel: string;
     validityPendingNote: string;
+    ctaContact?: string;
   };
 };
 
@@ -176,12 +177,32 @@ export function PolicyCalculator({ locale, labels }: PolicyCalculatorProps) {
         <p className="font-label text-[11px] font-bold tracking-[0.18em] text-white/75 uppercase">
           {labels.estimatedTotalLabel}
         </p>
-        <p className="mt-2 font-label text-3xl font-bold text-highlight-light tabular-nums sm:text-4xl">
+        <p
+          suppressHydrationWarning
+          className="mt-2 font-label text-3xl font-bold text-highlight-light tabular-nums sm:text-4xl"
+        >
           {formatVnd(totalVnd, locale)}
         </p>
-        <p className="mt-1 font-body text-sm font-medium text-white/80">
+        <p
+          suppressHydrationWarning
+          className="mt-1 font-body text-sm font-medium text-white/80"
+        >
           ({formatApproxUsd(totalApproxUsd, locale)})
         </p>
+
+        {/* Nút liên kết nhận chính sách hỗ trợ tới phần liên hệ */}
+        <a
+          href="#contact"
+          className="group mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-highlight px-5 py-3 font-label text-xs font-bold tracking-wider text-ink uppercase shadow-md transition-all hover:bg-highlight-light hover:scale-[1.01] focus-visible:outline-white"
+        >
+          <span>
+            {labels.ctaContact ??
+              (locale === "vi"
+                ? "Nhận tư vấn & đăng ký chính sách ngay"
+                : "Claim Support & Contact Us")}
+          </span>
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </a>
       </div>
 
       <p className="mt-4 font-body text-xs text-white/60">{labels.validityPendingNote}</p>

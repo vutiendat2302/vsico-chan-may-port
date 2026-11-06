@@ -5,6 +5,7 @@ import { Anchor, Maximize2, Waves, Layers, Ship } from "lucide-react";
 import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { Counter } from "@/components/motion/Counter";
+import { BerthBlueprint } from "./BerthBlueprint";
 import type { SupportedLocale } from "@/lib/formatters";
 
 type BerthSpecsClientProps = {
@@ -43,6 +44,20 @@ type BerthSpecsClientProps = {
     bulkVesselTitle: string;
     bulkVesselDesc: string;
     officialPlanningNote: string;
+    blueprintTitle?: string;
+    blueprintAriaLabel?: string;
+    blueprintTotalLength?: string;
+    blueprintBerth4?: string;
+    blueprintBerth5?: string;
+    blueprintBerthsUnit?: string;
+    blueprintWaterDepth?: string;
+    blueprintSeabedDesign?: string;
+    blueprintMasterplan?: string;
+    blueprintPortArea?: string;
+    blueprintVesselNote?: string;
+    blueprintNotToScale?: string;
+    blueprintElevation?: string;
+    blueprintMobileAria?: string;
   };
 };
 
@@ -94,17 +109,17 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
     const allCards = showcaseEl ? [...cards, showcaseEl] : cards;
 
     // Thiết lập trạng thái ban đầu đồng nhất cho tiêu đề và các card
-    gsap.set(romanEl, { scale: 0.7, y: 35, opacity: 0, filter: "blur(12px)" });
-    gsap.set(eyebrowEl, { letterSpacing: "0.08em", y: 20, opacity: 0 });
-    gsap.set(titleEl, { y: 45, opacity: 0, filter: "blur(12px)" });
-    gsap.set(summaryEl, { y: 35, opacity: 0, filter: "blur(10px)" });
+    gsap.set(romanEl, { scale: 0.85, y: 16, opacity: 0, filter: "blur(4px)" });
+    gsap.set(eyebrowEl, { letterSpacing: "0.12em", y: 12, opacity: 0 });
+    gsap.set(titleEl, { y: 20, opacity: 0, filter: "blur(4px)" });
+    gsap.set(summaryEl, { y: 16, opacity: 0, filter: "blur(4px)" });
 
     // Thiết lập trạng thái ban đầu đồng nhất cho TOÀN BỘ CÁC CARD (4 card con + 1 card cỡ tàu)
     gsap.set(allCards, {
-      y: 45,
-      scale: 0.98,
+      y: 20,
+      scale: 0.99,
       opacity: 0,
-      filter: "blur(12px)",
+      filter: "blur(4px)",
     });
 
     const ctx = gsap.context(() => {
@@ -112,7 +127,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
       const sectionTl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
-          start: "top 85%",
+          start: "top 95%",
           toggleActions: "restart none none reset",
         },
       });
@@ -125,8 +140,8 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
-            duration: 0.9,
-            ease: "back.out(2)",
+            duration: 0.45,
+            ease: "back.out(1.5)",
           },
           0,
         )
@@ -136,10 +151,10 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
             letterSpacing: "0.22em",
             y: 0,
             opacity: 1,
-            duration: 0.8,
+            duration: 0.4,
             ease: "power3.out",
           },
-          0.05,
+          0.03,
         )
         .to(
           titleEl,
@@ -147,10 +162,10 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
-            duration: 0.9,
+            duration: 0.45,
             ease: "power3.out",
           },
-          0.1,
+          0.05,
         )
         .to(
           summaryEl,
@@ -158,10 +173,10 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
-            duration: 0.9,
+            duration: 0.45,
             ease: "power3.out",
           },
-          0.15,
+          0.08,
         )
         // Đồng nhất toàn bộ 5 card (4 card con + card cỡ tàu) xuất hiện ĐỒNG THỜI cùng text với cùng hiệu ứng power3.out, unblur và trượt lên
         .to(
@@ -171,11 +186,11 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
             scale: 1,
             opacity: 1,
             filter: "blur(0px)",
-            duration: 0.9,
+            duration: 0.45,
             ease: "power3.out",
             clearProps: "filter",
           },
-          0.15,
+          0.08,
         );
     }, container);
 
@@ -220,6 +235,28 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
         </div>
       </div>
 
+      {/* Bản vẽ kỹ thuật mặt đứng cầu bến (Bản vẽ kỹ thuật trước 4 thẻ chỉ số) */}
+      <BerthBlueprint
+        locale={locale}
+        stats={stats}
+        t={{
+          title: t.blueprintTitle || "Thông số kỹ thuật mặt đứng cầu bến cảng VSICO Huế (Minh họa, không theo tỷ lệ)",
+          ariaLabel: t.blueprintAriaLabel || "Bản vẽ kỹ thuật mặt đứng dọc cầu bến cảng VSICO Huế",
+          totalLength: t.blueprintTotalLength || (locale === "vi" ? "TỔNG CHIỀU DÀI CẦU BẾN" : "TOTAL QUAY LENGTH"),
+          berth4: t.blueprintBerth4 || (locale === "vi" ? "BẾN SỐ 4" : "BERTH NO. 4"),
+          berth5: t.blueprintBerth5 || (locale === "vi" ? "BẾN SỐ 5" : "BERTH NO. 5"),
+          berthsUnit: t.blueprintBerthsUnit || (locale === "vi" ? "BẾN" : "BERTHS"),
+          waterDepth: t.blueprintWaterDepth || (locale === "vi" ? "ĐỘ SÂU TRƯỚC BẾN" : "WATER DEPTH"),
+          seabedDesign: t.blueprintSeabedDesign || (locale === "vi" ? "CAO TRÌNH ĐÁY BIỂN THIẾT KẾ" : "DESIGNED SEABED LEVEL"),
+          masterplan: t.blueprintMasterplan || (locale === "vi" ? "MẶT BẰNG HẬU PHƯƠNG" : "REAR MASTERPLAN"),
+          portArea: t.blueprintPortArea || (locale === "vi" ? "QUY MÔ DIỆN TÍCH BẾN" : "PORT SURFACE AREA"),
+          vesselNote: t.blueprintVesselNote || (locale === "vi" ? "TIẾP NHẬN TÀU HÀNG RỜI ĐẾN 70.000 DWT · TÀU CONTAINER" : "ACCOMMODATING BULK CARRIERS UP TO 70,000 DWT · CONTAINER SHIPS"),
+          notToScale: t.blueprintNotToScale || (locale === "vi" ? "KHÔNG THEO TỶ LỆ" : "NOT TO SCALE"),
+          elevation: t.blueprintElevation || (locale === "vi" ? "MẶT ĐỨNG CẦU BẾN" : "BERTH ELEVATION"),
+          mobileAria: t.blueprintMobileAria || (locale === "vi" ? "Mặt đứng cầu bến cảng VSICO Huế trên điện thoại" : "VSICO Hue Port Berth Elevation on Mobile"),
+        }}
+      />
+
       {/* Khối 1: 4 Thẻ Chi tiết Thông số Hạ tầng Vật lý - BẢN CUỐI CÙNG HOÀN CHỈNH */}
       <div
         ref={cardsContainerRef}
@@ -245,7 +282,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                 value={stats.berths}
                 locale={locale}
                 padZero={true}
-                duration={1.0}
+                duration={0.65}
                 toggleActions="restart none none reset"
                 className="text-ink"
               />
@@ -281,7 +318,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                 value={stats.quayLengthMeters}
                 locale={locale}
                 suffix=" m"
-                duration={1.0}
+                duration={0.65}
                 toggleActions="restart none none reset"
                 className="text-ink"
               />
@@ -317,7 +354,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                 value={stats.depthMeters}
                 locale={locale}
                 suffix=" m"
-                duration={1.0}
+                duration={0.65}
                 toggleActions="restart none none reset"
                 className="text-ink"
               />
@@ -407,7 +444,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                   value={stats.maxContainerVesselTeu}
                   locale={locale}
                   suffix=" TEU"
-                  duration={1.0}
+                  duration={0.65}
                   toggleActions="restart none none reset"
                   className="text-primary"
                 />
@@ -435,7 +472,7 @@ export function BerthSpecsClient({ locale, stats, t }: BerthSpecsClientProps) {
                   value={stats.maxBulkVesselDwt}
                   locale={locale}
                   suffix=" DWT"
-                  duration={1.0}
+                  duration={0.65}
                   toggleActions="restart none none reset"
                   className="text-primary"
                 />

@@ -102,7 +102,7 @@ export function PortIcdCorridor({
             opacity: 1,
             x: 0,
             filter: "blur(0px)",
-            duration: 0.75,
+            duration: 0.4,
             ease: "power3.out",
           },
           0,
@@ -115,10 +115,10 @@ export function PortIcdCorridor({
             opacity: 1,
             x: 0,
             filter: "blur(0px)",
-            duration: 0.75,
+            duration: 0.4,
             ease: "power3.out",
           },
-          0.1,
+          0.05,
         );
       }
 
@@ -129,10 +129,10 @@ export function PortIcdCorridor({
           {
             scale: 1,
             opacity: 1,
-            duration: 0.35,
+            duration: 0.2,
             ease: "back.out(2)",
           },
-          0.2,
+          0.1,
         );
       }
 
@@ -142,10 +142,10 @@ export function PortIcdCorridor({
           lineProg,
           {
             scaleX: 1,
-            duration: 1.1,
+            duration: 0.5,
             ease: "power2.inOut",
           },
-          0.3,
+          0.15,
         );
       }
 
@@ -155,17 +155,17 @@ export function PortIcdCorridor({
           truck,
           {
             opacity: 1,
-            duration: 0.2,
+            duration: 0.15,
           },
-          0.3,
+          0.15,
         ).to(
           truck,
           {
             left: "calc(100% - 28px)",
-            duration: 1.1,
+            duration: 0.5,
             ease: "power2.inOut",
           },
-          0.3,
+          0.15,
         );
       }
 
@@ -177,10 +177,10 @@ export function PortIcdCorridor({
             opacity: 1,
             y: 0,
             filter: "blur(0px)",
-            duration: 0.6,
+            duration: 0.35,
             ease: "power2.out",
           },
-          0.45,
+          0.25,
         );
       }
       if (truckLbl) {
@@ -190,10 +190,10 @@ export function PortIcdCorridor({
             opacity: 1,
             y: 0,
             filter: "blur(0px)",
-            duration: 0.6,
+            duration: 0.35,
             ease: "power2.out",
           },
-          0.65,
+          0.35,
         );
       }
 
@@ -204,10 +204,10 @@ export function PortIcdCorridor({
           {
             scale: 1,
             opacity: 1,
-            duration: 0.35,
+            duration: 0.2,
             ease: "back.out(2)",
           },
-          1.35,
+          0.65,
         );
       }
 
@@ -219,10 +219,10 @@ export function PortIcdCorridor({
             opacity: 1,
             y: 0,
             filter: "blur(0px)",
-            duration: 0.6,
+            duration: 0.35,
             ease: "power3.out",
           },
-          0.4,
+          0.2,
         );
       }
       if (portInfo) {
@@ -232,10 +232,10 @@ export function PortIcdCorridor({
             opacity: 1,
             y: 0,
             filter: "blur(0px)",
-            duration: 0.6,
+            duration: 0.35,
             ease: "power3.out",
           },
-          0.6,
+          0.3,
         );
       }
     }, container);

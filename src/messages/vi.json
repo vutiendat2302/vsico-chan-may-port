@@ -64,7 +64,21 @@
     "videoPlayAria": "Phát video mô phỏng Cảng Chân Mây",
     "videoPauseAria": "Tạm dừng video",
     "videoMuteAria": "Tắt tiếng",
-    "videoUnmuteAria": "Bật tiếng"
+    "videoUnmuteAria": "Bật tiếng",
+    "blueprintTitle": "Thông số kỹ thuật mặt đứng cầu bến cảng VSICO Huế (Minh họa, không theo tỷ lệ)",
+    "blueprintAriaLabel": "Bản vẽ kỹ thuật mặt đứng dọc cầu bến cảng VSICO Huế với tổng chiều dài 540m gồm Bến số 4 và Bến số 5, độ sâu trước bến -14m và diện tích mặt bằng 20,4 ha.",
+    "blueprintTotalLength": "TỔNG CHIỀU DÀI CẦU BẾN",
+    "blueprintBerth4": "BẾN SỐ 4",
+    "blueprintBerth5": "BẾN SỐ 5",
+    "blueprintBerthsUnit": "BẾN",
+    "blueprintWaterDepth": "ĐỘ SÂU TRƯỚC BẾN",
+    "blueprintSeabedDesign": "CAO TRÌNH ĐÁY BIỂN THIẾT KẾ",
+    "blueprintMasterplan": "MẶT BẰNG HẬU PHƯƠNG",
+    "blueprintPortArea": "QUY MÔ DIỆN TÍCH BẾN",
+    "blueprintVesselNote": "TIẾP NHẬN TÀU HÀNG RỜI ĐẾN 70.000 DWT · TÀU CONTAINER",
+    "blueprintNotToScale": "KHÔNG THEO TỶ LỆ",
+    "blueprintElevation": "MẶT ĐỨNG CẦU BẾN",
+    "blueprintMobileAria": "Mặt đứng cầu bến cảng VSICO Huế trên điện thoại"
   },
   "hero": {
     "brandTitle": "CẢNG VSICO HUẾ",
@@ -350,7 +364,8 @@
       "cont20InputLabel": "Số lượng Container 20'",
       "cont40InputLabel": "Số lượng Container 40'",
       "estimatedTotalLabel": "Tổng mức hỗ trợ ước tính từ TP. Huế",
-      "validityPendingNote": "Lưu ý: Thời hạn hiệu lực cụ thể của chính sách hỗ trợ đang chờ xác nhận chính thức."
+      "validityPendingNote": "Lưu ý: Thời hạn hiệu lực cụ thể của chính sách hỗ trợ đang chờ xác nhận chính thức.",
+      "ctaContact": "Nhận tư vấn & đăng ký chính sách ngay"
     }
   },
   "about": {
@@ -540,6 +555,12 @@
     "hotlineLabel": "TỔNG ĐÀI VSICO",
     "websiteLabel": "WEBSITE",
     "bannerAlt": "Dải toàn cảnh Cảng biển Nước sâu VSICO Chân Mây",
+    "mapEyebrow": "VỊ TRÍ THỰC ĐỊA",
+    "mapTitle": "Bản đồ vị trí Cảng Chân Mây",
+    "mapPortName": "Cảng Chân Mây (VSICO Huế Bến 4 & 5)",
+    "mapAddress": "Xã Lộc Vĩnh, Huyện Phú Lộc, Chân Mây – Lăng Cô, Thừa Thiên Huế, Việt Nam",
+    "openInMaps": "Mở trong Google Maps",
+    "mapIframeTitle": "Bản đồ vị trí Google Maps Cảng Chân Mây",
     "form": {
       "roleLegend": "Bạn là",
       "roles": {

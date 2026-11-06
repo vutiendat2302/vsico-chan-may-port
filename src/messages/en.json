@@ -64,7 +64,21 @@
     "videoPlayAria": "Play Chan May Port simulation video",
     "videoPauseAria": "Pause video",
     "videoMuteAria": "Mute audio",
-    "videoUnmuteAria": "Unmute audio"
+    "videoUnmuteAria": "Unmute audio",
+    "blueprintTitle": "VSICO Hue Port Berth Elevation Technical Specifications (Illustration, not to scale)",
+    "blueprintAriaLabel": "Technical elevation blueprint of VSICO Hue port berth with total length 540m including Berth 4 & 5, draft -14m, and 20.4 ha area.",
+    "blueprintTotalLength": "TOTAL QUAY LENGTH",
+    "blueprintBerth4": "BERTH NO. 4",
+    "blueprintBerth5": "BERTH NO. 5",
+    "blueprintBerthsUnit": "BERTHS",
+    "blueprintWaterDepth": "WATER DEPTH",
+    "blueprintSeabedDesign": "DESIGNED SEABED LEVEL",
+    "blueprintMasterplan": "REAR MASTERPLAN",
+    "blueprintPortArea": "PORT SURFACE AREA",
+    "blueprintVesselNote": "ACCOMMODATING BULK CARRIERS UP TO 70,000 DWT · CONTAINER SHIPS",
+    "blueprintNotToScale": "NOT TO SCALE",
+    "blueprintElevation": "BERTH ELEVATION",
+    "blueprintMobileAria": "VSICO Hue Port Berth Elevation on Mobile"
   },
   "hero": {
     "brandTitle": "VSICO HUE PORT",
@@ -350,7 +364,8 @@
       "cont20InputLabel": "Number of 20' Containers",
       "cont40InputLabel": "Number of 40' Containers",
       "estimatedTotalLabel": "Estimated Total Hue City Support",
-      "validityPendingNote": "Note: The official validity period of these support policies is subject to confirmation."
+      "validityPendingNote": "Note: The official validity period of these support policies is subject to confirmation.",
+      "ctaContact": "Claim Support & Contact Us"
     }
   },
   "about": {
@@ -540,6 +555,12 @@
     "hotlineLabel": "VSICO SWITCHBOARD",
     "websiteLabel": "WEBSITE",
     "bannerAlt": "Panoramic aerial view of VSICO Chan May Deep-Water Port",
+    "mapEyebrow": "PHYSICAL LOCATION",
+    "mapTitle": "Chan May Port Location Map",
+    "mapPortName": "Chan May Port (VSICO Hue Berth 4 & 5)",
+    "mapAddress": "Loc Vinh commune, Phu Loc district, Chan May – Lang Co, Thua Thien Hue, Vietnam",
+    "openInMaps": "Open in Google Maps",
+    "mapIframeTitle": "Google Maps location of Chan May Port",
     "form": {
       "roleLegend": "You are",
       "roles": {

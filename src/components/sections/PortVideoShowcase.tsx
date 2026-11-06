@@ -368,7 +368,10 @@ export function PortVideoShowcase({
               )}
             </button>
 
-            <span className="font-mono text-xs font-semibold tabular-nums text-white/90 tracking-wider select-none">
+            <span
+              suppressHydrationWarning
+              className="font-mono text-xs font-semibold tabular-nums text-white/90 tracking-wider select-none"
+            >
               {formatTime(currentTime)} / {formatTime(duration)}
             </span>
           </div>

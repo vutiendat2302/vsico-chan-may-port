@@ -43,10 +43,10 @@ export type InfrastructureClientProps = {
   movesUnit: string;
   teuUnit: string;
   phase2Advantage: string;
-  daysRemaining: number;
-  countdownPrefix: string;
-  countdownSuffix: string;
-  countdownCompleted: string;
+  daysRemaining?: number;
+  countdownPrefix?: string;
+  countdownSuffix?: string;
+  countdownCompleted?: string;
 };
 
 export function InfrastructureClient({
@@ -72,10 +72,6 @@ export function InfrastructureClient({
   movesUnit,
   teuUnit,
   phase2Advantage,
-  daysRemaining,
-  countdownPrefix,
-  countdownSuffix,
-  countdownCompleted,
 }: InfrastructureClientProps) {
   const [activeRow, setActiveRow] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -123,7 +119,7 @@ export function InfrastructureClient({
       if (desktopRail) {
         tl.to(desktopRail, {
           scaleX: 1,
-          duration: 0.9,
+          duration: 0.45,
           ease: "power2.inOut",
         });
       }
@@ -133,11 +129,11 @@ export function InfrastructureClient({
           {
             opacity: 1,
             y: 0,
-            duration: 0.5,
-            stagger: 0.15,
+            duration: 0.35,
+            stagger: 0.06,
             ease: "power2.out",
           },
-          "-=0.5",
+          "-=0.25",
         );
       }
       if (desktopPhases && desktopPhases.length > 0) {
@@ -146,11 +142,11 @@ export function InfrastructureClient({
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
-            stagger: 0.2,
+            duration: 0.35,
+            stagger: 0.08,
             ease: "power2.out",
           },
-          "-=0.3",
+          "-=0.2",
         );
       }
 
@@ -160,7 +156,7 @@ export function InfrastructureClient({
           mobileRail,
           {
             scaleY: 1,
-            duration: 0.9,
+            duration: 0.45,
             ease: "power2.inOut",
           },
           0,
@@ -172,19 +168,17 @@ export function InfrastructureClient({
           {
             opacity: 1,
             x: 0,
-            duration: 0.5,
-            stagger: 0.2,
+            duration: 0.35,
+            stagger: 0.08,
             ease: "power2.out",
           },
-          0.3,
+          0.15,
         );
       }
     }, timelineEl);
 
     return () => ctx.revert();
   }, [prefersReducedMotion]);
-
-  const isCountdownActive = daysRemaining > 0;
 
   return (
     <div ref={containerRef} className="mt-12 sm:mt-16 bg-white text-ink">
@@ -380,18 +374,12 @@ export function InfrastructureClient({
                     {targetThroughputLabel}
                   </span>
                   <div className="mt-1.5 font-body text-xl sm:text-xl lg:text-2xl font-extrabold tracking-tight text-ink tabular-nums">
-                    {prefersReducedMotion ? (
-                      <span>
-                        {phase1VolumeFormatted} {teuUnit}
-                      </span>
-                    ) : (
-                      <Counter
-                        value={phase1Volume}
-                        locale={locale}
-                        suffix={` ${teuUnit}`}
-                        duration={1.2}
-                      />
-                    )}
+                    <Counter
+                      value={phase1Volume}
+                      locale={locale}
+                      suffix={` ${teuUnit}`}
+                      duration={0.65}
+                    />
                   </div>
                 </div>
 
@@ -475,7 +463,10 @@ export function InfrastructureClient({
                   <span className="block font-label text-[11px] font-bold tracking-[0.16em] text-muted uppercase">
                     {targetThroughputLabel}
                   </span>
-                  <p className="mt-1 font-body text-lg font-extrabold text-ink tabular-nums">
+                  <p
+                    suppressHydrationWarning
+                    className="mt-1 font-body text-lg font-extrabold text-ink tabular-nums"
+                  >
                     {phase1VolumeFormatted} {teuUnit}
                   </p>
                 </div>

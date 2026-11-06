@@ -58,6 +58,20 @@ export async function BerthSpecs({ locale }: BerthSpecsProps) {
           bulkVesselTitle: t("bulkVesselTitle"),
           bulkVesselDesc: t("bulkVesselDesc"),
           officialPlanningNote: t("officialPlanningNote"),
+          blueprintTitle: t("blueprintTitle"),
+          blueprintAriaLabel: t("blueprintAriaLabel"),
+          blueprintTotalLength: t("blueprintTotalLength"),
+          blueprintBerth4: t("blueprintBerth4"),
+          blueprintBerth5: t("blueprintBerth5"),
+          blueprintBerthsUnit: t("blueprintBerthsUnit"),
+          blueprintWaterDepth: t("blueprintWaterDepth"),
+          blueprintSeabedDesign: t("blueprintSeabedDesign"),
+          blueprintMasterplan: t("blueprintMasterplan"),
+          blueprintPortArea: t("blueprintPortArea"),
+          blueprintVesselNote: t("blueprintVesselNote"),
+          blueprintNotToScale: t("blueprintNotToScale"),
+          blueprintElevation: t("blueprintElevation"),
+          blueprintMobileAria: t("blueprintMobileAria"),
         }}
       />
 
